@@ -40,8 +40,23 @@ public class Clicker extends MouseAdapter {
 		if(Main.actually==Now.DFS) {
 			Vertex a=panel.getVertex(e.getX()-Main.diam/2,e.getY()-Main.diam/2);
 			if(a!=null) {
-				panel.G.DeepSearch(panel.G,panel);
+				panel.G.DFS(panel.G,a.getNumb(),panel);
 			}
+		}
+		
+		if(Main.actually==Now.DEEPSEARCH) {
+				panel.G.DeepSearch(panel.G,panel);
+		}
+		
+		if(Main.actually==Now.BFS) {
+			Vertex a=panel.getVertex(e.getX()-Main.diam/2,e.getY()-Main.diam/2);
+			if(a!=null) {
+				panel.G.BFS(panel.G,a.getNumb(),panel);
+			}
+		}
+		
+		if(Main.actually==Now.BREADTHSEARCH) {
+				panel.G.BreadthSearch(panel.G,panel);
 		}
 	}
 }

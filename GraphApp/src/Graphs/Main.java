@@ -102,6 +102,29 @@ public class Main {
 			}
 		});
 		mnAlgorithms.add(btnDfs);
+		
+		JButton btnDeepSearch = new JButton("Deep search");
+		btnDeepSearch.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Main.actually=Now.DEEPSEARCH;
+			}
+		});
+		mnAlgorithms.add(btnDeepSearch);
+		
+		JButton btnBfs = new JButton("BFS");
+		btnBfs.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Main.actually=Now.BFS;
+			}
+		});
+		mnAlgorithms.add(btnBfs);
+		
+		JButton btnBreadthSearch = new JButton("Breadth search");
+		btnBreadthSearch.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Main.actually=Now.BREADTHSEARCH;
+			}
+		});
+		mnAlgorithms.add(btnBreadthSearch);
 	}
-
 }

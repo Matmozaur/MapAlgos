@@ -3,9 +3,10 @@ package Graphs;
 import java.awt.Color;
 
 public abstract class Graph {
-	public static int n=30;
-	public  int last=-1;
-	public static Color color=Color.RED;
+	static int n=30;
+	protected  int last=-1;
+	static Color color=Color.RED;
+	static long t=400;
 	int V;
 	
 	

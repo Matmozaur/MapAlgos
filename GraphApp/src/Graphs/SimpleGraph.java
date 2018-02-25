@@ -10,6 +10,26 @@ public class SimpleGraph extends Graph {
 		E=e;
 	}
 	
+	//panel algorithms
+	
+	public void DFS(SimpleGraph G,int v,GraphPanel panel) {
+		boolean Visited[]=new boolean[n];
+		G.DFS(G, v, Visited, panel);
+	}
+	public void DFS(SimpleGraph G,int v,boolean Visited[],GraphPanel panel){
+		Visited[v]=true;
+		algos.sleep(t);
+		if(last>=0) color(last,v,panel);
+		algos.sleep(t);
+		color(v,panel);
+		for(int i=0;i<G.V;i++){
+			last=v;
+			if(G.E[v][i]==true && Visited[i]==false){
+				DFS(G,i,Visited,panel);
+			}
+		}
+	}
+	
 	private int DFS(SimpleGraph G,int v,int numb,int Sequence[],boolean Visited[],GraphPanel panel){
 		Visited[v]=true;
 		algos.sleep(500);
@@ -40,6 +60,49 @@ public class SimpleGraph extends Graph {
 		}
 	}
 	
+	
+	public  void BFS(SimpleGraph G,int v,GraphPanel panel){
+		color(v,panel);
+		boolean Visited[]=new boolean[n];
+		BFS(G,v,Visited,panel);
+	}
+	
+	private  void BFS(SimpleGraph G,int v,boolean Visited[],GraphPanel panel){
+		Visited[v]=true;
+		last=v;
+		Queue<Integer> Q=new LinkedList<Integer>();
+		for(int i=0;i<G.V;i++){
+			if(G.E[v][i]==true && Visited[i]==false){
+				Visited[i]=true;
+				algos.sleep(500);
+				if(last>=0) color(last,i,panel);
+				algos.sleep(500);
+				color(i,panel);
+				Q.add(i);
+			}
+		}
+		int x;
+		while(!Q.isEmpty()){
+			x=Q.remove();
+			BFS( G, x, Visited, panel);
+		}
+	}
+	
+	public  void BreadthSearch(SimpleGraph G,GraphPanel panel){
+		boolean Visited[]=new boolean[n];
+		for(int i=0;i<G.V;i++){		
+			if(Visited[i]==false){
+				last=-1;
+				color(i,panel);
+				BFS(G,i,Visited,panel);
+			}
+		}
+
+	
+	}
+	
+	
+	//Pure graphs
 	
 	private int DFS(SimpleGraph G,int v,int numb,int Sequence[],boolean Visited[]){
 		Visited[v]=true;

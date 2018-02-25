@@ -18,8 +18,8 @@ public class Clicker extends MouseAdapter {
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 		if(Main.actually==Now.VERTEX) {
-			panel.counter++;
 			panel.addVertex(new Vertex(e.getX()-Main.diam/2,e.getY()-Main.diam/2,panel.counter,null));
+			panel.counter++;
 		}
 		
 		if(Main.actually==Now.EDGE) {

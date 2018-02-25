@@ -9,5 +9,12 @@ public abstract class algos {
 		if(a>b) return a;
 		return b;
 	}
+	public static void sleep(long t) {
+		try{
+			Thread.sleep(t);
+			}
+			catch(InterruptedException e){
+			}
+	}
 	
 }

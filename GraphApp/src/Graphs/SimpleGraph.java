@@ -12,32 +12,32 @@ public class SimpleGraph extends Graph {
 	
 	private int DFS(SimpleGraph G,int v,int numb,int Sequence[],boolean Visited[],GraphPanel panel){
 		Visited[v]=true;
-		color(v,panel);
+		algos.sleep(500);
 		if(last>=0) color(last,v,panel);
-		last=v;
+		algos.sleep(500);
+		color(v,panel);
 		Sequence[numb]=v;
 		numb++;
 		for(int i=0;i<G.V;i++){
+			last=v;
 			if(G.E[v][i]==true && Visited[i]==false){
 				numb=DFS(G,i,numb,Sequence,Visited,panel);
 			}
 		}
 		return numb;
 	}
-	public  int[] DeepSearch(SimpleGraph G,GraphPanel panel){
-		last=-1;
+	public  void DeepSearch(SimpleGraph G,GraphPanel panel){
 		int numb=0;
 		int Sequence[]= new int[2*n+1];
 		boolean Visited[]=new boolean[n];
 		for(int i=0;i<G.V;i++){		
 			if(Visited[i]==false){
+				last=-1;
 				numb=DFS(G,i,numb,Sequence,Visited,panel);
 				Sequence[numb]=-1;
 				numb++;
 			}
 		}
-		Sequence[2*n]=numb;
-		return Sequence;
 	}
 	
 	

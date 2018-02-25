@@ -41,15 +41,15 @@ class GraphPanel extends JPanel {
 	public void addVertex(Vertex c) {
 		if(getVertex(c.getX(),c.getY())==null) {
 		vertexes.add(c);
-		this.update(this.getGraphics());
 		G.V++;
+		this.update(this.getGraphics());
 		}
 	}
 	
 	public void addEdge(Edge c) {
 		edges.add(c);
-		this.update(this.getGraphics());
 		G.E[c.a.getNumb()][c.b.getNumb()]=G.E[c.b.getNumb()][c.a.getNumb()]=true;
+		this.update(this.getGraphics());
 	}
 	
 }

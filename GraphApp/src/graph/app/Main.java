@@ -24,6 +24,7 @@ public class Main {
 	static Now actually=Now.VERTEX ;
 	
 	private JFrame frame;
+	private static GraphPanel graphPanel;
 
 	/**
 	 * Launch the application.
@@ -58,6 +59,7 @@ public class Main {
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		GraphPanel graphPanel = new GraphPanel();
+		Main.graphPanel=graphPanel;
 		graphPanel.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 		graphPanel.setBackground(UIManager.getColor("info"));
 		frame.getContentPane().add(graphPanel, BorderLayout.CENTER);
@@ -126,5 +128,13 @@ public class Main {
 			}
 		});
 		mnAlgorithms.add(btnBreadthSearch);
+		
+		JButton btnRefresh = new JButton("Refresh");
+		btnRefresh.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Main.graphPanel.clear();
+			}
+		});
+		menuBar.add(btnRefresh);
 	}
 }

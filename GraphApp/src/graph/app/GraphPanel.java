@@ -63,4 +63,16 @@ class GraphPanel extends JPanel {
 		this.update(this.getGraphics());
 	}
 	
+	public void clear() {
+		boolean E[][]=new boolean[n][n];
+		this.E=E;
+		SimpleGraph G=new SimpleGraph(0,E);
+		this.G=G;
+		this.vertexes.clear();
+		this.edges.clear();
+		this.counter=0;
+		this.setOpaque(false) ;
+		this.repaint();
+	}
+	
 }

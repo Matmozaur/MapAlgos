@@ -36,6 +36,54 @@ public class Edge {
 	public void setB(Vertex b) {
 		this.b = b;
 	}
+	
+	
+	
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((a == null) ? 0 : a.hashCode());
+		result = prime * result + ((b == null) ? 0 : b.hashCode());
+		result = prime * result + ((color == null) ? 0 : color.hashCode());
+		result = prime * result + ((label == null) ? 0 : label.hashCode());
+		result = prime * result + numb;
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Edge other = (Edge) obj;
+		if (a == null) {
+			if (other.a != null)
+				return false;
+		} else if (!a.equals(other.a))
+			return false;
+		if (b == null) {
+			if (other.b != null)
+				return false;
+		} else if (!b.equals(other.b))
+			return false;
+		if (color == null) {
+			if (other.color != null)
+				return false;
+		} else if (!color.equals(other.color))
+			return false;
+		if (label == null) {
+			if (other.label != null)
+				return false;
+		} else if (!label.equals(other.label))
+			return false;
+		if (numb != other.numb)
+			return false;
+		return true;
+	}
 	/**
 	 * draws edge with color set in Main class 
 	 * @param g

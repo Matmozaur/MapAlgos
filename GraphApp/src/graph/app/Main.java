@@ -135,6 +135,25 @@ public class Main {
 				Main.graphPanel.clear();
 			}
 		});
+		
+		JMenu mnRemove = new JMenu("Remove");
+		menuBar.add(mnRemove);
+		
+		JButton btnVertex_1 = new JButton("Vertex");
+		btnVertex_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Main.actually=Now.VERTEXREMOVE;
+			}
+		});
+		mnRemove.add(btnVertex_1);
+		
+		JButton btnEdge_1 = new JButton("Edge");
+		btnEdge_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Main.actually=Now.EDGEREMOVE;
+			}
+		});
+		mnRemove.add(btnEdge_1);
 		menuBar.add(btnRefresh);
 	}
 }

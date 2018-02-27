@@ -7,6 +7,7 @@ import java.awt.event.MouseEvent;
 public class Clicker extends MouseAdapter {
 	private GraphPanel panel;
 	private static int j=0;
+	private static int r=0;
 	private Vertex flow;
 	 
 	public Clicker(GraphPanel panel) {
@@ -19,7 +20,6 @@ public class Clicker extends MouseAdapter {
 		// TODO Auto-generated method stub
 		if(Main.actually==Now.VERTEX) {
 			panel.addVertex(new Vertex(e.getX()-Main.diam/2,e.getY()-Main.diam/2,panel.counter,null));
-			panel.counter++;
 		}
 		
 		if(Main.actually==Now.EDGE) {
@@ -36,6 +36,7 @@ public class Clicker extends MouseAdapter {
 				}
 			}
 		}
+		if(Main.actually!=Now.EDGE) j=0;
 		
 		if(Main.actually==Now.DFS) {
 			Vertex a=panel.getVertex(e.getX()-Main.diam/2,e.getY()-Main.diam/2);
@@ -58,5 +59,30 @@ public class Clicker extends MouseAdapter {
 		if(Main.actually==Now.BREADTHSEARCH) {
 				panel.G.BreadthSearch(panel.G,panel);
 		}
+		
+		if(Main.actually==Now.VERTEXREMOVE) {
+			Vertex v=panel.getVertex(e.getX()-Main.diam/2,e.getY()-Main.diam/2);
+			if(v!=null) {
+				panel.removeVertex(v);
+			}
+		}
+		
+		if(Main.actually==Now.EDGEREMOVE) {
+			if(r==0) {
+				flow=panel.getVertex(e.getX()-Main.diam/2,e.getY()-Main.diam/2);
+				if(flow!=null) r=1;
+			}
+			else {
+				Vertex a=panel.getVertex(e.getX()-Main.diam/2,e.getY()-Main.diam/2);
+				if(a!=null) {
+					Edge c=panel.getEdge(a,flow);
+					if(c!=null) {
+						panel.removeEdge(c);
+						r--;
+					}
+				}
+			}
+		}
+		if(Main.actually!=Now.EDGEREMOVE) r=0;
 	}
 }

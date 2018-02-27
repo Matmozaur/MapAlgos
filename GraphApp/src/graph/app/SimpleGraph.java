@@ -9,6 +9,20 @@ public class SimpleGraph extends Graph {
 		super(v);
 		E=e;
 	}
+
+	public void remove(int x) {
+		for(int i=x;i<this.V;i++) {
+			for(int j=0;j<this.V;j++) {
+				this.E[i][j]=this.E[i+1][j];
+				this.E[j][i]=this.E[j][i+1];
+			}
+		}
+		this.V--;
+	}
+	
+	
+	
+	
 	
 	//panel algorithms
 	

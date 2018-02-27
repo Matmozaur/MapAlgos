@@ -40,15 +40,13 @@ public class Edge {
 	
 	
 	
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((a == null) ? 0 : a.hashCode());
 		result = prime * result + ((b == null) ? 0 : b.hashCode());
-		result = prime * result + ((color == null) ? 0 : color.hashCode());
-		result = prime * result + ((label == null) ? 0 : label.hashCode());
-		result = prime * result + numb;
 		return result;
 	}
 	@Override
@@ -69,18 +67,6 @@ public class Edge {
 			if (other.b != null)
 				return false;
 		} else if (!b.equals(other.b))
-			return false;
-		if (color == null) {
-			if (other.color != null)
-				return false;
-		} else if (!color.equals(other.color))
-			return false;
-		if (label == null) {
-			if (other.label != null)
-				return false;
-		} else if (!label.equals(other.label))
-			return false;
-		if (numb != other.numb)
 			return false;
 		return true;
 	}

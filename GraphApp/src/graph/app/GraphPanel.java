@@ -2,6 +2,8 @@ package graph.app;
 import java.awt.Graphics;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
+
 import javax.swing.JPanel;
 
 class GraphPanel extends JPanel {
@@ -84,19 +86,35 @@ class GraphPanel extends JPanel {
 	 * remove vertex from panel
 	 */
 	public void removeVertex(Vertex v) {
-		for(Edge e:edges) {
-			if(e.getA()==v||e.getB()==v) {
-				this.removeEdge(e);
+		ListIterator<Edge> iterE = edges.listIterator();
+		while(iterE.hasNext()){
+		    Edge e = iterE.next();
+		    if(e.getA()==v||e.getB()==v){
+				iterE.remove();
+		    }
+		}
+		/*for(Edge e:this.edges) {
+				if(e.getA()==v||e.getB()==v) {
+				int a=this.edges.indexOf(e);
+				this.edges.remove(a);
+			}
+		}*/
+		this.counter--;
+		ListIterator<Vertex> iterV = vertexes.listIterator();
+		while(iterV.hasNext()){
+		    Vertex u = iterV.next();
+		    if(u==v){
+				iterV.remove();
+				G.remove(v.getNumb());
 			}
 		}
-		this.counter--;
-		for(Vertex u:vertexes) {
+		/*for(Vertex u:vertexes) {
 			if(u==v) {
 				int a=vertexes.indexOf(u);
 				vertexes.remove(a);
 				G.remove(v.getNumb());
 			}
-		}
+		}*/
 		this.setOpaque(false);
 		this.repaint();
 	}
@@ -105,15 +123,15 @@ class GraphPanel extends JPanel {
 	 * remove edge from panel
 	 */
 	public void removeEdge(Edge e) {
-		System.out.println("removing edge");
 		int a;
 		for(Edge f:edges) {
 			if(f==e) {
 				a=edges.indexOf(f);
 				edges.remove(a);
+				G.E[e.getA().getNumb()][e.getB().getNumb()]=G.E[e.getB().getNumb()][e.getA().getNumb()]=false;
+				break;
 			}
 		}
-		G.E[e.a.getNumb()][e.b.getNumb()]=G.E[e.b.getNumb()][e.a.getNumb()]=false;
 		this.setOpaque(false);
 		this.repaint();
 	}

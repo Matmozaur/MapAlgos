@@ -108,6 +108,9 @@ class GraphPanel extends JPanel {
 				G.remove(v.getNumb());
 			}
 		}
+		for(Vertex u:vertexes) {
+			if(u.getNumb()>v.getNumb()) u.setNumb(u.getNumb()-1);
+		}
 		/*for(Vertex u:vertexes) {
 			if(u==v) {
 				int a=vertexes.indexOf(u);

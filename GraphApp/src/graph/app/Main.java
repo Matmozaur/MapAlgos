@@ -129,13 +129,6 @@ public class Main {
 		});
 		mnAlgorithms.add(btnBreadthSearch);
 		
-		JButton btnRefresh = new JButton("Refresh");
-		btnRefresh.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				Main.graphPanel.clear();
-			}
-		});
-		
 		JMenu mnRemove = new JMenu("Remove");
 		menuBar.add(mnRemove);
 		
@@ -145,6 +138,22 @@ public class Main {
 				Main.actually=Now.VERTEXREMOVE;
 			}
 		});
+		
+		JButton btnRefresh = new JButton("Refresh");
+		mnRemove.add(btnRefresh);
+		btnRefresh.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Main.graphPanel.refresh();
+			}
+		});
+		
+		JButton btnClear = new JButton("Clear");
+		btnClear.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Main.graphPanel.clear();
+			}
+		});
+		mnRemove.add(btnClear);
 		mnRemove.add(btnVertex_1);
 		
 		JButton btnEdge_1 = new JButton("Edge");
@@ -154,6 +163,5 @@ public class Main {
 			}
 		});
 		mnRemove.add(btnEdge_1);
-		menuBar.add(btnRefresh);
 	}
 }

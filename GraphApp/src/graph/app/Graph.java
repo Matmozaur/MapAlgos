@@ -6,7 +6,7 @@ public abstract class Graph {
 	static int n=30;
 	protected  int last=-1;
 	static Color color=Color.RED;
-	static long t=400;
+	static long t=500;
 	int V;
 	
 	

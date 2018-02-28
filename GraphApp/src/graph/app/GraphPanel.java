@@ -137,13 +137,24 @@ class GraphPanel extends JPanel {
 	}
 	
 	
-	public void clear() {
+	public void refresh() {
 		SimpleGraph G=new SimpleGraph(0,new boolean[n][n]);
 		this.G=G;
 		this.vertexes.clear();
 		this.edges.clear();
 		this.counter=0;
 		this.setOpaque(false) ;
+		this.repaint();
+	}
+	
+	public void clear() {
+		for(Edge c:edges) {
+			c.setColor(Main.ecolor);
+		}
+		for(Vertex c:vertexes) {
+			c.setColor(Main.vcolor);
+		}
+		this.setOpaque(false);
 		this.repaint();
 	}
 	

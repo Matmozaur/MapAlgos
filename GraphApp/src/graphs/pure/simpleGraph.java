@@ -72,7 +72,6 @@ public class simpleGraph extends graph {
 	}
 	
 	public static boolean Connected(simpleGraph G,int v, int u){
-		//DFS
 		int numb=0;
 		int Sequence[]= new int[101];
 		boolean Visited[]=new boolean[50];

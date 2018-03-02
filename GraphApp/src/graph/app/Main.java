@@ -130,6 +130,7 @@ public class Main {
 		mnAlgorithms.add(btnBreadthSearch);
 		
 		JMenu mnRemove = new JMenu("Remove");
+		mnRemove.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		menuBar.add(mnRemove);
 		
 		JButton btnVertex_1 = new JButton("Vertex");
@@ -163,5 +164,17 @@ public class Main {
 			}
 		});
 		mnRemove.add(btnEdge_1);
+		
+		JMenu mnNewMenu_1 = new JMenu("Graph Elements");
+		mnNewMenu_1.setFont(new Font("Segoe UI", Font.PLAIN, 15));
+		menuBar.add(mnNewMenu_1);
+		
+		JButton btnCenter = new JButton("Center");
+		btnCenter.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Main.graphPanel.G.graphCenter(graphPanel);
+			}
+		});
+		mnNewMenu_1.add(btnCenter);
 	}
 }

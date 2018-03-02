@@ -1,5 +1,9 @@
 package graph.app;
 import java.util.Queue;
+
+import graphs.pure.simpleGraph;
+
+import java.lang.reflect.Array;
 import java.util.LinkedList;
 
 public class SimpleGraph extends Graph {
@@ -9,7 +13,12 @@ public class SimpleGraph extends Graph {
 		super(v);
 		E=e;
 	}
-
+	
+	
+	
+	
+	
+	//panel algorithms
 	public void remove(int x) {
 		for(int i=x;i<this.V;i++) {
 			for(int j=0;j<this.V;j++) {
@@ -21,10 +30,6 @@ public class SimpleGraph extends Graph {
 	}
 	
 	
-	
-	
-	
-	//panel algorithms
 	
 	public void DFS(SimpleGraph G,int v,GraphPanel panel) {
 		boolean Visited[]=new boolean[n];
@@ -115,6 +120,162 @@ public class SimpleGraph extends Graph {
 		}
 
 	
+	}
+	
+	public void graphCenter(GraphPanel panel) {
+		int E[]=new int[n];
+		for(int i=0;i<this.V;i++) {
+			E[i]=eccentricyOfVertex(i);
+		}
+		int m=algos.min(E, this.V);
+		int Sub[]=new int[n];
+		int k=0;
+		for(int i=0;i<this.V;i++) {
+			if(E[i]==m) {
+				Sub[k]=i;
+				k++;
+			}
+		}
+		this.colorInducedSubgraph(k,Sub,panel);
+	}
+	
+	public void colorInducedSubgraph(int k,int Sub[], GraphPanel panel) {
+		for(int i=0;i<k;i++) {
+			color(Sub[i],panel);
+			for(int j=i+1;j<k;j++) {
+				if(this.E[Sub[i]][Sub[j]]) color(Sub[i],Sub[j],panel);
+			}
+		}
+	}
+	
+	
+	
+	
+	
+	
+	//Pure graphs algorithms
+	
+	public int degreeOfVertex(int v){
+		int d=0;
+		for(int i=0;i<this.V;i++) {
+			if(this.E[v][i]==true) d++;
+		}
+		return d;
+	}
+	
+	public int eccentricyOfVertex(int v) {
+		if(!this.Connected(this)) return -1;
+		boolean Visited[]=new boolean[n];
+		int D[]=new int[n];
+		D[v]=0;
+		breadthDistance(v,Visited,D);
+		return algos.max(D,this.V);
+	}
+	
+	public void breadthDistance(int v,boolean Visited[],int D[]) {
+		Visited[v]=true;
+		Queue<Integer> Q=new LinkedList<Integer>();
+		for(int i=0;i<this.V;i++){
+			if(this.E[v][i]==true && Visited[i]==false){
+				Visited[i]=true;
+				D[i]=D[v]+1;
+				Q.add(i);
+			}
+		}
+		int x;
+		while(!Q.isEmpty()){
+			x=Q.remove();
+			this.breadthDistance(x,Visited,D);
+		}
+	}
+	
+	private static int DFS(SimpleGraph G,int v,int numb,int Sequence[],boolean Visited[]){
+		Visited[v]=true;
+		Sequence[numb]=v;
+		numb++;
+		for(int i=0;i<G.V;i++){
+			if(G.E[v][i]==true && Visited[i]==false){
+				numb=DFS(G,i,numb,Sequence,Visited);
+			}
+		}
+		return numb;
+	}
+	public static int[] DeepSearch(SimpleGraph G){
+		int numb=0;
+		int Sequence[]= new int[2*n+1];
+		boolean Visited[]=new boolean[n];
+		for(int i=0;i<G.V;i++){		
+			if(Visited[i]==false){
+				numb=DFS(G,i,numb,Sequence,Visited);
+				Sequence[numb]=-1;
+				numb++;
+			}
+		}
+		Sequence[2*n]=numb;
+		return Sequence;
+	}
+	
+	private static int BFS(SimpleGraph G,int v,int numb,int Sequence[],boolean Visited[]){
+		Visited[v]=true;
+		Sequence[numb]=v;
+		numb++;
+		Queue<Integer> Q=new LinkedList<Integer>();
+		for(int i=0;i<G.V;i++){
+			if(G.E[v][i]==true && Visited[i]==false){
+				Visited[i]=true;
+				Q.add(i);
+			}
+		}
+		int x;
+		while(!Q.isEmpty()){
+			x=Q.remove();
+			numb=BFS( G, x, numb, Sequence, Visited);
+		}
+		return numb;
+	}
+	
+	public static int[] BreadthSearch(SimpleGraph G){
+		int numb=0;
+		int Sequence[]= new int[2*n+1];
+		boolean Visited[]=new boolean[n];
+		for(int i=0;i<G.V;i++){		
+			if(Visited[i]==false){
+				numb=BFS(G,i,numb,Sequence,Visited);
+				Sequence[numb]=-1;
+				numb++;
+			}
+		}
+		Sequence[2*n]=numb;
+		return Sequence;
+	
+	}
+	
+	public static boolean Connected(SimpleGraph G,int v, int u){
+		int numb=0;
+		int Sequence[]= new int[101];
+		boolean Visited[]=new boolean[50];
+		DFS(G,v,numb,Sequence,Visited);
+		//DFS
+		if(Visited[u]==true) return true;
+		else return false;
+	}
+	
+	public static boolean Connected(SimpleGraph G) {
+		for(int i=0;i<G.V-1;i++) {
+			for(int j=i+1;j<G.V;j++) {
+				if(!G.Connected(G, i, j)) return false;
+			}
+		}
+		return true;
+	}
+	
+	public void Print(){
+		System.out.println(V);
+		for(int i=0;i<V;i++){
+			for(int j=0;j<=i;j++){
+				if(E[i][j]==true) System.out.print(i+"-"+j+"  ");
+			}
+		}
 	}
 	
 	

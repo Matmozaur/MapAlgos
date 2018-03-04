@@ -189,6 +189,7 @@ public class SimpleGraph extends Graph {
 	public PatchSet shortestPatches(int v,int u){
 		if(!this.Connected(this, v, u)) return null;
 		PatchSet P=new PatchSet();
+		/*
 		int D[]=new int[n];
 		boolean Visited[]=new boolean[n];
 		breadthDistance(v,Visited,D);
@@ -212,6 +213,7 @@ public class SimpleGraph extends Graph {
 				}
 			}
 		}
+		*/
 		return P;
 	}
 	

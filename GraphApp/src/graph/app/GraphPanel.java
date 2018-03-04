@@ -139,9 +139,6 @@ class GraphPanel extends JPanel {
 		this.repaint();
 	}
 	
-	/**
-	 * remove all objects from panel
-	 */
 	
 	public void refresh() {
 		SimpleGraph G=new SimpleGraph(0,new boolean[n][n]);
@@ -153,10 +150,6 @@ class GraphPanel extends JPanel {
 		this.repaint();
 	}
 	
-	
-	/**
-	 * return all vertexes and edges to their basic colors
-	 */
 	public void clear() {
 		for(Edge c:edges) {
 			c.setColor(Main.ecolor);

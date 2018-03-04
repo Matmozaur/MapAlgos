@@ -176,5 +176,21 @@ public class Main {
 			}
 		});
 		mnNewMenu_1.add(btnCenter);
+		
+		JButton btnPeryfery = new JButton("Peryfery");
+		btnPeryfery.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Main.graphPanel.G.graphPeryfery(graphPanel);
+			}
+		});
+		mnNewMenu_1.add(btnPeryfery);
+		
+		JButton btnShortestPatch = new JButton("Shortest patch");
+		btnShortestPatch.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Main.actually=Now.PATCH;
+			}
+		});
+		mnNewMenu_1.add(btnShortestPatch);
 	}
 }

@@ -5,6 +5,7 @@ import graphs.pure.simpleGraph;
 
 import java.lang.reflect.Array;
 import java.util.LinkedList;
+import java.util.List;
 
 public class SimpleGraph extends Graph {
 	
@@ -18,7 +19,12 @@ public class SimpleGraph extends Graph {
 	
 	
 	
-	//panel algorithms
+	/*
+	 * Panel algorithms
+	 */
+	
+	
+	
 	public void remove(int x) {
 		for(int i=x;i<this.V;i++) {
 			for(int j=0;j<this.V;j++) {
@@ -29,7 +35,7 @@ public class SimpleGraph extends Graph {
 		this.V--;
 	}
 	
-	
+	//Search algorithms
 	
 	public void DFS(SimpleGraph G,int v,GraphPanel panel) {
 		boolean Visited[]=new boolean[n];
@@ -122,12 +128,38 @@ public class SimpleGraph extends Graph {
 	
 	}
 	
+	//Elements of graphs
+	
+	public void colorPatch(int P[],int k,GraphPanel panel){
+		for(int i=0;i<=k;i++) {
+			color(i,panel);
+			if(i>0&&this.E[i][i-1]) color(i,i-1,panel);
+		}
+	}
+	
+
 	public void graphCenter(GraphPanel panel) {
 		int E[]=new int[n];
 		for(int i=0;i<this.V;i++) {
 			E[i]=eccentricyOfVertex(i);
 		}
 		int m=algos.min(E, this.V);
+		int Sub[]=new int[n];
+		int k=0;
+		for(int i=0;i<this.V;i++) {
+			if(E[i]==m) {
+				Sub[k]=i;
+				k++;
+			}
+		}
+		this.colorInducedSubgraph(k,Sub,panel);
+	}
+	public void graphPeryfery(GraphPanel panel) {
+		int E[]=new int[n];
+		for(int i=0;i<this.V;i++) {
+			E[i]=eccentricyOfVertex(i);
+		}
+		int m=algos.max(E, this.V);
 		int Sub[]=new int[n];
 		int k=0;
 		for(int i=0;i<this.V;i++) {
@@ -148,12 +180,41 @@ public class SimpleGraph extends Graph {
 		}
 	}
 	
+	/*
+	 * Pure graphs algorithms
+	 */
 	
 	
 	
+	public PatchSet shortestPatches(int v,int u){
+		if(!this.Connected(this, v, u)) return null;
+		PatchSet P=new PatchSet();
+		int D[]=new int[n];
+		boolean Visited[]=new boolean[n];
+		breadthDistance(v,Visited,D);
+		int k=D[u];
+		P.length=k;
+		P.sum++;
+		P.P[0][0]=u;
+		for(int i=1;i<=k;i++) {
+			for(int j=0;j<n;j++) {
+				if(D[j]==k-i) {
+					for(int l=0;l<P.sum;l++) {
+						if(E[j][P.P[l][i-1]]) {
+							if(P.P[l][i]<0) {
+								P.P[l][i]=j;
+							}
+							else {
+								P.sum++;
+							}
+						}
+					}
+				}
+			}
+		}
+		return P;
+	}
 	
-	
-	//Pure graphs algorithms
 	
 	public int degreeOfVertex(int v){
 		int d=0;
@@ -189,6 +250,7 @@ public class SimpleGraph extends Graph {
 		}
 	}
 	
+	//Search algorithms
 	private static int DFS(SimpleGraph G,int v,int numb,int Sequence[],boolean Visited[]){
 		Visited[v]=true;
 		Sequence[numb]=v;
@@ -250,6 +312,7 @@ public class SimpleGraph extends Graph {
 	
 	}
 	
+	//Basic algorithms
 	public static boolean Connected(SimpleGraph G,int v, int u){
 		int numb=0;
 		int Sequence[]= new int[101];

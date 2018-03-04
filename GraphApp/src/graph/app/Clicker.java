@@ -8,8 +8,17 @@ public class Clicker extends MouseAdapter {
 	private GraphPanel panel;
 	private static int j=0;
 	private static int r=0;
+	private static int p=0;
 	private Vertex flow;
 	 
+	public Vertex getFlow() {
+		return flow;
+	}
+
+	public void setFlow(Vertex flow) {
+		this.flow = flow;
+	}
+
 	public Clicker(GraphPanel panel) {
 		super();
 		this.panel=panel;
@@ -84,5 +93,22 @@ public class Clicker extends MouseAdapter {
 			}
 		}
 		if(Main.actually!=Now.EDGEREMOVE) r=0;
+		
+		if(Main.actually==Now.PATCH) {
+			if(p==0) {
+				flow=panel.getVertex(e.getX()-Main.diam/2,e.getY()-Main.diam/2);
+				if(flow!=null) p=1;
+			}
+			else {
+				Vertex a=panel.getVertex(e.getX()-Main.diam/2,e.getY()-Main.diam/2);
+				if(a!=null) {
+					//Edge c=new Edge(a,flow,null);
+					PatchSet PS=panel.G.shortestPatches(a.getNumb(), flow.getNumb());
+					panel.G.colorPatch(PS.P[0], PS.length, panel);
+					p--;
+				}
+			}
+		}
+		if(Main.actually!=Now.PATCH) p=0;
 	}
 }

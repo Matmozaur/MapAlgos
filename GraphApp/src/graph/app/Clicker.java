@@ -46,7 +46,7 @@ public class Clicker extends MouseAdapter {
             }
         }
 
-        // new
+         // new
         if (Main.actually == Now.WEIGHTEDGE) {
             if (j == 0) {
                 flow = panel.getVertex(e.getX() - Main.diam / 2, e.getY() - Main.diam / 2);
@@ -55,9 +55,11 @@ public class Clicker extends MouseAdapter {
                 Vertex a = panel.getVertex(e.getX() - Main.diam / 2, e.getY() - Main.diam / 2);
                 if (a != null) {
                     // i tak ta waga nie ma znaczenia
+                   /*
                     Random rand = new Random();
                     int weight = rand.nextInt(11);
-
+					*/
+                	int weight=Integer.parseInt(JOptionPane.showInputDialog("Podaj wagę:"));
                     WeightEdge we = new WeightEdge(a, flow, null, weight);
                     panel.addWeightEdge(we);
                     j--;

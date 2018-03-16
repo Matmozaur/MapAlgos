@@ -19,7 +19,7 @@ class WeightEdge extends Edge {
     }
 
     public int getWeight() {
-        return 5;   // for test cases
+        return weight;   // for test cases
         // return weight;
     }
 
@@ -81,8 +81,8 @@ class WeightEdge extends Edge {
     /*
      Obecne problemy:
      - mozliwe jest narysowanie "krawedzi" z v do v,
-     - grot strzały nie jest dobrze umiejscawiany,
-     - wagi nie sa jeszcze wprowadzane przy usera,
+     - grot strzaĹ‚y nie jest dobrze umiejscawiany,
+     - wagi nie sa jeszcze wprowadzane przy usera-done
      - usuwanie krawedzi!
      */
 }

@@ -13,8 +13,8 @@ class GraphPanel extends JPanel {
     List<Edge> edges = new LinkedList<Edge>();
     static int counter = 0;
     static int n = Graph.n;
-    SimpleGraph G = new SimpleGraph(0, new boolean[n][n]);
-
+    WeightGraph G = new WeightGraph(0, new boolean[n][n],new int[n][n]);
+    
     // New
     List<WeightEdge> wedges = new LinkedList<WeightEdge>();
 
@@ -68,17 +68,14 @@ class GraphPanel extends JPanel {
         return null;
     }
 
-    /*
     public WeightEdge getWeightEdge(Vertex u, Vertex v) {
-        for(WeightEdge we : wedges) {
-            if(we.getA() == u && we.getB == v) {
-                return we;
+        for (WeightEdge e : wedges) {
+            if (e.getA() == u && e.getB() == v || e.getA() == v && e.getB() == u) {
+                return e;
             }
         }
         return null;
     }
-    */
-
     /**
      * adds a vertex to a panel
      *
@@ -110,6 +107,7 @@ class GraphPanel extends JPanel {
         if (getEdge(we.getA(), we.getB()) == null) {
             wedges.add(we);
             G.E[we.a.getNumb()][we.b.getNumb()] = true;
+            G.W[we.a.getNumb()][we.b.getNumb()] = we.getWeight();
             this.update(this.getGraphics());
         }
     }
@@ -125,6 +123,13 @@ class GraphPanel extends JPanel {
                 iterE.remove();
             }
         }
+        ListIterator<WeightEdge> iterW = wedges.listIterator();
+        while (iterE.hasNext()) {
+            WeightEdge e = iterW.next();
+            if (e.getA() == v || e.getB() == v) {
+                iterW.remove();
+            }
+        }
         /*for(Edge e:this.edges) {
                 if(e.getA()==v||e.getB()==v) {
 				int a=this.edges.indexOf(e);
@@ -137,6 +142,7 @@ class GraphPanel extends JPanel {
             Vertex u = iterV.next();
             if (u == v) {
                 iterV.remove();
+                //trzeba poprawić remova
                 G.remove(v.getNumb());
             }
         }
@@ -170,10 +176,25 @@ class GraphPanel extends JPanel {
         this.setOpaque(false);
         this.repaint();
     }
+    
+    public void removeWeightEdge(Edge e) {
+        int a;
+        for (WeightEdge f : wedges) {
+            if (f == e) {
+                a = wedges.indexOf(f);
+                wedges.remove(a);
+                G.E[e.getA().getNumb()][e.getB().getNumb()] = G.E[e.getB().getNumb()][e.getA().getNumb()] = false;
+                G.W[e.getA().getNumb()][e.getB().getNumb()] = G.W[e.getB().getNumb()][e.getA().getNumb()] = 0;
+                break;
+            }
+        }
+        this.setOpaque(false);
+        this.repaint();
+    }
 
 
     public void refresh() {
-        SimpleGraph G = new SimpleGraph(0, new boolean[n][n]);
+    	WeightGraph G = new WeightGraph(0, new boolean[n][n],new int[n][n]);
         this.G = G;
         this.vertexes.clear();
         this.edges.clear();

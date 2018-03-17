@@ -5,6 +5,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Random;
 
+import javax.swing.JOptionPane;
+
 public class Clicker extends MouseAdapter {
     private GraphPanel panel;
     private static int j = 0;
@@ -46,7 +48,7 @@ public class Clicker extends MouseAdapter {
             }
         }
 
-         // new
+        // new
         if (Main.actually == Now.WEIGHTEDGE) {
             if (j == 0) {
                 flow = panel.getVertex(e.getX() - Main.diam / 2, e.getY() - Main.diam / 2);
@@ -110,6 +112,11 @@ public class Clicker extends MouseAdapter {
                         panel.removeEdge(c);
                         r--;
                     }
+                    WeightEdge w = panel.getWeightEdge(a, flow);
+                    if (w != null) {
+                        panel.removeWeightEdge(w);
+                        r--;
+                    }
                 }
             }
         }
@@ -132,3 +139,4 @@ public class Clicker extends MouseAdapter {
         if (Main.actually != Now.PATCH) p = 0;
     }
 }
+

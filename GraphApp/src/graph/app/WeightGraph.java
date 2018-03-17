@@ -8,6 +8,16 @@ public class WeightGraph extends SimpleGraph {
         W = w;
     }
 
+    public void remove(int x) {
+    	super.remove(x);
+		for(int i=x;i<this.V;i++) {
+			for(int j=0;j<this.V;j++) {
+				this.W[i][j]=this.W[i+1][j];
+				this.W[j][i]=this.W[j][i+1];
+			}
+		}
+		this.V--;
+	}
 
     //Pure graphs
     public static SimpleGraph kraskal(WeightGraph G) {

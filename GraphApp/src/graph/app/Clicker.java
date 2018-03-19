@@ -1,4 +1,4 @@
-package graph.app;
+ackage graph.app;
 
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
@@ -55,7 +55,7 @@ public class Clicker extends MouseAdapter {
                 if (flow != null) j = 1;
             } else {
                 Vertex a = panel.getVertex(e.getX() - Main.diam / 2, e.getY() - Main.diam / 2);
-                if (a != null) {
+                if (a != null&&a!=flow) {
                     // i tak ta waga nie ma znaczenia
                    /*
                     Random rand = new Random();
@@ -130,8 +130,12 @@ public class Clicker extends MouseAdapter {
                 Vertex a = panel.getVertex(e.getX() - Main.diam / 2, e.getY() - Main.diam / 2);
                 if (a != null) {
                     //Edge c=new Edge(a,flow,null);
-                    PatchSet PS = panel.G.shortestPatches(a.getNumb(), flow.getNumb());
+                    /*
+                	PatchSet PS = panel.G.shortestPatches(a.getNumb(), flow.getNumb());
                     panel.G.colorPatch(PS.P[0], PS.length, panel);
+                    */
+                	int P[]=panel.G.shortestPatch(a.getNumb(),flow.getNumb());
+                	panel.G.colorPatch(P, panel);
                     p--;
                 }
             }
@@ -139,4 +143,3 @@ public class Clicker extends MouseAdapter {
         if (Main.actually != Now.PATCH) p = 0;
     }
 }
-

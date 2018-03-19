@@ -37,7 +37,7 @@ class WeightEdge extends Edge {
 
     public void draw(Graphics g2d) {
         //g2d.setColor(color);
-        g2d.setColor(red);  // for fun
+        g2d.setColor(Main.ecolor);  // for fun
         Graphics2D g2 = (Graphics2D) g2d;
         g2.setStroke(new BasicStroke(3));
         int x1 = b.getX() + Main.diam / 2;

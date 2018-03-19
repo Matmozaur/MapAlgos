@@ -180,10 +180,55 @@ public class SimpleGraph extends Graph {
 		}
 	}
 	
+	public void colorPatch(int P[],GraphPanel panel) {
+		for(int i=0;i<n;i++) {
+			if(P[i]>=0) {
+				color(P[i],panel);
+				if(i>0) color(P[i],P[i-1],panel);
+			}
+		}
+	}
+	
 	/*
 	 * Pure graphs algorithms
 	 */
+	public int[] shortestPatch(int v,int u){
+		if(!this.Connected(this, v, u)) return null;
+		int P[]=new int[n];
+		for(int i=0;i<n;i++) {
+			P[i]=-1;
+		}
+		int Last[]=new int[n];
+		Last[v]=-1;
+		boolean Visited[]=new boolean[n];
+		Visited[v]=true;
+		BPatch(v,Last,Visited);
+		int i=u,j=0;
+		do {
+			P[j]=i;
+			i=Last[i];
+			j++;
+			
+		}
+		while(i>=0);
+		return P;
+	}
 	
+	public void BPatch(int v, int Last[], boolean Visited[]){
+		Queue<Integer> Q=new LinkedList<Integer>();
+		for(int i=0;i<V;i++){
+			if(E[v][i]==true && Visited[i]==false){
+				Visited[i]=true;
+				Q.add(i);
+				Last[i]=v;
+			}
+		}
+		int x;
+		while(!Q.isEmpty()){
+			x=Q.remove();
+			BPatch(x,Last,Visited);
+			}
+	}
 	
 	
 	public PatchSet shortestPatches(int v,int u){

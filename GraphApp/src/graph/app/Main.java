@@ -15,6 +15,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import java.awt.Cursor;
+import javax.swing.JProgressBar;
+import javax.swing.JSpinner;
+import javax.swing.JLabel;
+import javax.swing.SpinnerNumberModel;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
 
 public class Main {
 
@@ -137,6 +143,22 @@ public class Main {
             }
         });
         mnAlgorithms.add(btnBreadthSearch);
+        
+        JButton btnKraskal = new JButton("Kraskal");
+        btnKraskal.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		Main.actually=Now.KRASKAL;
+        	}
+        });
+        mnAlgorithms.add(btnKraskal);
+        
+        JButton btnPrim = new JButton("Prim");
+        btnKraskal.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		Main.actually=Now.PRIM;
+        	}
+        });
+        mnAlgorithms.add(btnPrim);
 
         JMenu mnRemove = new JMenu("Remove");
         mnRemove.setFont(new Font("Segoe UI", Font.PLAIN, 15));
@@ -201,5 +223,30 @@ public class Main {
             }
         });
         mnNewMenu_1.add(btnShortestPatch);
+        
+        JMenu mnSettings = new JMenu("Settings");
+        mnSettings.setFont(new Font("Segoe UI", Font.PLAIN, 15));
+        menuBar.add(mnSettings);
+        
+        JLabel lblNewLabel = new JLabel("Pause time");
+        mnSettings.add(lblNewLabel);
+        
+        JSpinner spinner = new JSpinner();
+        spinner.addChangeListener(new ChangeListener() {
+        	public void stateChanged(ChangeEvent arg0) {
+        		
+        	}
+        });
+        spinner.setModel(new SpinnerNumberModel(500, 0, 1000000, 10));
+        mnSettings.add(spinner);
+        
+        JButton btnApplay = new JButton("Applay");
+        btnApplay.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		int t=(Integer)spinner.getValue();
+        		Graph.t=t;
+        	}
+        });
+        mnSettings.add(btnApplay);
     }
 }

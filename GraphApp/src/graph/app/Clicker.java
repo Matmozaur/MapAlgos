@@ -1,4 +1,4 @@
-ackage graph.app;
+package graph.app;
 
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
@@ -128,7 +128,7 @@ public class Clicker extends MouseAdapter {
                 if (flow != null) p = 1;
             } else {
                 Vertex a = panel.getVertex(e.getX() - Main.diam / 2, e.getY() - Main.diam / 2);
-                if (a != null) {
+                if (a != null&&a!=flow) {
                     //Edge c=new Edge(a,flow,null);
                     /*
                 	PatchSet PS = panel.G.shortestPatches(a.getNumb(), flow.getNumb());

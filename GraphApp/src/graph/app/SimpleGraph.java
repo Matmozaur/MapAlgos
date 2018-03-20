@@ -183,8 +183,12 @@ public class SimpleGraph extends Graph {
 	public void colorPatch(int P[],GraphPanel panel) {
 		for(int i=0;i<n;i++) {
 			if(P[i]>=0) {
+				if(i>0) {
+					color(P[i],P[i-1],panel);
+					algos.sleep(t);
+				}
 				color(P[i],panel);
-				if(i>0) color(P[i],P[i-1],panel);
+				algos.sleep(t);
 			}
 		}
 	}

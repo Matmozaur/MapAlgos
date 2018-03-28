@@ -17,6 +17,7 @@ class GraphPanel extends JPanel {
     
     // New
     List<WeightEdge> wedges = new LinkedList<WeightEdge>();
+    List<SimpleWeightEdge> simpleW = new LinkedList<SimpleWeightEdge>();
 
 
     public GraphPanel() {
@@ -29,6 +30,9 @@ class GraphPanel extends JPanel {
             c.draw(g);
         }
         for (WeightEdge we : wedges) {
+            we.draw(g);
+        }
+        for (SimpleWeightEdge we : simpleW) {
             we.draw(g);
         }
         for (Vertex c : vertexes) {
@@ -111,6 +115,14 @@ class GraphPanel extends JPanel {
             this.update(this.getGraphics());
         }
     }
+    public void addSimpleWeightEdge(SimpleWeightEdge we) {
+        if (getEdge(we.getA(), we.getB()) == null) {
+            simpleW.add(we);
+            G.E[we.a.getNumb()][we.b.getNumb()] = G.E[we.b.getNumb()][we.a.getNumb()] = true;
+            G.W[we.a.getNumb()][we.b.getNumb()] = G.W[we.b.getNumb()][we.a.getNumb()] = we.getWeight();
+            this.update(this.getGraphics());
+        }
+    }
 
     /**
      * remove vertex from panel
@@ -142,7 +154,7 @@ class GraphPanel extends JPanel {
             Vertex u = iterV.next();
             if (u == v) {
                 iterV.remove();
-                //trzeba poprawiÄ‡ remova
+                //trzeba poprawiæ remova
                 G.remove(v.getNumb());
             }
         }
@@ -193,11 +205,18 @@ class GraphPanel extends JPanel {
     }
 
 
+    
+    
+    
+    
+    
     public void refresh() {
     	WeightGraph G = new WeightGraph(0, new boolean[n][n],new int[n][n]);
         this.G = G;
         this.vertexes.clear();
         this.edges.clear();
+        this.wedges.clear();
+        this.simpleW.clear();
         this.counter = 0;
         this.setOpaque(false);
         this.repaint();
@@ -205,6 +224,12 @@ class GraphPanel extends JPanel {
 
     public void clear() {
         for (Edge c : edges) {
+            c.setColor(Main.ecolor);
+        }
+        for (WeightEdge c : wedges) {
+            c.setColor(Main.ecolor);
+        }
+        for (SimpleWeightEdge c : simpleW) {
             c.setColor(Main.ecolor);
         }
         for (Vertex c : vertexes) {

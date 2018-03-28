@@ -30,11 +30,11 @@ public class Clicker extends MouseAdapter {
     @Override
     public void mouseClicked(MouseEvent e) {
         // TODO Auto-generated method stub
-        if (Main.actually == Now.VERTEX) {
+        if (Main.currently == Now.VERTEX) {
             panel.addVertex(new Vertex(e.getX() - Main.diam / 2, e.getY() - Main.diam / 2, panel.counter, null));
         }
 
-        if (Main.actually == Now.EDGE) {
+        if (Main.currently == Now.EDGE) {
             if (j == 0) {
                 flow = panel.getVertex(e.getX() - Main.diam / 2, e.getY() - Main.diam / 2);
                 if (flow != null) j = 1;
@@ -49,7 +49,7 @@ public class Clicker extends MouseAdapter {
         }
 
         // new
-        if (Main.actually == Now.WEIGHTEDGE) {
+        if (Main.currently == Now.WEIGHTEDGE) {
             if (j == 0) {
                 flow = panel.getVertex(e.getX() - Main.diam / 2, e.getY() - Main.diam / 2);
                 if (flow != null) j = 1;
@@ -61,7 +61,7 @@ public class Clicker extends MouseAdapter {
                     Random rand = new Random();
                     int weight = rand.nextInt(11);
 					*/
-                	int weight=Integer.parseInt(JOptionPane.showInputDialog("Podaj wagÄ™:"));
+                	int weight=Integer.parseInt(JOptionPane.showInputDialog("Podaj wagê:"));
                     WeightEdge we = new WeightEdge(a, flow, null, weight);
                     panel.addWeightEdge(we);
                     j--;
@@ -69,38 +69,41 @@ public class Clicker extends MouseAdapter {
             }
         }
 
-        if (Main.actually != Now.EDGE && Main.actually != Now.WEIGHTEDGE) j = 0;
+        if (Main.currently != Now.EDGE && Main.currently != Now.WEIGHTEDGE && Main.currently != Now.SIMPLEWEIGHT) j = 0;
 
-        if (Main.actually == Now.DFS) {
+        if (Main.currently == Now.DFS) {
             Vertex a = panel.getVertex(e.getX() - Main.diam / 2, e.getY() - Main.diam / 2);
             if (a != null) {
                 panel.G.DFS(panel.G, a.getNumb(), panel);
             }
         }
 
-        if (Main.actually == Now.DEEPSEARCH) {
+        if (Main.currently == Now.DEEPSEARCH) {
             panel.G.DeepSearch(panel.G, panel);
         }
+        if (Main.currently == Now.KRASKAL) {
+            WeightGraph.kraskal(panel.G, panel);
+        }
 
-        if (Main.actually == Now.BFS) {
+        if (Main.currently == Now.BFS) {
             Vertex a = panel.getVertex(e.getX() - Main.diam / 2, e.getY() - Main.diam / 2);
             if (a != null) {
                 panel.G.BFS(panel.G, a.getNumb(), panel);
             }
         }
 
-        if (Main.actually == Now.BREADTHSEARCH) {
+        if (Main.currently == Now.BREADTHSEARCH) {
             panel.G.BreadthSearch(panel.G, panel);
         }
 
-        if (Main.actually == Now.VERTEXREMOVE) {
+        if (Main.currently == Now.VERTEXREMOVE) {
             Vertex v = panel.getVertex(e.getX() - Main.diam / 2, e.getY() - Main.diam / 2);
             if (v != null) {
                 panel.removeVertex(v);
             }
         }
 
-        if (Main.actually == Now.EDGEREMOVE) {
+        if (Main.currently == Now.EDGEREMOVE) {
             if (r == 0) {
                 flow = panel.getVertex(e.getX() - Main.diam / 2, e.getY() - Main.diam / 2);
                 if (flow != null) r = 1;
@@ -120,9 +123,9 @@ public class Clicker extends MouseAdapter {
                 }
             }
         }
-        if (Main.actually != Now.EDGEREMOVE) r = 0;
+        if (Main.currently != Now.EDGEREMOVE) r = 0;
 
-        if (Main.actually == Now.PATCH) {
+        if (Main.currently == Now.PATCH) {
             if (p == 0) {
                 flow = panel.getVertex(e.getX() - Main.diam / 2, e.getY() - Main.diam / 2);
                 if (flow != null) p = 1;
@@ -140,6 +143,28 @@ public class Clicker extends MouseAdapter {
                 }
             }
         }
-        if (Main.actually != Now.PATCH) p = 0;
+        if (Main.currently != Now.PATCH) p = 0;
+        
+        if (Main.currently == Now.SIMPLEWEIGHT) {
+            if (j == 0) {
+                flow = panel.getVertex(e.getX() - Main.diam / 2, e.getY() - Main.diam / 2);
+                if (flow != null) j = 1;
+            } else {
+                Vertex a = panel.getVertex(e.getX() - Main.diam / 2, e.getY() - Main.diam / 2);
+                if (a != null&&a!=flow) {
+                    // i tak ta waga nie ma znaczenia
+                   /*
+                    Random rand = new Random();
+                    int weight = rand.nextInt(11);
+					*/
+                	int weight=Integer.parseInt(JOptionPane.showInputDialog("Podaj wagê:"));
+                    SimpleWeightEdge we = new SimpleWeightEdge(a, flow, null, weight);
+                    panel.addSimpleWeightEdge(we);
+                    j--;
+                }
+            }
+        }
+
+
     }
 }

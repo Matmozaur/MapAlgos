@@ -49,5 +49,17 @@ public abstract class Graph {
 				panel.update(panel.getGraphics());
 			}
 		}
+		for(SimpleWeightEdge c:panel.simpleW) {
+			if((c.a.getNumb()==a&&c.b.getNumb()==b)||(c.b.getNumb()==a&&c.a.getNumb()==b)) {
+				c.setColor(color);
+				panel.update(panel.getGraphics());
+			}
+		}
+		for(WeightEdge c:panel.wedges) {
+			if((c.a.getNumb()==a&&c.b.getNumb()==b)) {
+				c.setColor(color);
+				panel.update(panel.getGraphics());
+			}
+		}
 	}
 }

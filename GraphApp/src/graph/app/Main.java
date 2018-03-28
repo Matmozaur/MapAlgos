@@ -27,7 +27,8 @@ public class Main {
     static Color vcolor = Color.BLACK;
     static Color ecolor = Color.BLACK;
     static int diam = 24;
-    static Now actually = Now.VERTEX;
+    static Now currently = Now.VERTEX;
+    static Type GRAPH = Type.UNDEFINED; 
 
     private JFrame frame;
     private static GraphPanel graphPanel;
@@ -86,7 +87,7 @@ public class Main {
         JButton btnVertex = new JButton("Vertex");
         btnVertex.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-                actually = Now.VERTEX;
+                currently = Now.VERTEX;
             }
         });
         mnNewMenu.add(btnVertex);
@@ -94,18 +95,26 @@ public class Main {
         JButton btnEdge = new JButton("Edge");
         btnEdge.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                actually = Now.EDGE;
+                currently = Now.EDGE;
             }
         });
         mnNewMenu.add(btnEdge);
 
         // newwww
-        JButton btnWeightEdge = new JButton("Weighted Edge");
+        JButton btnWeightEdge = new JButton("Weighted Edge \n (directed)");
         btnWeightEdge.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                actually = Now.WEIGHTEDGE;
+                currently = Now.WEIGHTEDGE;
             }
         });
+        
+        JButton btnWeightedEdge = new JButton("Weighted Edge");
+        btnWeightedEdge.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		currently= Now.SIMPLEWEIGHT;
+        	}
+        });
+        mnNewMenu.add(btnWeightedEdge);
         mnNewMenu.add(btnWeightEdge);
 
         JMenu mnAlgorithms = new JMenu("Algorithms");
@@ -115,7 +124,7 @@ public class Main {
         JButton btnDfs = new JButton("DFS");
         btnDfs.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-                actually = Now.DFS;
+                currently = Now.DFS;
             }
         });
         mnAlgorithms.add(btnDfs);
@@ -123,7 +132,7 @@ public class Main {
         JButton btnDeepSearch = new JButton("Deep search");
         btnDeepSearch.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-                Main.actually = Now.DEEPSEARCH;
+                Main.currently = Now.DEEPSEARCH;
             }
         });
         mnAlgorithms.add(btnDeepSearch);
@@ -131,7 +140,7 @@ public class Main {
         JButton btnBfs = new JButton("BFS");
         btnBfs.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-                Main.actually = Now.BFS;
+                Main.currently = Now.BFS;
             }
         });
         mnAlgorithms.add(btnBfs);
@@ -139,7 +148,7 @@ public class Main {
         JButton btnBreadthSearch = new JButton("Breadth search");
         btnBreadthSearch.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                Main.actually = Now.BREADTHSEARCH;
+                Main.currently = Now.BREADTHSEARCH;
             }
         });
         mnAlgorithms.add(btnBreadthSearch);
@@ -147,7 +156,7 @@ public class Main {
         JButton btnKraskal = new JButton("Kraskal");
         btnKraskal.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {
-        		Main.actually=Now.KRASKAL;
+        		Main.currently=Now.KRASKAL;
         	}
         });
         mnAlgorithms.add(btnKraskal);
@@ -155,7 +164,7 @@ public class Main {
         JButton btnPrim = new JButton("Prim");
         btnKraskal.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {
-        		Main.actually=Now.PRIM;
+        		Main.currently=Now.PRIM;
         	}
         });
         mnAlgorithms.add(btnPrim);
@@ -167,7 +176,7 @@ public class Main {
         JButton btnVertex_1 = new JButton("Vertex");
         btnVertex_1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-                Main.actually = Now.VERTEXREMOVE;
+                Main.currently = Now.VERTEXREMOVE;
             }
         });
 
@@ -191,7 +200,7 @@ public class Main {
         JButton btnEdge_1 = new JButton("Edge");
         btnEdge_1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                Main.actually = Now.EDGEREMOVE;
+                Main.currently = Now.EDGEREMOVE;
             }
         });
         mnRemove.add(btnEdge_1);
@@ -219,7 +228,7 @@ public class Main {
         JButton btnShortestPatch = new JButton("Shortest patch");
         btnShortestPatch.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                Main.actually = Now.PATCH;
+                Main.currently = Now.PATCH;
             }
         });
         mnNewMenu_1.add(btnShortestPatch);

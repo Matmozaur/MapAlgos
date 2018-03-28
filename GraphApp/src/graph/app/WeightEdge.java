@@ -37,7 +37,7 @@ class WeightEdge extends Edge {
 
     public void draw(Graphics g2d) {
         //g2d.setColor(color);
-        g2d.setColor(Main.ecolor);  // for fun
+        g2d.setColor(this.getColor());  // for fun
         Graphics2D g2 = (Graphics2D) g2d;
         g2.setStroke(new BasicStroke(3));
         int x1 = b.getX() + Main.diam / 2;
@@ -81,7 +81,7 @@ class WeightEdge extends Edge {
     /*
      Obecne problemy:
      - mozliwe jest narysowanie "krawedzi" z v do v,
-     - grot strzaĹ‚y nie jest dobrze umiejscawiany,
+     - grot strzały nie jest dobrze umiejscawiany,
      - wagi nie sa jeszcze wprowadzane przy usera-done
      - usuwanie krawedzi!
      */

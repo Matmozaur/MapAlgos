@@ -1,20 +1,16 @@
 package graph.app;
 
-import java.awt.EventQueue;
+import java.awt.*;
 
 import javax.swing.JFrame;
-import java.awt.BorderLayout;
-import java.awt.Color;
 
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JButton;
-import java.awt.Font;
 import javax.swing.UIManager;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
-import java.awt.Cursor;
 import javax.swing.JProgressBar;
 import javax.swing.JSpinner;
 import javax.swing.JLabel;
@@ -28,7 +24,7 @@ public class Main {
     static Color ecolor = Color.BLACK;
     static int diam = 24;
     static Now currently = Now.VERTEX;
-    static Type GRAPH = Type.UNDEFINED; 
+    static Type GRAPH = Type.UNDEFINED;
 
     private JFrame frame;
     private static GraphPanel graphPanel;
@@ -100,22 +96,23 @@ public class Main {
         });
         mnNewMenu.add(btnEdge);
 
-        // newwww
+        /*
         JButton btnWeightEdge = new JButton("Weighted Edge \n (directed)");
         btnWeightEdge.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 currently = Now.WEIGHTEDGE;
             }
         });
-        
+        mnNewMenu.add(btnWeightEdge);
+        */
+
         JButton btnWeightedEdge = new JButton("Weighted Edge");
         btnWeightedEdge.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent arg0) {
-        		currently= Now.SIMPLEWEIGHT;
-        	}
+            public void actionPerformed(ActionEvent arg0) {
+                currently = Now.SIMPLEWEIGHT;
+            }
         });
         mnNewMenu.add(btnWeightedEdge);
-        mnNewMenu.add(btnWeightEdge);
 
         JMenu mnAlgorithms = new JMenu("Algorithms");
         mnAlgorithms.setFont(new Font("Segoe UI", Font.PLAIN, 15));
@@ -152,22 +149,23 @@ public class Main {
             }
         });
         mnAlgorithms.add(btnBreadthSearch);
-        
-        JButton btnKraskal = new JButton("Kraskal");
+
+        JButton btnKraskal = new JButton("Algorytm Kruskala");
         btnKraskal.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent arg0) {
-        		Main.currently=Now.KRASKAL;
-        	}
+            public void actionPerformed(ActionEvent arg0) {
+                Main.currently = Now.KRASKAL;
+            }
         });
         mnAlgorithms.add(btnKraskal);
-        
-        JButton btnPrim = new JButton("Prim");
-        btnKraskal.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent arg0) {
-        		Main.currently=Now.PRIM;
-        	}
+/*
+        JButton btnPrim = new JButton("Algorytm Prima");
+        btnPrim.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                Main.currently = Now.PRIM;
+            }
         });
         mnAlgorithms.add(btnPrim);
+        */
 
         JMenu mnRemove = new JMenu("Remove");
         mnRemove.setFont(new Font("Segoe UI", Font.PLAIN, 15));
@@ -232,30 +230,30 @@ public class Main {
             }
         });
         mnNewMenu_1.add(btnShortestPatch);
-        
+
         JMenu mnSettings = new JMenu("Settings");
         mnSettings.setFont(new Font("Segoe UI", Font.PLAIN, 15));
         menuBar.add(mnSettings);
-        
+
         JLabel lblNewLabel = new JLabel("Pause time");
         mnSettings.add(lblNewLabel);
-        
+
         JSpinner spinner = new JSpinner();
         spinner.addChangeListener(new ChangeListener() {
-        	public void stateChanged(ChangeEvent arg0) {
-        		
-        	}
+            public void stateChanged(ChangeEvent arg0) {
+
+            }
         });
         spinner.setModel(new SpinnerNumberModel(500, 0, 1000000, 10));
         mnSettings.add(spinner);
-        
-        JButton btnApplay = new JButton("Applay");
-        btnApplay.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		int t=(Integer)spinner.getValue();
-        		Graph.t=t;
-        	}
+
+        JButton btnApply = new JButton("Apply");
+        btnApply.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int t = (Integer) spinner.getValue();
+                Graph.t = t;
+            }
         });
-        mnSettings.add(btnApplay);
+        mnSettings.add(btnApply);
     }
 }

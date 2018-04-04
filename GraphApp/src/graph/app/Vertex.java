@@ -4,107 +4,106 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 class Vertex {
-	private int x;
-	private int y;
-	private int diam;
-	private Color color;
-	private int numb;
-	private String label;
-	
-	public Vertex(int x, int y, int numb, String label) {
-		super();
-		this.x = x;
-		this.y = y;
-		this.numb = numb;
-		this.label = label;
-		this.color=Main.vcolor;
-		this.diam=Main.diam;
-	}
+    private int x;
+    private int y;
+    private int diam;
+    private Color color;
+    private int numb;
+    private String label;
 
-	int getX() {
-		return x;
-	}
+    public Vertex(int x, int y, int numb, String label) {
+        super();
+        this.x = x;
+        this.y = y;
+        this.numb = numb;
+        this.label = label;
+        this.color = Main.vcolor;
+        this.diam = Main.diam;
+    }
 
-	void setX(int x) {
-		this.x = x;
-	}
+    int getX() {
+        return x;
+    }
 
-	int getY() {
-		return y;
-	}
+    void setX(int x) {
+        this.x = x;
+    }
 
-	void setY(int y) {
-		this.y = y;
-	}
+    int getY() {
+        return y;
+    }
 
-	int getDiam() {
-		return diam;
-	}
+    void setY(int y) {
+        this.y = y;
+    }
 
-	void setDiam(int diam) {
-		this.diam = diam;
-	}
+    int getDiam() {
+        return diam;
+    }
 
-	Color getColor() {
-		return color;
-	}
+    void setDiam(int diam) {
+        this.diam = diam;
+    }
 
-	void setColor(Color color) {
-		this.color = color;
-	}
+    Color getColor() {
+        return color;
+    }
 
-	int getNumb() {
-		return numb;
-	}
+    void setColor(Color color) {
+        this.color = color;
+    }
 
-	void setNumb(int numb) {
-		this.numb = numb;
-	}
+    int getNumb() {
+        return numb;
+    }
 
-	String getLabel() {
-		return label;
-	}
+    void setNumb(int numb) {
+        this.numb = numb;
+    }
 
-	void setLabel(String label) {
-		this.label = label;
-	}
-	
-	
-	
+    String getLabel() {
+        return label;
+    }
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + x;
-		result = prime * result + y;
-		return result;
-	}
+    void setLabel(String label) {
+        this.label = label;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Vertex other = (Vertex) obj;
-		if (x != other.x)
-			return false;
-		if (y != other.y)
-			return false;
-		return true;
-	}
 
-	/**
-	 * draws vertex with color set in Main class 
-	 * @param g
-	 */
-	public void draw(Graphics g) {
-		g.setColor(color);
-		g.fillOval(x, y, diam, diam);
-	}
-	
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + x;
+        result = prime * result + y;
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Vertex other = (Vertex) obj;
+        if (x != other.x)
+            return false;
+        if (y != other.y)
+            return false;
+        return true;
+    }
+
+    /**
+     * draws vertex with color set in Main class
+     *
+     * @param g
+     */
+    public void draw(Graphics g) {
+        g.setColor(color);
+        g.fillOval(x, y, diam, diam);
+    }
+
 
 }

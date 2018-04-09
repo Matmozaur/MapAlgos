@@ -3,6 +3,7 @@ package graph.app;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.ParseException;
 import java.util.Random;
 
 import javax.swing.JOptionPane;
@@ -48,28 +49,43 @@ public class Clicker extends MouseAdapter {
             }
         }
 
-        // new
-        if (Main.currently == Now.WEIGHTEDGE) {
+        if (Main.currently == Now.SIMPLEWEIGHT) {
             if (j == 0) {
                 flow = panel.getVertex(e.getX() - Main.diam / 2, e.getY() - Main.diam / 2);
                 if (flow != null) j = 1;
             } else {
                 Vertex a = panel.getVertex(e.getX() - Main.diam / 2, e.getY() - Main.diam / 2);
-                if (a != null&&a!=flow) {
-                    // i tak ta waga nie ma znaczenia
-                   /*
-                    Random rand = new Random();
-                    int weight = rand.nextInt(11);
-					*/
-                	int weight=Integer.parseInt(JOptionPane.showInputDialog("Podaj wagê:"));
-                    WeightEdge we = new WeightEdge(a, flow, null, weight);
-                    panel.addWeightEdge(we);
-                    j--;
+                if (a != null && a != flow) {
+                    String response;
+                    int weight;
+                    boolean leave = false;
+                    while(leave == false) {
+                        try {
+                            response = JOptionPane.showInputDialog("Podaj wagÄ™:");
+                            if (response.equals("")) {
+                                leave = true;
+                                // handling Cancel
+                                //throw new NumberFormatException();
+                            } else {
+                                weight = Integer.parseInt(response);
+                                SimpleWeightEdge we = new SimpleWeightEdge(a, flow, null, weight);
+                                panel.addSimpleWeightEdge(we);
+                                j--;
+                            }
+                            leave = true;
+                        } catch(NumberFormatException ex) {
+                            ex.getLocalizedMessage();
+                        } catch (NullPointerException ex2) {
+                            // handling Cancel
+                            panel.unselect(a, flow);
+                            j = 0;
+                            leave = true;
+                        }
+                    }
                 }
             }
         }
-
-        if (Main.currently != Now.EDGE && Main.currently != Now.WEIGHTEDGE && Main.currently != Now.SIMPLEWEIGHT) j = 0;
+        if (Main.currently != Now.EDGE && Main.currently != Now.SIMPLEWEIGHT) j = 0;
 
         if (Main.currently == Now.DFS) {
             Vertex a = panel.getVertex(e.getX() - Main.diam / 2, e.getY() - Main.diam / 2);
@@ -115,9 +131,9 @@ public class Clicker extends MouseAdapter {
                         panel.removeEdge(c);
                         r--;
                     }
-                    WeightEdge w = panel.getWeightEdge(a, flow);
+                    SimpleWeightEdge w = panel.getSimpleWeightEdge(a, flow);
                     if (w != null) {
-                        panel.removeWeightEdge(w);
+                        panel.removeSimpleWeightEdge(w);
                         r--;
                     }
                 }
@@ -132,11 +148,6 @@ public class Clicker extends MouseAdapter {
             } else {
                 Vertex a = panel.getVertex(e.getX() - Main.diam / 2, e.getY() - Main.diam / 2);
                 if (a != null&&a!=flow) {
-                    //Edge c=new Edge(a,flow,null);
-                    /*
-                	PatchSet PS = panel.G.shortestPatches(a.getNumb(), flow.getNumb());
-                    panel.G.colorPatch(PS.P[0], PS.length, panel);
-                    */
                 	int P[]=panel.G.shortestPatch(a.getNumb(),flow.getNumb());
                 	panel.G.colorPatch(P, panel);
                     p--;
@@ -144,27 +155,5 @@ public class Clicker extends MouseAdapter {
             }
         }
         if (Main.currently != Now.PATCH) p = 0;
-        
-        if (Main.currently == Now.SIMPLEWEIGHT) {
-            if (j == 0) {
-                flow = panel.getVertex(e.getX() - Main.diam / 2, e.getY() - Main.diam / 2);
-                if (flow != null) j = 1;
-            } else {
-                Vertex a = panel.getVertex(e.getX() - Main.diam / 2, e.getY() - Main.diam / 2);
-                if (a != null&&a!=flow) {
-                    // i tak ta waga nie ma znaczenia
-                   /*
-                    Random rand = new Random();
-                    int weight = rand.nextInt(11);
-					*/
-                	int weight=Integer.parseInt(JOptionPane.showInputDialog("Podaj wagê:"));
-                    SimpleWeightEdge we = new SimpleWeightEdge(a, flow, null, weight);
-                    panel.addSimpleWeightEdge(we);
-                    j--;
-                }
-            }
-        }
-
-
     }
 }

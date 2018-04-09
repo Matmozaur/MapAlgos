@@ -1,8 +1,6 @@
 package graph.app;
 
-import java.awt.BasicStroke;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
+import java.awt.*;
 
 public class SimpleWeightEdge extends Edge {
 	private int weight;
@@ -35,6 +33,8 @@ public class SimpleWeightEdge extends Edge {
         // printing the weight of current edge
         int midx = (x1 + x2) / 2;
         int midy = (y1 + y2) / 2;
+        Font myFont = new Font ("Courier New", 1, 17);
+        g2d.setFont (myFont);
         Integer weight = this.getWeight();
         g2d.drawString(weight.toString(), midx + 12, midy + 12);
     }

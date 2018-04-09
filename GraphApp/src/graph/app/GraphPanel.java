@@ -108,6 +108,7 @@ class GraphPanel extends JPanel {
     public void addEdge(Edge c) {
         if (getEdge(c.getA(), c.getB()) == null) {
             edges.add(c);
+            unselect(c.getA(), c.getB());
             G.E[c.a.getNumb()][c.b.getNumb()] = G.E[c.b.getNumb()][c.a.getNumb()] = true;
             this.update(this.getGraphics());
         }
@@ -179,6 +180,7 @@ class GraphPanel extends JPanel {
         for (Edge f : edges) {
             if (f == e) {
                 a = edges.indexOf(f);
+                unselect(e.getA(), e.getB());
                 edges.remove(a);
                 G.E[e.getA().getNumb()][e.getB().getNumb()] = G.E[e.getB().getNumb()][e.getA().getNumb()] = false;
                 break;
@@ -193,6 +195,7 @@ class GraphPanel extends JPanel {
         for (SimpleWeightEdge f : simpleW) {
             if (f == e) {
                 a = simpleW.indexOf(f);
+                unselect(e.getA(), e.getB());
                 simpleW.remove(a);
                 G.E[e.getA().getNumb()][e.getB().getNumb()] = G.E[e.getB().getNumb()][e.getA().getNumb()] = false;
                 G.W[e.getA().getNumb()][e.getB().getNumb()] = G.W[e.getB().getNumb()][e.getA().getNumb()] = 0;

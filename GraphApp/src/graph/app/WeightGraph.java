@@ -9,19 +9,19 @@ public class WeightGraph extends SimpleGraph {
     }
 
     public void remove(int x) {
-    	super.remove(x);
-		for(int i=x;i<this.V;i++) {
-			for(int j=0;j<this.V;j++) {
-				this.W[i][j]=this.W[i+1][j];
-				this.W[j][i]=this.W[j][i+1];
-			}
-		}
-		this.V--;
-	}
+        super.remove(x);
+        for(int i=x;i<this.V;i++) {
+            for(int j=0;j<this.V;j++) {
+                this.W[i][j]=this.W[i+1][j];
+                this.W[j][i]=this.W[j][i+1];
+            }
+        }
+        this.V--;
+    }
     public static SimpleGraph kraskal(WeightGraph G,GraphPanel panel) {
-    	for(int i=0;i<G.V;i++) {
-    		G.color(i, panel);
-    	}
+        for(int i=0;i<G.V;i++) {
+            G.color(i, panel);
+        }
         SimpleGraph T = new SimpleGraph(G.V, new boolean[n][n]);
         SimpleGraph U = new SimpleGraph(G.V, new boolean[n][n]);
         int Counter = G.V - 1;

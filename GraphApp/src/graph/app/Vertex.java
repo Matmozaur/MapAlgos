@@ -10,7 +10,7 @@ class Vertex {
 	private Color color;
 	private int numb;
 	private String label;
-	
+
 	public Vertex(int x, int y, int numb, String label) {
 		super();
 		this.x = x;
@@ -68,9 +68,9 @@ class Vertex {
 	void setLabel(String label) {
 		this.label = label;
 	}
-	
-	
-	
+
+
+
 
 	@Override
 	public int hashCode() {
@@ -105,6 +105,6 @@ class Vertex {
 		g.setColor(color);
 		g.fillOval(x, y, diam, diam);
 	}
-	
+
 
 }

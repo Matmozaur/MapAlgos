@@ -28,7 +28,7 @@ public class Main {
     static Color ecolor = Color.BLACK;
     static int diam = 24;
     static Now currently = Now.VERTEX;
-    static Type GRAPH = Type.UNDEFINED; 
+    static Type GRAPH = Type.UNDEFINED;
 
     private JFrame frame;
     private static GraphPanel graphPanel;
@@ -78,13 +78,13 @@ public class Main {
         menuBar.setAlignmentX(0.0f);
         frame.setJMenuBar(menuBar);
 
-        JMenu mnNewMenu = new JMenu("New");
+        JMenu mnNewMenu = new JMenu("Nowy");
         mnNewMenu.setVerticalAlignment(SwingConstants.TOP);
         mnNewMenu.setBorderPainted(true);
         mnNewMenu.setFont(new Font("Segoe UI", Font.PLAIN, 15));
         menuBar.add(mnNewMenu);
 
-        JButton btnVertex = new JButton("Vertex");
+        JButton btnVertex = new JButton("Wierzchołek");
         btnVertex.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
                 currently = Now.VERTEX;
@@ -92,7 +92,7 @@ public class Main {
         });
         mnNewMenu.add(btnVertex);
 
-        JButton btnEdge = new JButton("Edge");
+        JButton btnEdge = new JButton("Krawędź");
         btnEdge.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 currently = Now.EDGE;
@@ -100,28 +100,19 @@ public class Main {
         });
         mnNewMenu.add(btnEdge);
 
-        // newwww
-        JButton btnWeightEdge = new JButton("Weighted Edge \n (directed)");
-        btnWeightEdge.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                currently = Now.WEIGHTEDGE;
+        JButton btnWeightedEdge = new JButton("Krawędź ważona");
+        btnWeightedEdge.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                currently = Now.SIMPLEWEIGHT;
             }
         });
-        
-        JButton btnWeightedEdge = new JButton("Weighted Edge");
-        btnWeightedEdge.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent arg0) {
-        		currently= Now.SIMPLEWEIGHT;
-        	}
-        });
         mnNewMenu.add(btnWeightedEdge);
-        mnNewMenu.add(btnWeightEdge);
 
-        JMenu mnAlgorithms = new JMenu("Algorithms");
+        JMenu mnAlgorithms = new JMenu("Algorytmy");
         mnAlgorithms.setFont(new Font("Segoe UI", Font.PLAIN, 15));
         menuBar.add(mnAlgorithms);
 
-        JButton btnDfs = new JButton("DFS");
+        JButton btnDfs = new JButton("Algorytm DFS");
         btnDfs.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
                 currently = Now.DFS;
@@ -137,7 +128,7 @@ public class Main {
         });
         mnAlgorithms.add(btnDeepSearch);
 
-        JButton btnBfs = new JButton("BFS");
+        JButton btnBfs = new JButton("Algorytm BFS");
         btnBfs.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
                 Main.currently = Now.BFS;
@@ -152,35 +143,35 @@ public class Main {
             }
         });
         mnAlgorithms.add(btnBreadthSearch);
-        
-        JButton btnKraskal = new JButton("Kraskal");
+
+        JButton btnKraskal = new JButton("Algorytm Kruskala");
         btnKraskal.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent arg0) {
-        		Main.currently=Now.KRASKAL;
-        	}
+            public void actionPerformed(ActionEvent arg0) {
+                Main.currently = Now.KRASKAL;
+            }
         });
         mnAlgorithms.add(btnKraskal);
-        
-        JButton btnPrim = new JButton("Prim");
+
+        JButton btnPrim = new JButton("Algorytm Prima");
         btnKraskal.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent arg0) {
-        		Main.currently=Now.PRIM;
-        	}
+            public void actionPerformed(ActionEvent arg0) {
+                Main.currently = Now.PRIM;
+            }
         });
         mnAlgorithms.add(btnPrim);
 
-        JMenu mnRemove = new JMenu("Remove");
+        JMenu mnRemove = new JMenu("Zmień");
         mnRemove.setFont(new Font("Segoe UI", Font.PLAIN, 15));
         menuBar.add(mnRemove);
 
-        JButton btnVertex_1 = new JButton("Vertex");
+        JButton btnVertex_1 = new JButton("Usuń wierzchołek");
         btnVertex_1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
                 Main.currently = Now.VERTEXREMOVE;
             }
         });
 
-        JButton btnRefresh = new JButton("Refresh");
+        JButton btnRefresh = new JButton("Wyczyść");
         mnRemove.add(btnRefresh);
         btnRefresh.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
@@ -188,7 +179,7 @@ public class Main {
             }
         });
 
-        JButton btnClear = new JButton("Clear");
+        JButton btnClear = new JButton("Odśwież");
         btnClear.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
                 Main.graphPanel.clear();
@@ -197,7 +188,7 @@ public class Main {
         mnRemove.add(btnClear);
         mnRemove.add(btnVertex_1);
 
-        JButton btnEdge_1 = new JButton("Edge");
+        JButton btnEdge_1 = new JButton("Usuń krawędź");
         btnEdge_1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Main.currently = Now.EDGEREMOVE;
@@ -205,11 +196,11 @@ public class Main {
         });
         mnRemove.add(btnEdge_1);
 
-        JMenu mnNewMenu_1 = new JMenu("Graph Elements");
+        JMenu mnNewMenu_1 = new JMenu("Elementy grafu");
         mnNewMenu_1.setFont(new Font("Segoe UI", Font.PLAIN, 15));
         menuBar.add(mnNewMenu_1);
 
-        JButton btnCenter = new JButton("Center");
+        JButton btnCenter = new JButton("Centrum");
         btnCenter.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
                 Main.graphPanel.G.graphCenter(graphPanel);
@@ -217,7 +208,7 @@ public class Main {
         });
         mnNewMenu_1.add(btnCenter);
 
-        JButton btnPeryfery = new JButton("Peryfery");
+        JButton btnPeryfery = new JButton("Peryferium");
         btnPeryfery.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
                 Main.graphPanel.G.graphPeryfery(graphPanel);
@@ -232,29 +223,29 @@ public class Main {
             }
         });
         mnNewMenu_1.add(btnShortestPatch);
-        
-        JMenu mnSettings = new JMenu("Settings");
+
+        JMenu mnSettings = new JMenu("Ustawienia");
         mnSettings.setFont(new Font("Segoe UI", Font.PLAIN, 15));
         menuBar.add(mnSettings);
-        
-        JLabel lblNewLabel = new JLabel("Pause time");
+
+        JLabel lblNewLabel = new JLabel("Szybkość animacji");
         mnSettings.add(lblNewLabel);
-        
+
         JSpinner spinner = new JSpinner();
         spinner.addChangeListener(new ChangeListener() {
-        	public void stateChanged(ChangeEvent arg0) {
-        		
-        	}
+            public void stateChanged(ChangeEvent arg0) {
+
+            }
         });
         spinner.setModel(new SpinnerNumberModel(500, 0, 1000000, 10));
         mnSettings.add(spinner);
-        
-        JButton btnApplay = new JButton("Applay");
+
+        JButton btnApplay = new JButton("Zastosuj");
         btnApplay.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		int t=(Integer)spinner.getValue();
-        		Graph.t=t;
-        	}
+            public void actionPerformed(ActionEvent e) {
+                int t = (Integer) spinner.getValue();
+                Graph.t = t;
+            }
         });
         mnSettings.add(btnApplay);
     }

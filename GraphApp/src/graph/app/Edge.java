@@ -1,7 +1,6 @@
 package graph.app;
 
-import java.awt.Color;
-import java.awt.Graphics;
+import java.awt.*;
 
 public class Edge {
 
@@ -76,6 +75,8 @@ public class Edge {
 	 */
 	public void draw(Graphics g) {
 		g.setColor(color);
+		Graphics2D g2 = (Graphics2D) g;
+		g2.setStroke(new BasicStroke(3));
 		g.drawLine(a.getX()+Main.diam/2, a.getY()+Main.diam/2, b.getX()+Main.diam/2, b.getY()+Main.diam/2);
 	}
 }

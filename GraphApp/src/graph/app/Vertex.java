@@ -105,6 +105,4 @@ class Vertex {
 		g.setColor(color);
 		g.fillOval(x, y, diam, diam);
 	}
-
-
 }

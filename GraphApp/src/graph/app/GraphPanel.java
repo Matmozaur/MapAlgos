@@ -1,6 +1,6 @@
 package graph.app;
 
-import java.awt.*;
+import java.awt.Graphics;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
@@ -16,18 +16,9 @@ class GraphPanel extends JPanel {
     WeightGraph G = new WeightGraph(0, new boolean[n][n],new int[n][n]);
     
     // New
+    List<WeightEdge> wedges = new LinkedList<WeightEdge>();
     List<SimpleWeightEdge> simpleW = new LinkedList<SimpleWeightEdge>();
 
-    public void select(Vertex v) {
-        v.setColor(Color.blue);
-        this.update(this.getGraphics());
-    }
-
-    public void unselect(Vertex a, Vertex b) {
-        a.setColor(Color.black);
-        b.setColor(Color.black);
-        this.update(this.getGraphics());
-    }
 
     public GraphPanel() {
         setLayout(null);
@@ -38,11 +29,13 @@ class GraphPanel extends JPanel {
         for (Edge c : edges) {
             c.draw(g);
         }
+        for (WeightEdge we : wedges) {
+            we.draw(g);
+        }
         for (SimpleWeightEdge we : simpleW) {
             we.draw(g);
         }
         for (Vertex c : vertexes) {
-            //c.setColor(Color.black);
             c.draw(g);
         }
     }
@@ -57,7 +50,6 @@ class GraphPanel extends JPanel {
     public Vertex getVertex(int u, int v) {
         for (Vertex c : vertexes) {
             if (c.getX() <= u + Main.diam && c.getX() >= u - Main.diam && c.getY() <= v + Main.diam && c.getY() >= v - Main.diam) {
-                select(c);
                 return c;
             }
         }
@@ -80,8 +72,8 @@ class GraphPanel extends JPanel {
         return null;
     }
 
-    public SimpleWeightEdge getSimpleWeightEdge(Vertex u, Vertex v) {
-        for (SimpleWeightEdge e : simpleW) {
+    public WeightEdge getWeightEdge(Vertex u, Vertex v) {
+        for (WeightEdge e : wedges) {
             if (e.getA() == u && e.getB() == v || e.getA() == v && e.getB() == u) {
                 return e;
             }
@@ -115,11 +107,17 @@ class GraphPanel extends JPanel {
         }
     }
 
+    public void addWeightEdge(WeightEdge we) {
+        if (getEdge(we.getA(), we.getB()) == null) {
+            wedges.add(we);
+            G.E[we.a.getNumb()][we.b.getNumb()] = true;
+            G.W[we.a.getNumb()][we.b.getNumb()] = we.getWeight();
+            this.update(this.getGraphics());
+        }
+    }
     public void addSimpleWeightEdge(SimpleWeightEdge we) {
         if (getEdge(we.getA(), we.getB()) == null) {
             simpleW.add(we);
-            // black vertices come back
-            unselect(we.getA(), we.getB());
             G.E[we.a.getNumb()][we.b.getNumb()] = G.E[we.b.getNumb()][we.a.getNumb()] = true;
             G.W[we.a.getNumb()][we.b.getNumb()] = G.W[we.b.getNumb()][we.a.getNumb()] = we.getWeight();
             this.update(this.getGraphics());
@@ -137,9 +135,9 @@ class GraphPanel extends JPanel {
                 iterE.remove();
             }
         }
-        ListIterator<SimpleWeightEdge> iterW = simpleW.listIterator();
+        ListIterator<WeightEdge> iterW = wedges.listIterator();
         while (iterE.hasNext()) {
-            SimpleWeightEdge e = iterW.next();
+            WeightEdge e = iterW.next();
             if (e.getA() == v || e.getB() == v) {
                 iterW.remove();
             }
@@ -156,7 +154,7 @@ class GraphPanel extends JPanel {
             Vertex u = iterV.next();
             if (u == v) {
                 iterV.remove();
-                //trzeba poprawic remova
+                //trzeba poprawiæ remova
                 G.remove(v.getNumb());
             }
         }
@@ -191,12 +189,12 @@ class GraphPanel extends JPanel {
         this.repaint();
     }
     
-    public void removeSimpleWeightEdge(Edge e) {
+    public void removeWeightEdge(Edge e) {
         int a;
-        for (SimpleWeightEdge f : simpleW) {
+        for (WeightEdge f : wedges) {
             if (f == e) {
-                a = simpleW.indexOf(f);
-                simpleW.remove(a);
+                a = wedges.indexOf(f);
+                wedges.remove(a);
                 G.E[e.getA().getNumb()][e.getB().getNumb()] = G.E[e.getB().getNumb()][e.getA().getNumb()] = false;
                 G.W[e.getA().getNumb()][e.getB().getNumb()] = G.W[e.getB().getNumb()][e.getA().getNumb()] = 0;
                 break;
@@ -205,12 +203,19 @@ class GraphPanel extends JPanel {
         this.setOpaque(false);
         this.repaint();
     }
+
+
+    
+    
+    
+    
     
     public void refresh() {
     	WeightGraph G = new WeightGraph(0, new boolean[n][n],new int[n][n]);
         this.G = G;
         this.vertexes.clear();
         this.edges.clear();
+        this.wedges.clear();
         this.simpleW.clear();
         this.counter = 0;
         this.setOpaque(false);
@@ -219,6 +224,9 @@ class GraphPanel extends JPanel {
 
     public void clear() {
         for (Edge c : edges) {
+            c.setColor(Main.ecolor);
+        }
+        for (WeightEdge c : wedges) {
             c.setColor(Main.ecolor);
         }
         for (SimpleWeightEdge c : simpleW) {

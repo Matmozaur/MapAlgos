@@ -99,9 +99,9 @@ public class SimpleGraph extends Graph {
 		for(int i=0;i<G.V;i++){
 			if(G.E[v][i]==true && Visited[i]==false){
 				Visited[i]=true;
-				algos.sleep(500);
+				algos.sleep(t);
 				if(last>=0) color(last,i,panel);
-				algos.sleep(500);
+				algos.sleep(t);
 				color(i,panel);
 				Q.add(i);
 			}
@@ -127,6 +127,17 @@ public class SimpleGraph extends Graph {
 
 	
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	//Elements of graphs
 	
@@ -275,30 +286,39 @@ public class SimpleGraph extends Graph {
 		return d;
 	}
 	
+	
+	//problem
 	public int eccentricyOfVertex(int v) {
 		if(!this.Connected(this)) return -1;
 		boolean Visited[]=new boolean[n];
 		int D[]=new int[n];
 		D[v]=0;
-		breadthDistance(v,Visited,D);
+		Queue<Integer> Q=new LinkedList<Integer>();
+		this.breadthDistance(v,Visited,D,Q);
 		return algos.max(D,this.V);
 	}
 	
-	public void breadthDistance(int v,boolean Visited[],int D[]) {
+	//PROBLEM
+	public void breadthDistance(int v,boolean Visited[],int D[],Queue<Integer> Q) {
+		//System.out.println("now"+v+" "+D[v]);
 		Visited[v]=true;
-		Queue<Integer> Q=new LinkedList<Integer>();
 		for(int i=0;i<this.V;i++){
 			if(this.E[v][i]==true && Visited[i]==false){
 				Visited[i]=true;
 				D[i]=D[v]+1;
+				//System.out.println(i+" "+D[i]);
 				Q.add(i);
 			}
 		}
 		int x;
 		while(!Q.isEmpty()){
 			x=Q.remove();
-			this.breadthDistance(x,Visited,D);
+			this.breadthDistance(x,Visited,D,Q);
 		}
+		/*System.out.println("Odleg³oœci:");
+		for(int k=0;k<this.V;k++) {
+			System.out.println(D[k]);
+		}*/
 	}
 	
 	//Search algorithms

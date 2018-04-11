@@ -32,10 +32,27 @@ public class Main {
     static Now currently = Now.VERTEX;
     static Type GRAPH = Type.UNDEFINED;
 
-    private JFrame frame;
+    private static JFrame frame;
     private static GraphPanel graphPanel;
+    private static JMenu mnNewMenu_1;
 
-    /**
+    public static JFrame getFrame() {
+		return frame;
+	}
+
+	public static void setFrame(JFrame frame) {
+		Main.frame = frame;
+	}
+
+	public  static JMenu getMnNewMenu_1() {
+		return mnNewMenu_1;
+	}
+
+	public static void setMnNewMenu_1(JMenu mnNewMenu_1) {
+		Main.mnNewMenu_1 = mnNewMenu_1;
+	}
+
+	/**
      * Launch the application.
      */
     public static void main(String[] args) {
@@ -247,7 +264,7 @@ public class Main {
         });
         mnRemove.add(btnEdge_1);
 
-        JMenu mnNewMenu_1 = new JMenu("Elementy grafu");
+        mnNewMenu_1 = new JMenu("Elementy grafu");
         mnNewMenu_1.setFont(new Font("Segoe UI", Font.PLAIN, 15));
         menuBar.add(mnNewMenu_1);
 
@@ -303,10 +320,27 @@ public class Main {
         });
         mnInformacje.add(btnSpjny);
         
-        JButton btnPoczenie = new JButton("Po\u0142\u0105czenie");
-        btnPoczenie.setMinimumSize(new Dimension(88, 23));
-        btnPoczenie.setMaximumSize(new Dimension(88, 23));
-        mnInformacje.add(btnPoczenie);
+        JButton btnStopieWierzchoka = new JButton("Stopie\u0144 wierzcho\u0142ka");
+        btnStopieWierzchoka.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		Main.currently=Now.DEGREE;
+        	}
+        });
+        btnStopieWierzchoka.setPreferredSize(new Dimension(88, 23));
+        btnStopieWierzchoka.setMinimumSize(new Dimension(88, 23));
+        btnStopieWierzchoka.setMaximumSize(new Dimension(88, 23));
+        mnInformacje.add(btnStopieWierzchoka);
+        
+        JButton btnEkscentrycznocWierzchoka = new JButton("Ekscentryczno\u015Bc wierzcho\u0142ka");
+        btnEkscentrycznocWierzchoka.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		Main.currently=Now.ECCENTRICY;
+        	}
+        });
+        btnEkscentrycznocWierzchoka.setMaximumSize(new Dimension(88, 23));
+        btnEkscentrycznocWierzchoka.setMinimumSize(new Dimension(88, 23));
+        btnEkscentrycznocWierzchoka.setPreferredSize(new Dimension(88, 23));
+        mnInformacje.add(btnEkscentrycznocWierzchoka);
 
         JMenu mnSettings = new JMenu("Ustawienia");
         mnSettings.setFont(new Font("Segoe UI", Font.PLAIN, 15));
@@ -333,4 +367,10 @@ public class Main {
         });
         mnSettings.add(btnApplay);
     }
+	public boolean getMnNewMenu_1Enabled() {
+		return mnNewMenu_1.isEnabled();
+	}
+	public void setMnNewMenu_1Enabled(boolean enabled) {
+		mnNewMenu_1.setEnabled(enabled);
+	}
 }

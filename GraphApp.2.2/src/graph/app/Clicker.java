@@ -173,5 +173,23 @@ public class Clicker extends MouseAdapter {
             }
         }
         if (Main.currently != Now.PATCH) p = 0;
+        
+        if (Main.currently == Now.ECCENTRICY) {
+        	Vertex a = panel.getVertex(e.getX() - Main.diam / 2, e.getY() - Main.diam / 2);
+        	if(a!=null) {
+        		int eccentricy = panel.G.eccentricyOfVertex(a.getNumb());
+        		JOptionPane.showMessageDialog(panel,"Ekscentrycznoœ wierzcho³ka jest równa "+eccentricy);
+        		panel.unselect(a);
+        	}
+        }
+        
+        if (Main.currently == Now.DEGREE) {
+        	Vertex a = panel.getVertex(e.getX() - Main.diam / 2, e.getY() - Main.diam / 2);
+        	if(a!=null) {
+        		int degree = panel.G.degreeOfVertex(a.getNumb());
+        		JOptionPane.showMessageDialog(panel,"Stopieñ wierzcho³ka jest równy "+degree);
+        		panel.unselect(a);
+        	}
+        }
     }
 }

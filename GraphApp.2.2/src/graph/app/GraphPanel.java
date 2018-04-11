@@ -121,6 +121,7 @@ class GraphPanel extends JPanel {
 
     public void addSimpleWeightEdge(SimpleWeightEdge we) {
     	Main.GRAPH=Type.SIMPLEWEIGHT;
+    	Main.getMnNewMenu_1().setEnabled(false);
         if (getEdge(we.getA(), we.getB()) == null) {
             simpleW.add(we);
             unselect(we.getA(), we.getB());
@@ -209,7 +210,10 @@ class GraphPanel extends JPanel {
                 break;
             }
         }
-        if(simpleW.isEmpty()) Main.GRAPH=Type.UNDEFINED;
+        if(simpleW.isEmpty()) {
+        	Main.GRAPH=Type.UNDEFINED;
+        	Main.getMnNewMenu_1().setEnabled(true);
+        }
         this.setOpaque(false);
         this.repaint();
     }

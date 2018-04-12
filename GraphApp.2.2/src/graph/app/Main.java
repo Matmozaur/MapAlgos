@@ -103,7 +103,7 @@ public class Main {
         mnNewMenu.setFont(new Font("Segoe UI", Font.PLAIN, 15));
         menuBar.add(mnNewMenu);
 
-        JButton btnVertex = new JButton("Wierzchołek");
+        JButton btnVertex = new JButton("WierzchoÅ‚ek");
         btnVertex.setPreferredSize(new Dimension(144, 23));
         btnVertex.setMinimumSize(new Dimension(144, 23));
         btnVertex.setMaximumSize(new Dimension(144, 23));
@@ -114,7 +114,7 @@ public class Main {
         });
         mnNewMenu.add(btnVertex);
 
-        JButton btnEdge = new JButton("Krawędź");
+        JButton btnEdge = new JButton("KrawÄ™dÅº");
         btnEdge.setPreferredSize(new Dimension(144, 23));
         btnEdge.setMinimumSize(new Dimension(144, 23));
         btnEdge.setMaximumSize(new Dimension(144, 23));
@@ -130,7 +130,7 @@ public class Main {
         });
         mnNewMenu.add(btnEdge);
 
-        JButton btnWeightedEdge = new JButton("Krawędź ważona");
+        JButton btnWeightedEdge = new JButton("KrawÄ™dÅº waÅ¼ona");
         btnWeightedEdge.setPreferredSize(new Dimension(144, 23));
         btnWeightedEdge.setMinimumSize(new Dimension(144, 23));
         btnWeightedEdge.setMaximumSize(new Dimension(144, 23));
@@ -209,18 +209,18 @@ public class Main {
         btnPrim.setMinimumSize(new Dimension(133, 23));
         btnPrim.setMaximumSize(new Dimension(133, 23));
         btnPrim.setPreferredSize(new Dimension(133, 23));
-        btnKraskal.addActionListener(new ActionListener() {
+        btnPrim.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
                 Main.currently = Now.PRIM;
             }
         });
         mnAlgorithms.add(btnPrim);
 
-        JMenu mnRemove = new JMenu("Zmień");
+        JMenu mnRemove = new JMenu("ZmieÅ„");
         mnRemove.setFont(new Font("Segoe UI", Font.PLAIN, 15));
         menuBar.add(mnRemove);
 
-        JButton btnVertex_1 = new JButton("Usuń wierzchołek");
+        JButton btnVertex_1 = new JButton("UsuÅ„ wierzchoÅ‚ek");
         btnVertex_1.setPreferredSize(new Dimension(133, 23));
         btnVertex_1.setMinimumSize(new Dimension(133, 23));
         btnVertex_1.setMaximumSize(new Dimension(133, 23));
@@ -230,7 +230,7 @@ public class Main {
             }
         });
 
-        JButton btnRefresh = new JButton("Wyczyść");
+        JButton btnRefresh = new JButton("WyczyÅ›Ä‡");
         btnRefresh.setMinimumSize(new Dimension(133, 23));
         btnRefresh.setMaximumSize(new Dimension(133, 23));
         btnRefresh.setPreferredSize(new Dimension(133, 23));
@@ -241,7 +241,7 @@ public class Main {
             }
         });
 
-        JButton btnClear = new JButton("Odśwież");
+        JButton btnClear = new JButton("OdÅ›wieÅ¼");
         btnClear.setPreferredSize(new Dimension(133, 23));
         btnClear.setMinimumSize(new Dimension(133, 23));
         btnClear.setMaximumSize(new Dimension(133, 23));
@@ -253,7 +253,7 @@ public class Main {
         mnRemove.add(btnClear);
         mnRemove.add(btnVertex_1);
 
-        JButton btnEdge_1 = new JButton("Usuń krawędź");
+        JButton btnEdge_1 = new JButton("UsuÅ„ krawÄ™dÅº");
         btnEdge_1.setMaximumSize(new Dimension(133, 23));
         btnEdge_1.setMinimumSize(new Dimension(133, 23));
         btnEdge_1.setPreferredSize(new Dimension(133, 23));
@@ -311,9 +311,9 @@ public class Main {
         btnSpjny.setPreferredSize(new Dimension(88, 23));
         btnSpjny.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {
-        		String s="Nie jest sp�jny";
+        		String s="Nie jest spójny";
         		if(Main.graphPanel.G.Connected(Main.graphPanel.G)) {
-        			s="Jest sp�jny";
+        			s="Jest spójny";
         		}
         		JOptionPane.showMessageDialog(Main.graphPanel,s);
         	}
@@ -346,7 +346,7 @@ public class Main {
         mnSettings.setFont(new Font("Segoe UI", Font.PLAIN, 15));
         menuBar.add(mnSettings);
 
-        JLabel lblNewLabel = new JLabel("Szybkość animacji");
+        JLabel lblNewLabel = new JLabel("SzybkoÅ›Ä‡ animacji");
         mnSettings.add(lblNewLabel);
 
         JSpinner spinner = new JSpinner();

@@ -10,7 +10,9 @@ class Vertex {
 	private Color color;
 	private int numb;
 	private String label;
+	private boolean visible;
 
+	
 	public Vertex(int x, int y, int numb, String label) {
 		super();
 		this.x = x;
@@ -19,7 +21,17 @@ class Vertex {
 		this.label = label;
 		this.color=Main.vcolor;
 		this.diam=Main.diam;
+		this.visible=false;
 	}
+	
+	public boolean isVisible() {
+		return visible;
+	}
+
+	public void setVisible(boolean visible) {
+		this.visible = visible;
+	}
+
 
 	int getX() {
 		return x;
@@ -104,5 +116,9 @@ class Vertex {
 	public void draw(Graphics g) {
 		g.setColor(color);
 		g.fillOval(x, y, diam, diam);
+		if(visible) {
+			int n=numb+1;
+			g.drawString(n+"", x+diam/2, y-(int)0.6*diam);
+		}
 	}
 }

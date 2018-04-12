@@ -117,12 +117,19 @@ class GraphPanel extends JPanel {
             G.E[c.a.getNumb()][c.b.getNumb()] = G.E[c.b.getNumb()][c.a.getNumb()] = true;
             this.update(this.getGraphics());
         }
+        /*
+        int i=0;
+        for (Edge e : edges) {
+        	i++;
+        }
+        System.out.println(i+" ");
+        */
     }
 
     public void addSimpleWeightEdge(SimpleWeightEdge we) {
     	Main.GRAPH=Type.SIMPLEWEIGHT;
     	Main.getMnNewMenu_1().setEnabled(false);
-        if (getEdge(we.getA(), we.getB()) == null) {
+        if (getSimpleWeightEdge(we.getA(), we.getB()) == null) {
             simpleW.add(we);
             unselect(we.getA(), we.getB());
             G.E[we.a.getNumb()][we.b.getNumb()] = G.E[we.b.getNumb()][we.a.getNumb()] = true;
@@ -213,6 +220,22 @@ class GraphPanel extends JPanel {
         if(simpleW.isEmpty()) {
         	Main.GRAPH=Type.UNDEFINED;
         	Main.getMnNewMenu_1().setEnabled(true);
+        }
+        this.setOpaque(false);
+        this.repaint();
+    }
+    
+    public void showLabels() {
+    	for (Vertex c : vertexes) {
+            c.setVisible(true);
+        }
+        this.setOpaque(false);
+        this.repaint();
+    }
+    
+    public void hideLabels() {
+    	for (Vertex c : vertexes) {
+    		c.setVisible(false);
         }
         this.setOpaque(false);
         this.repaint();

@@ -69,32 +69,40 @@ public class Clicker extends MouseAdapter {
             } else {
                 Vertex a = panel.getVertex(e.getX() - Main.diam / 2, e.getY() - Main.diam / 2);
                 if (a != null && a != flow) {
-                    String response;
-                    int weight;
-                    boolean leave = false;
-                    while(leave == false) {
-                        try {
-                            response = JOptionPane.showInputDialog("Podaj wagę:");
-                            if (response.equals("")) {
-                                leave = true;
-                                // handling Cancel
-                                //throw new NumberFormatException();
-                            } else {
-                                weight = Integer.parseInt(response);
-                                SimpleWeightEdge we = new SimpleWeightEdge(a, flow, null, weight);
-                                panel.addSimpleWeightEdge(we);
-                                j--;
-                                panel.unselect(a, flow);
-                            }
-                            leave = true;
-                        } catch(NumberFormatException ex) {
-                            ex.getLocalizedMessage();
-                        } catch (NullPointerException ex2) {
-                            // handling Cancel
-                            panel.unselect(a, flow);
-                            j = 0;
-                            leave = true;
-                        }
+                    if(panel.getSimpleWeightEdge(a, flow) == null) {
+                    	String response;
+	                    int weight;
+	                    boolean leave = false;
+	                    while(leave == false) {
+	                        try {
+	                            response = JOptionPane.showInputDialog("Podaj wagę:");
+	                            if (response.equals("")) {
+	                                leave = true;
+	                                // handling Cancel
+	                                //throw new NumberFormatException();
+	                            } else {
+	                                weight = Integer.parseInt(response);
+	                                SimpleWeightEdge we = new SimpleWeightEdge(a, flow, null, weight);
+	                                panel.addSimpleWeightEdge(we);
+	                                j--;
+	                                panel.unselect(a, flow);
+	                            }
+	                            leave = true;
+	                        } catch(NumberFormatException ex) {
+	                            ex.getLocalizedMessage();
+	                        } catch (NullPointerException ex2) {
+	                            // handling Cancel
+	                            panel.unselect(a, flow);
+	                            j = 0;
+	                            leave = true;
+	                        }
+	                    }
+                    }
+                    else {
+                    	panel.unselect(a, flow);
+                    	flow=null;
+                        j = 0;
+                        JOptionPane.showMessageDialog(panel, "Juz istnieje taka kraw�d!");
                     }
                 }
                 else {

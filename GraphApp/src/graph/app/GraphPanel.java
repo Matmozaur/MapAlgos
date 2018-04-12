@@ -102,6 +102,9 @@ class GraphPanel extends JPanel {
             G.V++;
             this.update(this.getGraphics());
         }
+        else {
+        	this.unselect(getVertex(c.getX(), c.getY()));
+        }
     }
 
     /**

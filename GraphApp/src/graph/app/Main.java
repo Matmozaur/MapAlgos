@@ -254,12 +254,18 @@ public class Main {
         mnAlgorithms.add(btnPrim);
 	    
 	JButton btnDijkstra = new JButton("Algorytm Dijkstry");
+	btnDijkstra.setEnabled(false);
         btnDijkstra.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
                 Main.currently = Now.DIJKSTRA;
             }
         });
         mnAlgorithms.add(btnDijkstra);
+        btnDijkstra.setForeground(new Color(0, 200, 0));
+        btnDijkstra.setMinimumSize(new Dimension(133, 23));
+        btnDijkstra.setMaximumSize(new Dimension(133, 23));
+        btnDijkstra.setPreferredSize(new Dimension(133, 23));
+        btnDijkstra.setBackground(Color.DARK_GRAY);
 
 
         JMenu mnRemove = new JMenu("Zmie\u0144");

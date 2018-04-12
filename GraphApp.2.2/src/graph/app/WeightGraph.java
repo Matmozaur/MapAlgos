@@ -98,15 +98,87 @@ public class WeightGraph extends SimpleGraph {
     }
 
 
-    public static SimpleGraph prim(WeightGraph G) {
-        SimpleGraph T = new SimpleGraph(G.V, new boolean[n][n]);
-        int P[] = new int[n], Q[] = new int[50], Visited[] = new int[n];
-        for (int i = 0; i < G.V; i++) {
-            P[i] = 999;
-            Q[i] = -1;
-        }
-        P[0] = 0;
+    public static void prim(GraphPanel panel, Vertex vStart) {
+        LinkedList<Vertex> spanningTree = new LinkedList<>();
+        LinkedList<Vertex> parents = new LinkedList<>();
+        System.out.println(panel.G.V);
 
-        return T;
+        int[] available = new int[panel.G.V];
+
+        for(int i = 0; i < panel.G.V; i++) {
+            available[i] = 0;
+        }
+        // av[v] = 0 <=> v nie sasiaduje z biezacym drzewem
+        // av[v] = 1 <=> v sasiaduje z biezacym drzewem
+        // av[v] = 2 <=> v nalezy do biezacego drzewa
+
+        spanningTree.add(vStart);
+        parents.add(vStart);
+        available[vStart.getNumb()] = 2;
+
+        Vertex vLast = vStart;  //ostatnio dodawany wierzchołek
+
+        int iteration = 0;
+        while(iteration < panel.G.V) {
+            iteration += 1;
+            for(Vertex v : panel.vertexes) {
+                if(available[v.getNumb()] == 0 && panel.G.E[v.getNumb()][vLast.getNumb()] == true) {
+                    available[v.getNumb()] = 1;
+                    System.out.print(v.getNumb());
+                    System.out.println(" is now available.");
+                }
+            }
+
+            int minWeight = 99999;
+
+            Vertex parent = vLast;
+            Vertex candidate = vLast;
+            for(Vertex v : panel.vertexes) {
+                //System.out.println(v.getNumb());
+                for(Vertex u: panel.vertexes) {
+                    try {
+                        if (available[v.getNumb()] == 1 && available[u.getNumb()] == 2) {
+                            if (panel.G.E[u.getNumb()][v.getNumb()] == true) {
+                                int weight = panel.G.W[u.getNumb()][v.getNumb()];
+                                if (weight < minWeight) {
+                                    System.out.println("relaxation");
+                                    minWeight = weight;
+                                    candidate = v;
+                                    parent = u;
+                                }
+                            }
+                        }
+                    } catch (NullPointerException e) {
+                        System.out.println("error");
+                    }
+                }
+            }
+            if(candidate == vLast) {
+                continue;
+            }
+            if(candidate != null) {
+                //System.out.print("Candidate chosen: its weight ");
+                //System.out.println(minWeight);
+                spanningTree.add(candidate);
+                parents.add(parent);
+                available[candidate.getNumb()] = 2;
+                vLast = candidate;
+            } else {
+                //System.out.println("Candidate not found");
+                //???
+            }
+        }
+        animatePrim(spanningTree, parents, panel);
+    }
+
+    public static void animatePrim(LinkedList<Vertex> spanningTree, LinkedList<Vertex> parents, GraphPanel panel) {
+        int index = 0;
+        for (Vertex v : spanningTree) {
+            algos.sleep(t);
+            panel.G.color(parents.get(index).getNumb(), v.getNumb(), panel);
+            index++;
+            algos.sleep(t);
+            panel.G.color(v.getNumb(), panel);
+        }
     }
 }

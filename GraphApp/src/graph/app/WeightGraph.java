@@ -152,7 +152,7 @@ public class WeightGraph extends SimpleGraph {
         parents.add(vStart);
         available[vStart.getNumb()] = 2;
 
-        Vertex vLast = vStart;  //ostatnio dodawany wierzcho�ek
+        Vertex vLast = vStart;  //ostatnio dodawany wierzcho³ek
 
         int iteration = 0;
         while(iteration < panel.G.V) {
@@ -217,70 +217,57 @@ public class WeightGraph extends SimpleGraph {
             panel.G.color(v.getNumb(), panel);
         }
     }
-  
-    
-    //DIJKSTRA
-    
-    
-    public static int[] dijkstra(WeightGraph G, int start) {
-        // weights cannot be negative
-        for (int i = 0; i < G.V; i++) {
-            for (int j = 0; j < G.V; j++) {
-                if (G.W[i][j] < 0) {
-                    // moze jakis wyjatek??
-                    // raise error?
-                    return null;
-                }
-            }
-        }
-        int[] distances = new int[G.V];
-        int[] prev = new int[G.V];
-        boolean[] visited = new boolean[G.V];
-        final int sup = 999;
-        for (int i = 0; i < G.V; i++) {
+      public static void dijkstra(GraphPanel panel, Vertex vStart) {
+        int[] distances = new int[panel.G.V];
+        int[] available = new int[panel.G.V];
+        int[] parent = new int[panel.G.V];
+
+        int sup = 999999;
+        for (int i = 0; i < panel.G.V; i++) {
             distances[i] = sup;
-            prev[i] = -1;
-            visited[i] = false;
+            available[i] = 0;
         }
-        distances[start] = 0;
-        visited[start] = true;
+        distances[vStart.getNumb()] = 0;
+        available[vStart.getNumb()] = 2;
+        parent[vStart.getNumb()] = -1;
 
-        while (!allVisited(visited, G.V)) {
-            int u = findMin(visited, distances, G.V);
-            visited[u] = true;
-            // relax
-            for(int i = 0; i < G.V; i++) {
-                if(visited[i] == false && distances[i] > distances[u] + G.W[u][i]) {
-                    distances[i] = distances[u] + G.W[u][i];
-                    prev[i] = u;
+        Vertex vLast = vStart;  //ostatnio dodawany wierzchołek
+
+        int iteration = 0;
+        while (iteration < panel.G.V) {
+            iteration += 1;
+            for (Vertex v : panel.vertexes) {
+                if (available[v.getNumb()] == 0 && panel.G.E[v.getNumb()][vLast.getNumb()] == true) {
+                    available[v.getNumb()] = 1;
+                }
+            }
+
+            int min = 99999;
+            for(Vertex v : panel.vertexes) {
+                if(available[v.getNumb()] == 1) {
+                    if(distances[v.getNumb()] < min) {
+                        min = distances[v.getNumb()];
+                        vLast = v;
+                    }
+                }
+            }   // vLast - chosen vertex
+            available[vLast.getNumb()] = 2;
+
+            // relaxation
+            for(Vertex v : panel.vertexes) {
+                if(panel.G.E[v.getNumb()][vLast.getNumb()] == true) {
+                    int weight = panel.G.W[v.getNumb()][vLast.getNumb()];
+                    if(distances[v.getNumb()] > distances[vLast.getNumb()] + weight) {
+                        distances[v.getNumb()] = distances[vLast.getNumb()] + weight;
+                        parent[v.getNumb()] = vLast.getNumb();
+                        System.out.println("relaxation");
+                    }
                 }
             }
         }
-        // We return an array which includes predecessors of every vertex on the "cheapest" path
-        // Its cost can be computed again while reading parent[] or returned here somehow xd
-        return prev;
-    }
-
-    private static boolean allVisited(boolean[] visited, int n) {
-        for(int i = 0; i < n; i++) {
-            if(visited[i] == false) {
-                return false;
-            }
+        for(int i = 0; i < panel.G.V; i++) {
+            System.out.println(distances[i]);
         }
-        return true;
     }
-
-    private static int findMin(boolean[] visited, int[] distances, int n) {
-        int minIndex = 0;
-        int min = 999;
-        for(int i = 0; i < n; i++) {
-            if(visited[i] == false && min > distances[i]) {
-                minIndex = i;
-                min = distances[i];
-            }
-        }
-        return minIndex;
-    }
-    
 }
 

@@ -75,7 +75,7 @@ public class Clicker extends MouseAdapter {
 	                    boolean leave = false;
 	                    while(leave == false) {
 	                        try {
-	                            response = JOptionPane.showInputDialog("Podaj wagÄ™:");
+	                            response = JOptionPane.showInputDialog("Podaj wagÃ„â„¢:");
 	                            if (response.equals("")) {
 	                                leave = true;
 	                                // handling Cancel
@@ -102,7 +102,7 @@ public class Clicker extends MouseAdapter {
                     	panel.unselect(a, flow);
                     	flow=null;
                         j = 0;
-                        JOptionPane.showMessageDialog(panel, "Juz istnieje taka krawêd!");
+                        JOptionPane.showMessageDialog(panel, "Juz istnieje taka krawÃªd!");
                     }
                 }
                 else {
@@ -134,6 +134,13 @@ public class Clicker extends MouseAdapter {
             }
         }
 
+	if(Main.currently == Now.DIJKSTRA) {
+            Vertex start = panel.getVertex(e.getX() - Main.diam / 2, e.getY() - Main.diam / 2);
+            if(start != null) {
+                WeightGraph.dijkstra(panel, start);
+            }
+        }
+	    
         if (Main.currently == Now.BFS) {
             Vertex a = panel.getVertex(e.getX() - Main.diam / 2, e.getY() - Main.diam / 2);
             if (a != null) {
@@ -193,7 +200,7 @@ public class Clicker extends MouseAdapter {
         	Vertex a = panel.getVertex(e.getX() - Main.diam / 2, e.getY() - Main.diam / 2);
         	if(a!=null) {
         		int eccentricy = panel.G.eccentricyOfVertex(a.getNumb());
-        		JOptionPane.showMessageDialog(panel,"Ekscentrycznoœ wierzcho³ka jest równa "+eccentricy);
+        		JOptionPane.showMessageDialog(panel,"EkscentrycznoÅ“ wierzchoÂ³ka jest rÃ³wna "+eccentricy);
         		panel.unselect(a);
         	}
         }
@@ -202,7 +209,7 @@ public class Clicker extends MouseAdapter {
         	Vertex a = panel.getVertex(e.getX() - Main.diam / 2, e.getY() - Main.diam / 2);
         	if(a!=null) {
         		int degree = panel.G.degreeOfVertex(a.getNumb());
-        		JOptionPane.showMessageDialog(panel,"Stopieñ wierzcho³ka jest równy "+degree);
+        		JOptionPane.showMessageDialog(panel,"StopieÃ± wierzchoÂ³ka jest rÃ³wny "+degree);
         		panel.unselect(a);
         	}
         }

@@ -136,6 +136,7 @@ public class WeightGraph extends SimpleGraph {
 
     public static void prim(GraphPanel panel, Vertex vStart) {
         LinkedList<Vertex> spanningTree = new LinkedList<>();
+        LinkedList<Vertex> parents = new LinkedList<>();
         System.out.println(panel.G.V);
 
         int[] available = new int[panel.G.V];
@@ -148,6 +149,7 @@ public class WeightGraph extends SimpleGraph {
         // av[v] = 2 <=> v nalezy do biezacego drzewa
 
         spanningTree.add(vStart);
+        parents.add(vStart);
         available[vStart.getNumb()] = 2;
 
         Vertex vLast = vStart;  //ostatnio dodawany wierzcho³ek
@@ -165,6 +167,7 @@ public class WeightGraph extends SimpleGraph {
 
             int minWeight = 99999;
 
+            Vertex parent = vLast;
             Vertex candidate = vLast;
             for(Vertex v : panel.vertexes) {
                 //System.out.println(v.getNumb());
@@ -177,6 +180,7 @@ public class WeightGraph extends SimpleGraph {
                                     System.out.println("relaxation");
                                     minWeight = weight;
                                     candidate = v;
+                                    parent = u;
                                 }
                             }
                         }
@@ -189,9 +193,10 @@ public class WeightGraph extends SimpleGraph {
                 continue;
             }
             if(candidate != null) {
-                System.out.print("Candidate chosen: its weight ");
-                System.out.println(minWeight);
+                //System.out.print("Candidate chosen: its weight ");
+                //System.out.println(minWeight);
                 spanningTree.add(candidate);
+                parents.add(parent);
                 available[candidate.getNumb()] = 2;
                 vLast = candidate;
             } else {
@@ -199,14 +204,17 @@ public class WeightGraph extends SimpleGraph {
                 //???
             }
         }
-        animatePrim(spanningTree, panel);
+        animatePrim(spanningTree, parents, panel);
     }
 
-    public static void animatePrim(LinkedList<Vertex> spanningTree, GraphPanel panel) {
+    public static void animatePrim(LinkedList<Vertex> spanningTree, LinkedList<Vertex> parents, GraphPanel panel) {
+        int index = 0;
         for (Vertex v : spanningTree) {
-            //System.out.println(v.getNumb());
-            panel.G.color(v.getNumb(), panel);
             algos.sleep(t);
+            panel.G.color(parents.get(index).getNumb(), v.getNumb(), panel);
+            index++;
+            algos.sleep(t);
+            panel.G.color(v.getNumb(), panel);
         }
     }
   

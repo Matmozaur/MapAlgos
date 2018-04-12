@@ -126,6 +126,13 @@ public class Clicker extends MouseAdapter {
         if (Main.currently == Now.KRASKAL) {
             WeightGraph.kraskal(panel.G, panel);
         }
+        
+        if(Main.currently == Now.PRIM) {
+            Vertex start = panel.getVertex(e.getX() - Main.diam / 2, e.getY() - Main.diam / 2);
+            if(start != null) {
+                WeightGraph.prim(panel, start);
+            }
+        }
 
         if (Main.currently == Now.BFS) {
             Vertex a = panel.getVertex(e.getX() - Main.diam / 2, e.getY() - Main.diam / 2);

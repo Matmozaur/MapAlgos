@@ -236,6 +236,11 @@ public class Main {
         mnAlgorithms.add(btnKraskal);
 
         JButton btnPrim = new JButton("Algorytm Prima");
+        btnPrim.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		Main.currently=Now.PRIM;
+        	}
+        });
         btnPrim.setForeground(new Color(0, 200, 0));
         btnPrim.setMinimumSize(new Dimension(133, 23));
         btnPrim.setMaximumSize(new Dimension(133, 23));

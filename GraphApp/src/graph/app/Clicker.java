@@ -69,6 +69,7 @@ public class Clicker extends MouseAdapter {
             } else {
                 Vertex a = panel.getVertex(e.getX() - Main.diam / 2, e.getY() - Main.diam / 2);
                 if (a != null && a != flow) {
+<<<<<<< HEAD:GraphApp/src/graph/app/Clicker.java
                     if(panel.getSimpleWeightEdge(a, flow) == null) {
                     	String response;
 	                    int weight;
@@ -103,6 +104,34 @@ public class Clicker extends MouseAdapter {
                     	flow=null;
                         j = 0;
                         JOptionPane.showMessageDialog(panel, "Juz istnieje taka krawêd!");
+=======
+                    String response;
+                    int weight;
+                    boolean leave = false;
+                    while(leave == false) {
+                        try {
+                            response = JOptionPane.showInputDialog("Podaj wagÃ„â„¢:");
+                            if (response.equals("")) {
+                                leave = true;
+                                // handling Cancel
+                                //throw new NumberFormatException();
+                            } else {
+                                weight = Integer.parseInt(response);
+                                SimpleWeightEdge we = new SimpleWeightEdge(a, flow, null, weight);
+                                panel.addSimpleWeightEdge(we);
+                                j--;
+                                panel.unselect(a, flow);
+                            }
+                            leave = true;
+                        } catch(NumberFormatException ex) {
+                            ex.getLocalizedMessage();
+                        } catch (NullPointerException ex2) {
+                            // handling Cancel
+                            panel.unselect(a, flow);
+                            j = 0;
+                            leave = true;
+                        }
+>>>>>>> 43a66a16ffb789e5dca20ef1619c6c972b21dab7:GraphApp.2.2/src/graph/app/Clicker.java
                     }
                 }
                 else {
@@ -127,6 +156,13 @@ public class Clicker extends MouseAdapter {
             WeightGraph.kraskal(panel.G, panel);
         }
 
+        if(Main.currently == Now.PRIM) {
+            Vertex start = panel.getVertex(e.getX() - Main.diam / 2, e.getY() - Main.diam / 2);
+            if(start != null) {
+                WeightGraph.prim(panel, start);
+            }
+        }
+        
         if (Main.currently == Now.BFS) {
             Vertex a = panel.getVertex(e.getX() - Main.diam / 2, e.getY() - Main.diam / 2);
             if (a != null) {
@@ -186,7 +222,7 @@ public class Clicker extends MouseAdapter {
         	Vertex a = panel.getVertex(e.getX() - Main.diam / 2, e.getY() - Main.diam / 2);
         	if(a!=null) {
         		int eccentricy = panel.G.eccentricyOfVertex(a.getNumb());
-        		JOptionPane.showMessageDialog(panel,"Ekscentrycznoœ wierzcho³ka jest równa "+eccentricy);
+        		JOptionPane.showMessageDialog(panel,"EkscentrycznoÅ“ wierzchoÂ³ka jest rÃ³wna "+eccentricy);
         		panel.unselect(a);
         	}
         }
@@ -195,7 +231,7 @@ public class Clicker extends MouseAdapter {
         	Vertex a = panel.getVertex(e.getX() - Main.diam / 2, e.getY() - Main.diam / 2);
         	if(a!=null) {
         		int degree = panel.G.degreeOfVertex(a.getNumb());
-        		JOptionPane.showMessageDialog(panel,"Stopieñ wierzcho³ka jest równy "+degree);
+        		JOptionPane.showMessageDialog(panel,"StopieÃ± wierzchoÂ³ka jest rÃ³wny "+degree);
         		panel.unselect(a);
         	}
         }

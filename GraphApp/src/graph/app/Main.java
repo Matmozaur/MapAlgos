@@ -116,8 +116,12 @@ public class Main {
         mnNewMenu.setBackground(Color.pink);
         menuBar.add(mnNewMenu);
 
+<<<<<<< HEAD:GraphApp/src/graph/app/Main.java
         JButton btnVertex = new JButton("Wierzcho\u0142ek");
         btnVertex.setForeground(new Color(0, 200, 0));
+=======
+        JButton btnVertex = new JButton("WierzchoÅ‚ek");
+>>>>>>> 43a66a16ffb789e5dca20ef1619c6c972b21dab7:GraphApp.2.2/src/graph/app/Main.java
         btnVertex.setPreferredSize(new Dimension(144, 23));
         btnVertex.setMinimumSize(new Dimension(144, 23));
         btnVertex.setMaximumSize(new Dimension(144, 23));
@@ -129,8 +133,12 @@ public class Main {
         });
         mnNewMenu.add(btnVertex);
 
+<<<<<<< HEAD:GraphApp/src/graph/app/Main.java
         JButton btnEdge = new JButton("Kraw\u0119d\u017A");
         btnEdge.setForeground(new Color(0, 200, 0));
+=======
+        JButton btnEdge = new JButton("KrawÄ™dÅº");
+>>>>>>> 43a66a16ffb789e5dca20ef1619c6c972b21dab7:GraphApp.2.2/src/graph/app/Main.java
         btnEdge.setPreferredSize(new Dimension(144, 23));
         btnEdge.setMinimumSize(new Dimension(144, 23));
         btnEdge.setMaximumSize(new Dimension(144, 23));
@@ -147,8 +155,12 @@ public class Main {
         });
         mnNewMenu.add(btnEdge);
 
+<<<<<<< HEAD:GraphApp/src/graph/app/Main.java
         JButton btnWeightedEdge = new JButton("Kraw\u0119d\u017A wa\u017Cona");
         btnWeightedEdge.setForeground(new Color(0, 200, 0));
+=======
+        JButton btnWeightedEdge = new JButton("KrawÄ™dÅº waÅ¼ona");
+>>>>>>> 43a66a16ffb789e5dca20ef1619c6c972b21dab7:GraphApp.2.2/src/graph/app/Main.java
         btnWeightedEdge.setPreferredSize(new Dimension(144, 23));
         btnWeightedEdge.setMinimumSize(new Dimension(144, 23));
         btnWeightedEdge.setMaximumSize(new Dimension(144, 23));
@@ -240,14 +252,19 @@ public class Main {
         btnPrim.setMinimumSize(new Dimension(133, 23));
         btnPrim.setMaximumSize(new Dimension(133, 23));
         btnPrim.setPreferredSize(new Dimension(133, 23));
+<<<<<<< HEAD:GraphApp/src/graph/app/Main.java
         btnPrim.setBackground(Color.DARK_GRAY);
         btnKraskal.addActionListener(new ActionListener() {
+=======
+        btnPrim.addActionListener(new ActionListener() {
+>>>>>>> 43a66a16ffb789e5dca20ef1619c6c972b21dab7:GraphApp.2.2/src/graph/app/Main.java
             public void actionPerformed(ActionEvent arg0) {
                 Main.currently = Now.PRIM;
             }
         });
         mnAlgorithms.add(btnPrim);
 
+<<<<<<< HEAD:GraphApp/src/graph/app/Main.java
         JMenu mnRemove = new JMenu("Zmie\u0144");
         mnRemove.setForeground(new Color(0, 200, 0));
         mnRemove.setFont(new Font("Segoe UI", Font.PLAIN, 15));
@@ -255,6 +272,13 @@ public class Main {
 
         JButton btnVertex_1 = new JButton("Usu\u0144 wierzcho\u0142ek");
         btnVertex_1.setForeground(new Color(0, 200, 0));
+=======
+        JMenu mnRemove = new JMenu("ZmieÅ„");
+        mnRemove.setFont(new Font("Segoe UI", Font.PLAIN, 15));
+        menuBar.add(mnRemove);
+
+        JButton btnVertex_1 = new JButton("UsuÅ„ wierzchoÅ‚ek");
+>>>>>>> 43a66a16ffb789e5dca20ef1619c6c972b21dab7:GraphApp.2.2/src/graph/app/Main.java
         btnVertex_1.setPreferredSize(new Dimension(133, 23));
         btnVertex_1.setMinimumSize(new Dimension(133, 23));
         btnVertex_1.setMaximumSize(new Dimension(133, 23));
@@ -265,8 +289,12 @@ public class Main {
             }
         });
 
+<<<<<<< HEAD:GraphApp/src/graph/app/Main.java
         JButton btnRefresh = new JButton("Wyczy\u015B\u0107");
         btnRefresh.setForeground(new Color(0, 200, 0));
+=======
+        JButton btnRefresh = new JButton("WyczyÅ›Ä‡");
+>>>>>>> 43a66a16ffb789e5dca20ef1619c6c972b21dab7:GraphApp.2.2/src/graph/app/Main.java
         btnRefresh.setMinimumSize(new Dimension(133, 23));
         btnRefresh.setMaximumSize(new Dimension(133, 23));
         btnRefresh.setPreferredSize(new Dimension(133, 23));
@@ -278,8 +306,12 @@ public class Main {
             }
         });
 
+<<<<<<< HEAD:GraphApp/src/graph/app/Main.java
         JButton btnClear = new JButton("Od\u015Bwie\u017C");
         btnClear.setForeground(new Color(0, 200, 0));
+=======
+        JButton btnClear = new JButton("OdÅ›wieÅ¼");
+>>>>>>> 43a66a16ffb789e5dca20ef1619c6c972b21dab7:GraphApp.2.2/src/graph/app/Main.java
         btnClear.setPreferredSize(new Dimension(133, 23));
         btnClear.setMinimumSize(new Dimension(133, 23));
         btnClear.setMaximumSize(new Dimension(133, 23));
@@ -292,8 +324,12 @@ public class Main {
         mnRemove.add(btnClear);
         mnRemove.add(btnVertex_1);
 
+<<<<<<< HEAD:GraphApp/src/graph/app/Main.java
         JButton btnEdge_1 = new JButton("Usu\u0144 kraw\u0119d\u017A");
         btnEdge_1.setForeground(new Color(0, 200, 0));
+=======
+        JButton btnEdge_1 = new JButton("UsuÅ„ krawÄ™dÅº");
+>>>>>>> 43a66a16ffb789e5dca20ef1619c6c972b21dab7:GraphApp.2.2/src/graph/app/Main.java
         btnEdge_1.setMaximumSize(new Dimension(133, 23));
         btnEdge_1.setMinimumSize(new Dimension(133, 23));
         btnEdge_1.setPreferredSize(new Dimension(133, 23));
@@ -362,9 +398,9 @@ public class Main {
         btnSpjny.setBackground(Color.DARK_GRAY);
         btnSpjny.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {
-        		String s="Nie jest sp�jny";
+        		String s="Nie jest spójny";
         		if(Main.graphPanel.G.Connected(Main.graphPanel.G)) {
-        			s="Jest sp�jny";
+        			s="Jest spójny";
         		}
         		JOptionPane.showMessageDialog(Main.graphPanel,s);
         	}
@@ -403,8 +439,12 @@ public class Main {
         menuBar.add(mnSettings);
         mnSettings.setBackground(Color.DARK_GRAY);
 
+<<<<<<< HEAD:GraphApp/src/graph/app/Main.java
         JLabel lblNewLabel = new JLabel("Szybko\u015B\u0107 animacji");
         lblNewLabel.setForeground(new Color(0, 200, 0));
+=======
+        JLabel lblNewLabel = new JLabel("SzybkoÅ›Ä‡ animacji");
+>>>>>>> 43a66a16ffb789e5dca20ef1619c6c972b21dab7:GraphApp.2.2/src/graph/app/Main.java
         mnSettings.add(lblNewLabel);
         
 

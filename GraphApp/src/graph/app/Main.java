@@ -252,6 +252,15 @@ public class Main {
             }
         });
         mnAlgorithms.add(btnPrim);
+	    
+	JButton btnDijkstra = new JButton("Algorytm Dijkstry");
+        btnDijkstra.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                Main.currently = Now.DIJKSTRA;
+            }
+        });
+        mnAlgorithms.add(btnDijkstra);
+
 
         JMenu mnRemove = new JMenu("Zmie\u0144");
         mnRemove.setForeground(new Color(0, 200, 0));
@@ -367,9 +376,9 @@ public class Main {
         btnSpjny.setBackground(Color.DARK_GRAY);
         btnSpjny.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {
-        		String s="Nie jest spójny";
+        		String s="Nie jest spÃ³jny";
         		if(Main.graphPanel.G.Connected(Main.graphPanel.G)) {
-        			s="Jest spójny";
+        			s="Jest spÃ³jny";
         		}
         		JOptionPane.showMessageDialog(Main.graphPanel,s);
         	}

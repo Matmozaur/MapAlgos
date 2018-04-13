@@ -132,6 +132,7 @@ class GraphPanel extends JPanel {
     public void addSimpleWeightEdge(SimpleWeightEdge we) {
     	Main.GRAPH=Type.SIMPLEWEIGHT;
     	Main.getMnNewMenu_1().setEnabled(false);
+    	//Main.getBtnVertex_1().setEnabled(false);
         if (getSimpleWeightEdge(we.getA(), we.getB()) == null) {
             simpleW.add(we);
             unselect(we.getA(), we.getB());
@@ -150,13 +151,15 @@ class GraphPanel extends JPanel {
             Edge e = iterE.next();
             if (e.getA() == v || e.getB() == v) {
                 iterE.remove();
+                this.removeEdge(e);
             }
         }
         ListIterator<SimpleWeightEdge> iterW = simpleW.listIterator();
-        while (iterE.hasNext()) {
+        while (iterW.hasNext()) {
             SimpleWeightEdge e = iterW.next();
             if (e.getA() == v || e.getB() == v) {
-                iterW.remove();
+            	iterW.remove();
+            	this.removeSimpleWeightEdge(e);
             }
         }
         /*for(Edge e:this.edges) {
@@ -223,6 +226,7 @@ class GraphPanel extends JPanel {
         if(simpleW.isEmpty()) {
         	Main.GRAPH=Type.UNDEFINED;
         	Main.getMnNewMenu_1().setEnabled(true);
+        	//Main.getBtnVertex_1().setEnabled(true);
         }
         this.setOpaque(false);
         this.repaint();
@@ -258,8 +262,11 @@ class GraphPanel extends JPanel {
         this.simpleW.clear();
         this.counter = 0;
         Main.GRAPH=Type.UNDEFINED;
+    	Main.getMnNewMenu_1().setEnabled(true);
+    	Main.getBtnVertex_1().setEnabled(true);
         this.setOpaque(false);
         this.repaint();
+        
     }
 
     public void clear() {
@@ -271,6 +278,7 @@ class GraphPanel extends JPanel {
         }
         for (Vertex c : vertexes) {
             c.setColor(Main.vcolor);
+            c.setLabel(null);
         }
         this.setOpaque(false);
         this.repaint();

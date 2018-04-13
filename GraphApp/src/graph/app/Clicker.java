@@ -75,7 +75,7 @@ public class Clicker extends MouseAdapter {
 	                    boolean leave = false;
 	                    while(leave == false) {
 	                        try {
-	                            response = JOptionPane.showInputDialog("Podaj wagÃ„â„¢:");
+	                            response = JOptionPane.showInputDialog("Podaj wagê:");
 	                            if (response.equals("")) {
 	                                leave = true;
 	                                // handling Cancel
@@ -102,7 +102,7 @@ public class Clicker extends MouseAdapter {
                     	panel.unselect(a, flow);
                     	flow=null;
                         j = 0;
-                        JOptionPane.showMessageDialog(panel, "Juz istnieje taka krawÃªd!");
+                        JOptionPane.showMessageDialog(panel, "Juz istnieje taka krawêdz!");
                     }
                 }
                 else {
@@ -200,7 +200,7 @@ public class Clicker extends MouseAdapter {
         	Vertex a = panel.getVertex(e.getX() - Main.diam / 2, e.getY() - Main.diam / 2);
         	if(a!=null) {
         		int eccentricy = panel.G.eccentricyOfVertex(a.getNumb());
-        		JOptionPane.showMessageDialog(panel,"EkscentrycznoÅ“ wierzchoÂ³ka jest rÃ³wna "+eccentricy);
+        		JOptionPane.showMessageDialog(panel,"Ekscentrycznoœc wierzcho³ka jest równa: "+eccentricy);
         		panel.unselect(a);
         	}
         }
@@ -209,7 +209,7 @@ public class Clicker extends MouseAdapter {
         	Vertex a = panel.getVertex(e.getX() - Main.diam / 2, e.getY() - Main.diam / 2);
         	if(a!=null) {
         		int degree = panel.G.degreeOfVertex(a.getNumb());
-        		JOptionPane.showMessageDialog(panel,"StopieÃ± wierzchoÂ³ka jest rÃ³wny "+degree);
+        		JOptionPane.showMessageDialog(panel,"Stopieñ wierzcho³ka jest równy: "+degree);
         		panel.unselect(a);
         	}
         }

@@ -42,6 +42,8 @@ public class Main {
     private static JFrame frame;
     private static GraphPanel graphPanel;
     private static JMenu mnNewMenu_1;
+    private static JButton btnEdge_1;
+    private static JButton btnVertex_1;
 
     public static JFrame getFrame() {
 		return frame;
@@ -87,7 +89,7 @@ public class Main {
      */
     private void initialize() {
         frame = new JFrame();
-        frame.setIconImage(Toolkit.getDefaultToolkit().getImage(Main.class.getResource("/images/knmd.jpg")));
+        //frame.setIconImage(Toolkit.getDefaultToolkit().getImage(Main.class.getResource("/images/knmd.jpg")));
         frame.setBounds(100, 100, 657, 468);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(new BorderLayout(0, 0));
@@ -254,7 +256,6 @@ public class Main {
         mnAlgorithms.add(btnPrim);
 	    
 	JButton btnDijkstra = new JButton("Algorytm Dijkstry");
-	btnDijkstra.setEnabled(false);
         btnDijkstra.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
                 Main.currently = Now.DIJKSTRA;
@@ -273,7 +274,7 @@ public class Main {
         mnRemove.setFont(new Font("Segoe UI", Font.PLAIN, 15));
         menuBar.add(mnRemove);
 
-        JButton btnVertex_1 = new JButton("Usu\u0144 wierzcho\u0142ek");
+        btnVertex_1 = new JButton("Usu\u0144 wierzcho\u0142ek");
         btnVertex_1.setForeground(new Color(0, 200, 0));
         btnVertex_1.setPreferredSize(new Dimension(133, 23));
         btnVertex_1.setMinimumSize(new Dimension(133, 23));
@@ -312,7 +313,7 @@ public class Main {
         mnRemove.add(btnClear);
         mnRemove.add(btnVertex_1);
 
-        JButton btnEdge_1 = new JButton("Usu\u0144 kraw\u0119d\u017A");
+        btnEdge_1 = new JButton("Usu\u0144 kraw\u0119d\u017A");
         btnEdge_1.setForeground(new Color(0, 200, 0));
         btnEdge_1.setMaximumSize(new Dimension(133, 23));
         btnEdge_1.setMinimumSize(new Dimension(133, 23));
@@ -464,5 +465,11 @@ public class Main {
 		public void setMnNewMenu_1Enabled(boolean enabled) {
 			mnNewMenu_1.setEnabled(enabled);
 		}
+	    public static  JButton getBtnEdge_1() {
+		return btnEdge_1;
+	}
+	public static JButton getBtnVertex_1() {
+		return btnVertex_1;
+	}
 }
 

@@ -91,6 +91,67 @@ public class WeightGraph extends SimpleGraph {
     
     
     
+    public static void dijkstra(GraphPanel panel, Vertex vStart) {
+        int[] distances = new int[panel.G.V];
+        int[] available = new int[panel.G.V];
+        int[] parent = new int[panel.G.V];
+
+        int sup = 999999;
+        for (int i = 0; i < panel.G.V; i++) {
+            distances[i] = sup;
+            available[i] = 0;
+        }
+        distances[vStart.getNumb()] = 0;
+        available[vStart.getNumb()] = 2;
+        parent[vStart.getNumb()] = -1;
+
+        Vertex vLast = vStart;  //ostatnio dodawany wierzchołek
+
+        int iteration = 0;
+        while (iteration < panel.G.V) {
+            iteration += 1;
+            for (Vertex v : panel.vertexes) {
+                if (available[v.getNumb()] == 0 && panel.G.E[v.getNumb()][vLast.getNumb()] == true) {
+                    available[v.getNumb()] = 1;
+                }
+            }
+
+            int min = 99999;
+            for(Vertex v : panel.vertexes) {
+                if(available[v.getNumb()] == 1) {
+                    if(distances[v.getNumb()] < min) {
+                        min = distances[v.getNumb()];
+                        vLast = v;
+                    }
+                }
+            }   // vLast - chosen vertex
+            available[vLast.getNumb()] = 2;
+
+            // relaxation
+            for(Vertex v : panel.vertexes) {
+                if(panel.G.E[v.getNumb()][vLast.getNumb()] == true) {
+                    int weight = panel.G.W[v.getNumb()][vLast.getNumb()];
+                    if(distances[v.getNumb()] > distances[vLast.getNumb()] + weight) {
+                        distances[v.getNumb()] = distances[vLast.getNumb()] + weight;
+                        parent[v.getNumb()] = vLast.getNumb();
+                        System.out.println("relaxation");
+                    }
+                }
+            }
+        }
+        for(int i = 0; i < panel.G.V; i++) {
+            System.out.println(distances[i]);
+        }
+        for(Vertex v:panel.vertexes) {
+        	int i=v.getNumb();
+        	v.setLabel(""+distances[i]);
+        	panel.G.color(i, panel);
+        	panel.G.color(i,parent[i], panel);
+        }
+        
+    }
+
+    
     
     
     
@@ -217,57 +278,6 @@ public class WeightGraph extends SimpleGraph {
             panel.G.color(v.getNumb(), panel);
         }
     }
-      public static void dijkstra(GraphPanel panel, Vertex vStart) {
-        int[] distances = new int[panel.G.V];
-        int[] available = new int[panel.G.V];
-        int[] parent = new int[panel.G.V];
-
-        int sup = 999999;
-        for (int i = 0; i < panel.G.V; i++) {
-            distances[i] = sup;
-            available[i] = 0;
-        }
-        distances[vStart.getNumb()] = 0;
-        available[vStart.getNumb()] = 2;
-        parent[vStart.getNumb()] = -1;
-
-        Vertex vLast = vStart;  //ostatnio dodawany wierzchołek
-
-        int iteration = 0;
-        while (iteration < panel.G.V) {
-            iteration += 1;
-            for (Vertex v : panel.vertexes) {
-                if (available[v.getNumb()] == 0 && panel.G.E[v.getNumb()][vLast.getNumb()] == true) {
-                    available[v.getNumb()] = 1;
-                }
-            }
-
-            int min = 99999;
-            for(Vertex v : panel.vertexes) {
-                if(available[v.getNumb()] == 1) {
-                    if(distances[v.getNumb()] < min) {
-                        min = distances[v.getNumb()];
-                        vLast = v;
-                    }
-                }
-            }   // vLast - chosen vertex
-            available[vLast.getNumb()] = 2;
-
-            // relaxation
-            for(Vertex v : panel.vertexes) {
-                if(panel.G.E[v.getNumb()][vLast.getNumb()] == true) {
-                    int weight = panel.G.W[v.getNumb()][vLast.getNumb()];
-                    if(distances[v.getNumb()] > distances[vLast.getNumb()] + weight) {
-                        distances[v.getNumb()] = distances[vLast.getNumb()] + weight;
-                        parent[v.getNumb()] = vLast.getNumb();
-                        System.out.println("relaxation");
-                    }
-                }
-            }
-        }
-        for(int i = 0; i < panel.G.V; i++) {
-            System.out.println(distances[i]);
-        }
-    }
+    
 }
 

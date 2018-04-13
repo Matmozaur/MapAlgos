@@ -120,5 +120,8 @@ class Vertex {
 			int n=numb+1;
 			g.drawString(n+"", x+diam/2, y-(int)0.6*diam);
 		}
+		if(this.label != null) {
+			g.drawString(this.label, x+diam/2, y+(int)2.6*diam);
+		}
 	}
 }

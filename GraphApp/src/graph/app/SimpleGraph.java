@@ -414,4 +414,41 @@ public class SimpleGraph extends Graph {
 	
 	
 	
+	//outside
+	public String allInfo() {
+		String info="";
+    	if(this.Connected(this)) {
+    		info=info+"Spójny \n";
+    	}
+    	else{
+    		info=info+"Niespójny \n";
+    	}
+    	info=info+"Rz¹d="+this.V+" \n";
+    	int size=0;
+    	for(int i=0;i<this.V;i++) {
+    		size=size+this.degreeOfVertex(i);
+    	}
+    	size=size/2;
+    	info=info+"Rozmiar="+size+" \n";
+    	int maxdim=0,mindim=this.V;
+    	for(int i=0;i<this.V;i++){
+    		if(this.degreeOfVertex(i)>maxdim) maxdim=this.degreeOfVertex(i);
+    		if(this.degreeOfVertex(i)<mindim) mindim=this.degreeOfVertex(i);
+    	}
+    	info=info+"Maksymalny stopieñ wierzcho³ka="+maxdim+" \n";
+    	info=info+"Minimalny stopieñ wierzcho³ka="+mindim+" \n";
+    	if(this.Connected(this)) {
+    		int rad=size, diam=0;
+    		for(int i=0;i<this.V;i++){
+        		if(this.eccentricyOfVertex(i)>diam) diam=this.eccentricyOfVertex(i);
+        		if(this.eccentricyOfVertex(i)<rad) rad=this.eccentricyOfVertex(i);
+        	}
+    		info=info+"Œrednica="+diam+" \n";
+        	info=info+"Promieñ="+rad+" \n";
+    	}
+    	int[] D=new int[this.n];
+    	return info;
+    }
+	
+	
 }

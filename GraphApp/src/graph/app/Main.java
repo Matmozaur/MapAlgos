@@ -30,6 +30,16 @@ import java.awt.Dimension;
 import java.awt.Label;
 import java.awt.Toolkit;
 import javax.swing.JRadioButton;
+import javax.swing.JTextField;
+import javax.swing.JTextArea;
+import javax.swing.JPanel;
+import javax.swing.JTree;
+import java.awt.Rectangle;
+import java.awt.Point;
+import java.awt.Insets;
+import javax.swing.JToolBar;
+import javax.swing.JSeparator;
+import javax.swing.border.LineBorder;
 
 public class Main {
 
@@ -44,6 +54,7 @@ public class Main {
     private static JMenu mnNewMenu_1;
     private static JButton btnEdge_1;
     private static JButton btnVertex_1;
+    private JTextField textField;
 
     public static JFrame getFrame() {
 		return frame;
@@ -89,7 +100,7 @@ public class Main {
      */
     private void initialize() {
         frame = new JFrame();
-        //frame.setIconImage(Toolkit.getDefaultToolkit().getImage(Main.class.getResource("/images/knmd.jpg")));
+        frame.setIconImage(Toolkit.getDefaultToolkit().getImage(Main.class.getResource("/images/knmd.jpg")));
         frame.setBounds(100, 100, 657, 468);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(new BorderLayout(0, 0));
@@ -102,6 +113,67 @@ public class Main {
         frame.getContentPane().add(graphPanel, BorderLayout.CENTER);
         graphPanel.addMouseListener(new Clicker(graphPanel));
         graphPanel.setBackground(Color.GRAY);
+        
+        JTextArea info = new JTextArea();
+        info.setMaximumSize(new Dimension(2147483647, 400));
+        info.setEditable(false);
+        info.setLineWrap(true);
+        info.setWrapStyleWord(true);
+        info.setMargin(new Insets(10, 10, 10, 10));
+        info.setCaretColor(Color.GREEN);
+        info.setLocation(new Point(2, 2));
+        info.setFont(new Font("Monospaced", Font.BOLD, 15));
+        info.setBounds(new Rectangle(2, 2, 2, 2));
+        info.setTabSize(11);
+        info.setText("Info:");
+        info.setDisabledTextColor(new Color(109, 109, 109));
+        info.setForeground(Color.GREEN);
+        info.setBackground(new Color(0, 0, 0));
+        info.setPreferredSize(new Dimension(150, 400));
+        info.setMinimumSize(new Dimension(150, 400));
+        frame.getContentPane().add(info, BorderLayout.WEST);
+        
+        JToolBar toolBar = new JToolBar();
+        toolBar.setPreferredSize(new Dimension(130, 2));
+        toolBar.setOrientation(SwingConstants.VERTICAL);
+        toolBar.setBackground(Color.DARK_GRAY);
+        frame.getContentPane().add(toolBar, BorderLayout.EAST);
+        
+        JButton btnNewButton = new JButton("New button");
+        btnNewButton.setBorder(new LineBorder(new Color(0, 0, 0)));
+        btnNewButton.setMaximumSize(new Dimension(130, 23));
+        btnNewButton.setPreferredSize(new Dimension(130, 23));
+        btnNewButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        	}
+        });
+        toolBar.add(btnNewButton);
+        
+        JButton btnNewButton_2 = new JButton("New button");
+        btnNewButton_2.setBorder(new LineBorder(new Color(0, 0, 0)));
+        btnNewButton_2.setPreferredSize(new Dimension(130, 23));
+        btnNewButton_2.setMaximumSize(new Dimension(130, 23));
+        toolBar.add(btnNewButton_2);
+        
+        JButton btnNewButton_3 = new JButton("New button");
+        btnNewButton_3.setBorder(new LineBorder(new Color(0, 0, 0)));
+        btnNewButton_3.setMaximumSize(new Dimension(130, 23));
+        btnNewButton_3.setPreferredSize(new Dimension(130, 23));
+        toolBar.add(btnNewButton_3);
+        
+        JSeparator separator = new JSeparator();
+        toolBar.add(separator);
+        
+        textField = new JTextField();
+        textField.setForeground(Color.GREEN);
+        textField.setBackground(Color.BLACK);
+        toolBar.add(textField);
+        textField.setColumns(10);
+        
+        JButton btnNewButton_1 = new JButton("New button");
+        btnNewButton_1.setPreferredSize(new Dimension(130, 23));
+        btnNewButton_1.setMaximumSize(new Dimension(130, 23));
+        toolBar.add(btnNewButton_1);
         
         JMenuBar menuBar = new JMenuBar();
         menuBar.setAutoscrolls(true);
@@ -383,9 +455,9 @@ public class Main {
         btnSpjny.setBackground(Color.DARK_GRAY);
         btnSpjny.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {
-        		String s="Nie jest spÃ³jny";
+        		String s="Nie jest spójny";
         		if(Main.graphPanel.G.Connected(Main.graphPanel.G)) {
-        			s="Jest spÃ³jny";
+        			s="Jest spójny";
         		}
         		JOptionPane.showMessageDialog(Main.graphPanel,s);
         	}
@@ -417,6 +489,23 @@ public class Main {
         btnEkscentrycznocWierzchoka.setPreferredSize(new Dimension(88, 23));
         btnEkscentrycznocWierzchoka.setBackground(Color.DARK_GRAY);
         mnInformacje.add(btnEkscentrycznocWierzchoka);
+        
+        JButton btnWszystkie = new JButton("Wszystkie");
+        btnWszystkie.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		/*
+        		 * 
+        		 */
+        		info.setText("Info: \n"+Main.graphPanel.G.allInfo());
+        		
+        	}
+        });
+        btnWszystkie.setBackground(new Color(0, 0, 0));
+        btnWszystkie.setForeground(new Color(50, 205, 50));
+        btnWszystkie.setMaximumSize(new Dimension(88, 23));
+        btnWszystkie.setMinimumSize(new Dimension(88, 23));
+        btnWszystkie.setPreferredSize(new Dimension(88, 23));
+        mnInformacje.add(btnWszystkie);
 
         JMenu mnSettings = new JMenu("Ustawienia");
         mnSettings.setForeground(new Color(0, 200, 0));
@@ -424,7 +513,7 @@ public class Main {
         menuBar.add(mnSettings);
         mnSettings.setBackground(Color.DARK_GRAY);
 
-        JLabel lblNewLabel = new JLabel("Szybko\u015B\u0107 animacji");
+        JLabel lblNewLabel = new JLabel("Szybkoœæ animacji");
         lblNewLabel.setForeground(new Color(0, 200, 0));
         mnSettings.add(lblNewLabel);
         

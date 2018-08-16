@@ -10,6 +10,9 @@ import static java.awt.Color.red;
 
 public class WeightEdge extends Edge {
 
+    /**
+    * Edges weight
+    */
     private int weight;
     private Color color;
 

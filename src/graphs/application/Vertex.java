@@ -6,14 +6,34 @@ import java.awt.Graphics;
 import main.application.Main;
 
 public class Vertex {
+	/**
+	 * horizontal coordinate in panel
+	 */
 	private int x;
+	/**
+	 * veritical coordinate in panel
+	 */
 	private int y;
+	/**
+	 * diameter of vertex
+	 */
 	private int diam;
+	/**
+	 * vertexes color
+	 */
 	private Color color;
+	/**
+	 * number of vertex (primary indentifier
+	 */
 	private int numb;
+	/**
+	 * vertexes label
+	 */
 	private String label;
+	/**
+	 * visibility of vertexes label
+	 */
 	private boolean visible;
-
 	
 	public Vertex(int x, int y, int numb, String label) {
 		super();

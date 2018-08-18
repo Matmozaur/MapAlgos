@@ -1,12 +1,17 @@
-package graphs.representation;
+package graphs.application;
 
 import java.awt.*;
 
-import graphs.application.Edge;
-import graphs.application.Vertex;
 import main.application.Main;
-
+/**
+ * representation of undirected weight edge
+ * @author Matmozaur
+ *
+ */
 public class SimpleWeightEdge extends Edge {
+	/**
+	 * edges weight
+	 */
 	private int weight;
 
 	public SimpleWeightEdge(Vertex a, Vertex b, String Label, int weight) {

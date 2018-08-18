@@ -1,4 +1,4 @@
-package graphs.pure;
+package graphs.pure.unused.in.application;
 import java.util.Queue;
 import java.util.LinkedList;
 

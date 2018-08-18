@@ -8,6 +8,11 @@ import main.application.Main;
 
 import static java.awt.Color.red;
 
+/**
+ * representation of directed weight edge
+ * @author Matmozaur
+ *
+ */
 public class WeightEdge extends Edge {
 
     /**
@@ -83,11 +88,5 @@ public class WeightEdge extends Edge {
         g.fill(arrowHead);
         g.dispose();
     }
-    /*
-     Obecne problemy:
-     - mozliwe jest narysowanie "krawedzi" z v do v,
-     - grot strzały nie jest dobrze umiejscawiany,
-     - wagi nie sa jeszcze wprowadzane przy usera-done
-     - usuwanie krawedzi!
-     */
+    
 }

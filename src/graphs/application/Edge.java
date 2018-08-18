@@ -3,15 +3,36 @@ package graphs.application;
 import java.awt.*;
 
 import main.application.Main;
-
+/**
+ * Representation of edge in simple graph 
+ * @author Matmozaur
+ *
+ */
 public class Edge {
-
+	
+	/**
+	 * one of edges nodes
+	 */
 	public Vertex a;
+	/**
+	 * one of edges nodes
+	 */
 	public Vertex b;
 	private Color color;
+	/**
+	 * number of edge (identifier)
+	 */
 	private int numb;
+	/**
+	 * edges label
+	 */
 	private String label;
-	
+	/**
+	 * Create egde with nodes in a and b
+	 * @param a begin node
+	 * @param b end node 
+	 * @param Label Label of edge 
+	 */
 	public Edge(Vertex a, Vertex b,String Label) {
 		super();
 		this.a = a;
@@ -72,7 +93,7 @@ public class Edge {
 		return true;
 	}
 	/**
-	 * draws edge with color set in Main class 
+	 * draws edge with color set in Main class @see {@link Main#ecolor}
 	 * @param g
 	 */
 	public void draw(Graphics g) {

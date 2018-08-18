@@ -8,9 +8,9 @@ import java.util.ListIterator;
 import javax.swing.JPanel;
 
 import graphs.application.Edge;
+import graphs.application.SimpleWeightEdge;
 import graphs.application.Vertex;
 import graphs.representation.Graph;
-import graphs.representation.SimpleWeightEdge;
 import graphs.representation.WeightGraph;
 
 public class GraphPanel extends JPanel {

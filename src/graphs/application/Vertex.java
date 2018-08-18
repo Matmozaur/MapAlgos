@@ -5,6 +5,11 @@ import java.awt.Graphics;
 
 import main.application.Main;
 
+/**
+ * representation of vertex
+ * @author Matmozaur
+ *
+ */
 public class Vertex {
 	/**
 	 * horizontal coordinate in panel

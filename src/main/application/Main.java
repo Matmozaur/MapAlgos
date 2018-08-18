@@ -53,6 +53,9 @@ import javax.swing.SpinnerListModel;
 public class Main {
 
 	private static Color vcolor = Color.BLACK;
+	/**
+	 * default color of edges
+	 */
 	private static Color ecolor = Color.BLACK;
     private static int diam = 24;
     private static Now currently = Now.VERTEX;

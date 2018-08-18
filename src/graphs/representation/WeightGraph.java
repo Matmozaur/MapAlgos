@@ -4,7 +4,7 @@ import java.util.LinkedList;
 
 import addicional.algos;
 import graphs.application.Vertex;
-import graphs.pure.directedGraph;
+import graphs.pure.unused.in.application.directedGraph;
 import main.application.GraphPanel;
 
 public class WeightGraph extends SimpleGraph {

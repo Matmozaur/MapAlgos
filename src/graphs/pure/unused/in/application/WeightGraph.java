@@ -1,4 +1,4 @@
-package graphs.pure;
+package graphs.pure.unused.in.application;
 
 public class WeightGraph extends simpleGraph {
 	int W[][]=new int[n][n];

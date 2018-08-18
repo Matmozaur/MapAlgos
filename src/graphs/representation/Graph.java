@@ -3,6 +3,7 @@ package graphs.representation;
 import java.awt.Color;
 
 import graphs.application.Edge;
+import graphs.application.SimpleWeightEdge;
 import graphs.application.Vertex;
 import main.application.GraphPanel;
 

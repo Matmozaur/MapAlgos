@@ -17,8 +17,8 @@ import javax.swing.*;
 import javax.swing.JOptionPane;
 
 import graphs.application.Edge;
+import graphs.application.SimpleWeightEdge;
 import graphs.application.Vertex;
-import graphs.representation.SimpleWeightEdge;
 import graphs.representation.WeightGraph;
 
 public class Clicker extends MouseAdapter {

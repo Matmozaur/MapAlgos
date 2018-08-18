@@ -1,4 +1,4 @@
-package graphs.pure;
+package graphs.pure.unused.in.application;
 
 public abstract class graph {
 	public final static int n=30;

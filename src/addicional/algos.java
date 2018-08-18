@@ -12,6 +12,7 @@ public abstract class algos {
 	/**
 	 * stops program for t milisec
 	 * @param t
+	 * @author Matmozaur
 	 */
 	public static void sleep(long t) {
 		try{

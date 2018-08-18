@@ -2,7 +2,7 @@ package graphs.representation;
 import java.util.Queue;
 
 import addicional.algos;
-import graphs.pure.simpleGraph;
+import graphs.pure.unused.in.application.simpleGraph;
 import main.application.GraphPanel;
 
 import java.lang.reflect.Array;

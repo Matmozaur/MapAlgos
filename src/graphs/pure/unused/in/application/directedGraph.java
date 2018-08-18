@@ -1,4 +1,4 @@
-package graphs.pure;
+package graphs.pure.unused.in.application;
 
 
 public class directedGraph extends WeightGraph {

@@ -18,8 +18,8 @@ public class GraphPanel extends JPanel {
 	public Vertex currentVertex=null;
 	public List<Vertex> vertexes = new LinkedList<Vertex>();
     public List<Edge> edges = new LinkedList<Edge>();
-    public static int counter = 0;
-    public static int n = Graph.n;
+    public  int counter = 0;
+    public  int n = Graph.n;
     public WeightGraph G = new WeightGraph(0, new boolean[n][n],new int[n][n]);
     public List<SimpleWeightEdge> simpleW = new LinkedList<SimpleWeightEdge>();
 
@@ -114,15 +114,17 @@ public class GraphPanel extends JPanel {
      * @param c
      */
     public void addVertex(Vertex c) {
-        if (getVertex(c.getX(), c.getY()) == null) {
+        if(this.counter<this.n) {
+        	if (getVertex(c.getX(), c.getY()) == null) {
             this.counter++;
             vertexes.add(c);
             G.V++;
             this.setCurrentVertex(null);
             this.update(this.getGraphics());
-        }
-        else {
-        	this.setCurrentVertex(getVertex(c.getX(), c.getY()));
+        	}
+        	else {
+        		this.setCurrentVertex(getVertex(c.getX(), c.getY()));
+        	}
         }
     }
 

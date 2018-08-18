@@ -6,12 +6,25 @@ import graphs.application.Edge;
 import graphs.application.SimpleWeightEdge;
 import graphs.application.Vertex;
 import main.application.GraphPanel;
-
+/**
+ * Abstract class used to represent various types of graphs
+ * @author Matmozaur
+ *
+ */
 public abstract class Graph {
-	public static int n = 30;
+	/**
+	 * Maximal number of vertexes
+	 */
+	public static final int n = 100;
 	public int last = -1;
 	public static Color color = Color.RED;
+	/**
+	 * time between displaying algorithms steps
+	 */
 	public static long t = 500;
+	/**
+	 * Order
+	 */
     public int V;
 
 

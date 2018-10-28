@@ -211,7 +211,7 @@ public class Main {
         frame.setJMenuBar(menuBar);
         menuBar.setBackground(Color.DARK_GRAY);
 
-        JMenu mnNewMenu = new JMenu("Nowy");
+        JMenu mnNewMenu = new JMenu("New");
         mnNewMenu.setForeground(new Color(0, 200, 0));
         mnNewMenu.setVerticalAlignment(SwingConstants.TOP);
         mnNewMenu.setBorderPainted(true);
@@ -219,7 +219,7 @@ public class Main {
         mnNewMenu.setBackground(Color.pink);
         menuBar.add(mnNewMenu);
 
-        JButton btnVertex = new JButton("Wierzcho\u0142ek");
+        JButton btnVertex = new JButton("Vertex");
         btnVertex.setForeground(new Color(0, 200, 0));
         btnVertex.setPreferredSize(new Dimension(144, 23));
         btnVertex.setMinimumSize(new Dimension(144, 23));
@@ -232,7 +232,7 @@ public class Main {
         });
         mnNewMenu.add(btnVertex);
 
-        JButton btnEdge = new JButton("Kraw\u0119d\u017A");
+        JButton btnEdge = new JButton("Edge");
         btnEdge.setForeground(new Color(0, 200, 0));
         btnEdge.setPreferredSize(new Dimension(144, 23));
         btnEdge.setMinimumSize(new Dimension(144, 23));
@@ -244,13 +244,13 @@ public class Main {
                 	currently = Now.EDGE;
                 }
                 else {
-                	JOptionPane.showMessageDialog(Main.graphPanel,"To nie jest graf prosty");
+                	JOptionPane.showMessageDialog(Main.graphPanel,"This is not a simple graph");
                 }
             }
         });
         mnNewMenu.add(btnEdge);
 
-        JButton btnWeightedEdge = new JButton("Kraw\u0119d\u017A wa\u017Cona");
+        JButton btnWeightedEdge = new JButton("Weight edge");
         btnWeightedEdge.setForeground(new Color(0, 200, 0));
         btnWeightedEdge.setPreferredSize(new Dimension(144, 23));
         btnWeightedEdge.setMinimumSize(new Dimension(144, 23));
@@ -262,18 +262,18 @@ public class Main {
                 	currently = Now.SIMPLEWEIGHT;
                 }
                 else {
-                	JOptionPane.showMessageDialog(Main.graphPanel,"To nie jest graf prosty z wagami");
+                	JOptionPane.showMessageDialog(Main.graphPanel,"This is not simple weight graph");
                 }
             }
         });
         mnNewMenu.add(btnWeightedEdge);
 
-        JMenu mnAlgorithms = new JMenu("Algorytmy");
+        JMenu mnAlgorithms = new JMenu("Algorithms");
         mnAlgorithms.setForeground(new Color(0, 200, 0));
         mnAlgorithms.setFont(new Font("Segoe UI", Font.PLAIN, 15));
         menuBar.add(mnAlgorithms);
 
-        JButton btnDfs = new JButton("Algorytm DFS");
+        JButton btnDfs = new JButton("DFS");
         btnDfs.setForeground(new Color(0, 200, 0));
         btnDfs.setPreferredSize(new Dimension(133, 23));
         btnDfs.setMinimumSize(new Dimension(133, 23));
@@ -299,7 +299,7 @@ public class Main {
         });
         mnAlgorithms.add(btnDeepSearch);
 
-        JButton btnBfs = new JButton("Algorytm BFS");
+        JButton btnBfs = new JButton("BFS");
         btnBfs.setForeground(new Color(0, 200, 0));
         btnBfs.setPreferredSize(new Dimension(133, 23));
         btnBfs.setMinimumSize(new Dimension(133, 23));
@@ -325,7 +325,7 @@ public class Main {
         });
         mnAlgorithms.add(btnBreadthSearch);
 
-        JButton btnKraskal = new JButton("Algorytm Kruskala");
+        JButton btnKraskal = new JButton("Kruskal");
         btnKraskal.setForeground(new Color(0, 200, 0));
         btnKraskal.setPreferredSize(new Dimension(133, 23));
         btnKraskal.setMinimumSize(new Dimension(133, 23));
@@ -338,7 +338,7 @@ public class Main {
         });
         mnAlgorithms.add(btnKraskal);
 
-        JButton btnPrim = new JButton("Algorytm Prima");
+        JButton btnPrim = new JButton("Prim");
         btnPrim.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {
         		Main.currently=Now.PRIM;
@@ -356,7 +356,7 @@ public class Main {
         });
         mnAlgorithms.add(btnPrim);
 	    
-	JButton btnDijkstra = new JButton("Algorytm Dijkstry");
+	JButton btnDijkstra = new JButton("Dijkstra");
         btnDijkstra.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
                 Main.currently = Now.DIJKSTRA;
@@ -370,12 +370,12 @@ public class Main {
         btnDijkstra.setBackground(Color.DARK_GRAY);
 
 
-        JMenu mnRemove = new JMenu("Zmie\u0144");
+        JMenu mnRemove = new JMenu("Change");
         mnRemove.setForeground(new Color(0, 200, 0));
         mnRemove.setFont(new Font("Segoe UI", Font.PLAIN, 15));
         menuBar.add(mnRemove);
 
-        btnVertex_1 = new JButton("Usu\u0144 wierzcho\u0142ek");
+        btnVertex_1 = new JButton("Remove vertex");
         btnVertex_1.setForeground(new Color(0, 200, 0));
         btnVertex_1.setPreferredSize(new Dimension(133, 23));
         btnVertex_1.setMinimumSize(new Dimension(133, 23));
@@ -387,7 +387,7 @@ public class Main {
             }
         });
 
-        JButton btnRefresh = new JButton("Wyczy\u015B\u0107");
+        JButton btnRefresh = new JButton("Refresh (delete all)");
         btnRefresh.setForeground(new Color(0, 200, 0));
         btnRefresh.setMinimumSize(new Dimension(133, 23));
         btnRefresh.setMaximumSize(new Dimension(133, 23));
@@ -400,7 +400,7 @@ public class Main {
             }
         });
 
-        JButton btnClear = new JButton("Od\u015Bwie\u017C");
+        JButton btnClear = new JButton("Clear");
         btnClear.setForeground(new Color(0, 200, 0));
         btnClear.setPreferredSize(new Dimension(133, 23));
         btnClear.setMinimumSize(new Dimension(133, 23));
@@ -414,7 +414,7 @@ public class Main {
         mnRemove.add(btnClear);
         mnRemove.add(btnVertex_1);
 
-        btnEdge_1 = new JButton("Usu\u0144 kraw\u0119d\u017A");
+        btnEdge_1 = new JButton("Remove edge");
         btnEdge_1.setForeground(new Color(0, 200, 0));
         btnEdge_1.setMaximumSize(new Dimension(133, 23));
         btnEdge_1.setMinimumSize(new Dimension(133, 23));
@@ -427,12 +427,12 @@ public class Main {
         });
         mnRemove.add(btnEdge_1);
 
-        mnNewMenu_1 = new JMenu("Elementy grafu");
+        mnNewMenu_1 = new JMenu("Graphs elements");
         mnNewMenu_1.setForeground(new Color(0, 200, 0));
         mnNewMenu_1.setFont(new Font("Segoe UI", Font.PLAIN, 15));
         menuBar.add(mnNewMenu_1);
 
-        JButton btnCenter = new JButton("Centrum");
+        JButton btnCenter = new JButton("Center");
         btnCenter.setForeground(new Color(0, 200, 0));
         btnCenter.setMinimumSize(new Dimension(122, 23));
         btnCenter.setMaximumSize(new Dimension(122, 23));
@@ -445,7 +445,7 @@ public class Main {
         });
         mnNewMenu_1.add(btnCenter);
 
-        JButton btnPeryfery = new JButton("Peryferium");
+        JButton btnPeryfery = new JButton("Peryfery");
         btnPeryfery.setForeground(new Color(0, 200, 0));
         btnPeryfery.setPreferredSize(new Dimension(122, 23));
         btnPeryfery.setMinimumSize(new Dimension(122, 23));
@@ -458,7 +458,7 @@ public class Main {
         });
         mnNewMenu_1.add(btnPeryfery);
 
-        JButton btnShortestPatch = new JButton("Najkr\u00F3tsza \u015Bcie\u017Cka");
+        JButton btnShortestPatch = new JButton("Shortest path");
         btnShortestPatch.setForeground(new Color(0, 200, 0));
         btnShortestPatch.setMinimumSize(new Dimension(122, 23));
         btnShortestPatch.setMaximumSize(new Dimension(122, 23));
@@ -471,12 +471,12 @@ public class Main {
         });
         mnNewMenu_1.add(btnShortestPatch);
         
-        JMenu mnInformacje = new JMenu("Informacje");
+        JMenu mnInformacje = new JMenu("Informations");
         mnInformacje.setForeground(new Color(0, 200, 0));
         mnInformacje.setFont(new Font("Segoe UI", Font.PLAIN, 15));
         menuBar.add(mnInformacje);
         
-        JButton btnSpjny = new JButton("Sp\u00F3jno\u015B\u0107");
+        JButton btnSpjny = new JButton("Connectivity");
         btnSpjny.setForeground(new Color(0, 200, 0));
         btnSpjny.setMinimumSize(new Dimension(88, 23));
         btnSpjny.setMaximumSize(new Dimension(88, 23));
@@ -582,12 +582,13 @@ public class Main {
         mnSettings.add(btnApplay);
         
         JToggleButton tglbtnNewToggleButton = new JToggleButton("PL");
-        tglbtnNewToggleButton.setSelected(true);
+        tglbtnNewToggleButton.setSelected(false);
         tglbtnNewToggleButton.setMaximumSize(new Dimension(60, 23));
         tglbtnNewToggleButton.setPreferredSize(new Dimension(60, 23));
         menuBar.add(tglbtnNewToggleButton);
         
         JToggleButton tglbtnNewToggleButton_1 = new JToggleButton("ENG");
+        tglbtnNewToggleButton.setSelected(true);
         tglbtnNewToggleButton_1.setMaximumSize(new Dimension(60, 23));
         tglbtnNewToggleButton_1.setMinimumSize(new Dimension(40, 23));
         tglbtnNewToggleButton_1.setPreferredSize(new Dimension(60, 23));

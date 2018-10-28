@@ -1,4 +1,4 @@
-package main.application;
+package application;
 
 public enum Type {
 SIMPLE,SIMPLEWEIGHT,WEIGHT,UNDEFINED;

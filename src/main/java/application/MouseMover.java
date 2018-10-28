@@ -1,4 +1,4 @@
-package main.application;
+package application;
 
 import java.awt.Cursor;
 import java.awt.event.MouseEvent;

@@ -1,4 +1,4 @@
-package main.application;
+package application;
 
 public enum Now {
 	VERTEX, EDGE,DFS,DEEPSEARCH,BFS,BREADTHSEARCH,VERTEXREMOVE,

@@ -1,4 +1,4 @@
-package main.application;
+package application;
 
 import java.awt.Color;
 import java.awt.Cursor;
@@ -92,7 +92,7 @@ public class Clicker extends MouseAdapter {
 	                    boolean leave = false;
 	                    while(leave == false) {
 	                        try {
-	                            response = JOptionPane.showInputDialog("Podaj wagê:");
+	                            response = JOptionPane.showInputDialog("Set weight:");
 	                            if (response.equals("")) {
 	                                leave = true;
 	                                // handling Cancel
@@ -120,7 +120,7 @@ public class Clicker extends MouseAdapter {
                     	panel.unselect(a);
                     	panel.setCurrentVertex(null);
                         j = 0;
-                        JOptionPane.showMessageDialog(panel, "Juz istnieje taka krawêdz!");
+                        JOptionPane.showMessageDialog(panel, "This edge already exist!");
                     }
                 }
                 else {
@@ -218,7 +218,7 @@ public class Clicker extends MouseAdapter {
         	Vertex a = panel.getVertex(e.getX() - Main.getDiam() / 2, e.getY() - Main.getDiam() / 2);
         	if(a!=null) {
         		int eccentricy = panel.G.eccentricyOfVertex(a.getNumb());
-        		JOptionPane.showMessageDialog(panel,"Ekscentrycznoœc wierzcho³ka jest równa: "+eccentricy);
+        		JOptionPane.showMessageDialog(panel,"Vertexex eccenticity is equals: "+eccentricy);
         		panel.unselect(a);
         	}
         }
@@ -227,7 +227,7 @@ public class Clicker extends MouseAdapter {
         	Vertex a = panel.getVertex(e.getX() - Main.getDiam() / 2, e.getY() - Main.getDiam() / 2);
         	if(a!=null) {
         		int degree = panel.G.degreeOfVertex(a.getNumb());
-        		JOptionPane.showMessageDialog(panel,"Stopieñ wierzcho³ka jest równy: "+degree);
+        		JOptionPane.showMessageDialog(panel,"Vertexes degree is equal: "+degree);
         		panel.unselect(a);
         	}
         }

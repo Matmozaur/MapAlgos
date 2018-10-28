@@ -1,4 +1,4 @@
-package main.application;
+package application;
 
 import java.awt.EventQueue;
 
@@ -200,61 +200,9 @@ public class Main {
         info.setPreferredSize(new Dimension(150, 400));
         info.setMinimumSize(new Dimension(150, 400));
         frame.getContentPane().add(info, BorderLayout.WEST);
-        
-        JToolBar toolBar = new JToolBar();
-        toolBar.setMaximumSize(new Dimension(140, 2147483647));
-        toolBar.setPreferredSize(new Dimension(140, 2));
-        toolBar.setOrientation(SwingConstants.VERTICAL);
-        toolBar.setBackground(Color.DARK_GRAY);
-        frame.getContentPane().add(toolBar, BorderLayout.EAST);
-        
-        JButton btnNewButton = new JButton("New button");
-        btnNewButton.setBorder(new LineBorder(new Color(0, 0, 0)));
-        btnNewButton.setMaximumSize(new Dimension(130, 23));
-        btnNewButton.setPreferredSize(new Dimension(130, 23));
-        btnNewButton.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent arg0) {
-        	}
-        });
-        toolBar.add(btnNewButton);
-        
-        JButton btnNewButton_2 = new JButton("New button");
-        btnNewButton_2.setBorder(new LineBorder(new Color(0, 0, 0)));
-        btnNewButton_2.setPreferredSize(new Dimension(130, 23));
-        btnNewButton_2.setMaximumSize(new Dimension(130, 23));
-        toolBar.add(btnNewButton_2);
-        
-        JButton btnNewButton_3 = new JButton("New button");
-        btnNewButton_3.setDefaultCapable(false);
-        btnNewButton_3.setSize(new Dimension(130, 30));
-        btnNewButton_3.setMinimumSize(new Dimension(130, 23));
-        btnNewButton_3.setBorder(new LineBorder(new Color(0, 0, 0)));
-        btnNewButton_3.setMaximumSize(new Dimension(130, 23));
-        btnNewButton_3.setPreferredSize(new Dimension(130, 23));
-        toolBar.add(btnNewButton_3);
-        
-        JSeparator separator = new JSeparator();
-        toolBar.add(separator);
-        
-        JTextArea textArea = new JTextArea();
-        textArea.setLineWrap(true);
-        textArea.setWrapStyleWord(true);
-        textArea.setBackground(Color.BLACK);
-        textArea.setForeground(new Color(0, 100, 0));
-        textArea.setPreferredSize(new Dimension(20, 30));
-        toolBar.add(textArea);
 
-        
-        JButton btnNewButton_1 = new JButton("New burrrrrrrrr");
-        btnNewButton_1.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent arg0) {
-        	}
-        });
-        btnNewButton_1.setAlignmentY(Component.TOP_ALIGNMENT);
-        btnNewButton_1.setMinimumSize(new Dimension(130, 23));
-        btnNewButton_1.setPreferredSize(new Dimension(130, 23));
-        btnNewButton_1.setMaximumSize(new Dimension(130, 23));
-        toolBar.add(btnNewButton_1);
+
+
         
         JMenuBar menuBar = new JMenuBar();
         menuBar.setAutoscrolls(true);
@@ -536,16 +484,16 @@ public class Main {
         btnSpjny.setBackground(Color.DARK_GRAY);
         btnSpjny.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {
-        		String s="Nie jest spójny";
+        		String s="Is not connected";
         		if(Main.graphPanel.G.Connected(Main.graphPanel.G)) {
-        			s="Jest spójny";
+        			s="Is connected";
         		}
         		JOptionPane.showMessageDialog(Main.graphPanel,s);
         	}
         });
         mnInformacje.add(btnSpjny);
         
-        JButton btnStopieWierzchoka = new JButton("Stopie\u0144 wierzcho\u0142ka");
+        JButton btnStopieWierzchoka = new JButton("Vertexes degree");
         btnStopieWierzchoka.setForeground(new Color(0, 200, 0));
         btnStopieWierzchoka.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {
@@ -558,7 +506,7 @@ public class Main {
         btnStopieWierzchoka.setBackground(Color.DARK_GRAY);
         mnInformacje.add(btnStopieWierzchoka);
         
-        JButton btnEkscentrycznocWierzchoka = new JButton("Ekscentryczno\u015Bc wierzcho\u0142ka");
+        JButton btnEkscentrycznocWierzchoka = new JButton("Vertexes eccenticity");
         btnEkscentrycznocWierzchoka.setForeground(new Color(0, 200, 0));
         btnEkscentrycznocWierzchoka.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
@@ -571,7 +519,7 @@ public class Main {
         btnEkscentrycznocWierzchoka.setBackground(Color.DARK_GRAY);
         mnInformacje.add(btnEkscentrycznocWierzchoka);
         
-        JButton btnWszystkie = new JButton("Wszystkie");
+        JButton btnWszystkie = new JButton("All");
         btnWszystkie.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {
         		/*
@@ -588,7 +536,7 @@ public class Main {
         btnWszystkie.setPreferredSize(new Dimension(88, 23));
         mnInformacje.add(btnWszystkie);
 
-        JMenu mnSettings = new JMenu("Ustawienia");
+        JMenu mnSettings = new JMenu("Settings");
         mnSettings.setDoubleBuffered(true);
         mnSettings.setFocusCycleRoot(true);
         mnSettings.setFocusPainted(true);
@@ -598,7 +546,7 @@ public class Main {
         menuBar.add(mnSettings);
         mnSettings.setBackground(Color.DARK_GRAY);
 
-        JLabel lblNewLabel = new JLabel("Szybkoœæ animacji");
+        JLabel lblNewLabel = new JLabel("Animations speed");
         lblNewLabel.setForeground(new Color(0, 200, 0));
         mnSettings.add(lblNewLabel);
         
@@ -614,9 +562,9 @@ public class Main {
         spinner.setModel(new SpinnerNumberModel(500, 0, 1000000, 10));
         mnSettings.add(spinner);
 
-        JRadioButton rdbtnEtykietyWidoczne = new JRadioButton("Etykiety  widoczne");
+        JRadioButton rdbtnEtykietyWidoczne = new JRadioButton("Labels visible");
         
-        JButton btnApplay = new JButton("Zastosuj");
+        JButton btnApplay = new JButton("Apply");
         btnApplay.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 int t = (Integer) spinner.getValue();

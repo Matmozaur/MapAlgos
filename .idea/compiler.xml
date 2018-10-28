@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="GraphsApp" target="1.5" />
+      <module name="GraphsApp" target="1.10" />
     </bytecodeTargetLevel>
   </component>
 </project>

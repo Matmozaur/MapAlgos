@@ -1,4 +1,4 @@
-package main.application;
+package application;
 
 import java.awt.*;
 import java.util.LinkedList;
@@ -195,7 +195,6 @@ public class GraphPanel extends JPanel {
             Vertex u = iterV.next();
             if (u == v) {
                 iterV.remove();
-                //trzeba poprawi� remova
                 G.remove(v.getNumb());
             }
         }

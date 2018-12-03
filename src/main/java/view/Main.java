@@ -10,7 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Main {
-
+    //random comment
 	private static Color vcolor = Color.BLACK;
 	/**
 	 * default color of edges

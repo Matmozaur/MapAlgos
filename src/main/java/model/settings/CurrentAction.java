@@ -1,0 +1,17 @@
+package model.settings;
+
+import java.util.EnumSet;
+
+public enum CurrentAction {
+	VERTEX, EDGE,DFS,DEEPSEARCH,BFS,BREADTHSEARCH,VERTEXREMOVE,
+	EDGEREMOVE,PATCH, WEIGHTEDGE,SIMPLEWEIGHT,PRIM,KRASKAL, DIJKSTRA,
+	DEGREE,ECCENTRICY,CONNECTED,CHANGELABEL;
+
+	public static EnumSet<CurrentAction> getGraphElements() {
+		return EnumSet.of(VERTEX, EDGE, SIMPLEWEIGHT,WEIGHTEDGE, VERTEXREMOVE, EDGEREMOVE,CHANGELABEL);
+	}
+
+	public static EnumSet<CurrentAction> getAlgorithms() {
+		return  EnumSet.of(DEGREE,ECCENTRICY,CONNECTED,PRIM,KRASKAL, DIJKSTRA,DFS,DEEPSEARCH,BFS,BREADTHSEARCH);
+	}
+}

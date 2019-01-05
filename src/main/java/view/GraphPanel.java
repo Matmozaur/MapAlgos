@@ -1,69 +1,83 @@
 package view;
 
-import model.Graph;
-import model.WeightGraph;
-import representations.Edge;
-import representations.SimpleWeightEdge;
-import representations.Vertex;
+import model.settings.Settings;
+import model.settings.Type;
+import model.elements.Edge;
+import model.elements.Vertex;
+import model.elements.WeightEdge;
+import model.graphs.representation.WeightGraph;
 
+import javax.swing.*;
 import java.awt.*;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.ListIterator;
-
-import javax.swing.JPanel;
-
 
 public class GraphPanel extends JPanel {
 
-	public Vertex currentVertex=null;
-	public List<Vertex> vertexes = new LinkedList<Vertex>();
-    public List<Edge> edges = new LinkedList<Edge>();
-    public  int counter = 0;
-    public  int n = Graph.n;
-    public WeightGraph G = new WeightGraph(0, new boolean[n][n],new int[n][n]);
-    public List<SimpleWeightEdge> simpleW = new LinkedList<SimpleWeightEdge>();
+    public GraphPanel(GraphApp parent){
+        setLayout(null);
+        G = new WeightGraph(this);
+        settings=parent.getSettings();
+    }
+
+    private Vertex currentVertex=null;
+    private WeightGraph G;
+    private int counter=0;
+
+
+    public Settings getSettings() {
+        return settings;
+    }
+
+    private final Settings settings;
+
+    public int getCounter() {
+        return counter;
+    }
+
+    public void setCounter(int counter) {
+        this.counter = counter;
+    }
+
+    public Vertex getCurrentVertex() {
+        return currentVertex;
+    }
 
     public void setCurrentVertex(Vertex currentVertex) {
-    	if(this.currentVertex==currentVertex && this.currentVertex!=null) {
-    		this.setCurrentVertex(null);
-    		return;
-    	}
-    	this.unselect(this.currentVertex);
-		this.currentVertex = currentVertex;
-		this.select(currentVertex);
-	}
-    
-    public void select(Vertex v) {
-    	if(v==null) return;
-        v.setColor(Color.blue);
+        if(this.currentVertex==currentVertex && this.currentVertex!=null) {
+            this.setCurrentVertex(null);
+            return;
+        }
+        this.unselect(this.currentVertex);
+        this.currentVertex = currentVertex;
+        this.select(currentVertex);
+    }
+
+
+
+    private void select(Vertex v) {
+        if(v==null) return;
+        v.setColor(settings.colorS);
         this.update(this.getGraphics());
     }
 
     public void unselect(Vertex a, Vertex b) {
-        a.setColor(Main.getVcolor());
-        b.setColor(Main.getVcolor());
-        this.update(this.getGraphics());
-    }
-    public void unselect(Vertex a) {
-    	if(a==null) return;
-        a.setColor(Main.getVcolor());
+        a.setColor(settings.vcolor);
+        b.setColor(settings.vcolor);
         this.update(this.getGraphics());
     }
 
-    public GraphPanel() {
-        setLayout(null);
+    public void unselect(Vertex a) {
+        if(a==null) return;
+        a.setColor(settings.vcolor);
+        this.update(this.getGraphics());
     }
 
     @Override
     public void paint(Graphics g) {
-        for (Edge c : edges) {
+        for (Edge c : G.getEdges()) {
             c.draw(g);
         }
-        for (SimpleWeightEdge we : simpleW) {
-            we.draw(g);
-        }
-        for (Vertex c : vertexes) {
+
+        for (Vertex c : G.getVertexes()) {
             c.draw(g);
         }
     }
@@ -71,14 +85,14 @@ public class GraphPanel extends JPanel {
     /**
      * returns vertex from location (u,v), if it doesnt exists returns null
      *
-     * @param u
-     * @param v
-     * @return
+     * @param u first vertex
+     * @param v secound vertex
+     * @return  vertex from location (u,v)
      */
     public Vertex getVertex(int u, int v) {
-        for (Vertex c : vertexes) {
-            if (c.getX() <= u + Main.getDiam() && c.getX() >= u - Main.getDiam() &&
-            		c.getY() <= v + Main.getDiam() && c.getY() >= v - Main.getDiam()) {
+        for (Vertex c : G.getVertexes()) {
+            if (c.getX() <= u + settings.vdiam && c.getX() >= u - settings.vdiam &&
+                    c.getY() <= v + settings.vdiam && c.getY() >= v - settings.vdiam) {
                 return c;
             }
         }
@@ -88,78 +102,59 @@ public class GraphPanel extends JPanel {
     /**
      * returns edge between vertexes u and v, if it doesnt exists returns null
      *
-     * @param u
-     * @param v
-     * @return
+     * @param u first vertex
+     * @param v secound vertex
+     * @return edge between vertexes u and v
      */
     public Edge getEdge(Vertex u, Vertex v) {
-        for (Edge e : edges) {
-            if (e.getA() == u && e.getB() == v || e.getA() == v && e.getB() == u) {
+        for (Edge e : G.getEdges()) {
+            if (e.getSource() == u && e.getTarget() == v || e.getSource() == v && e.getTarget() == u) {
                 return e;
             }
         }
         return null;
     }
 
-    public SimpleWeightEdge getSimpleWeightEdge(Vertex u, Vertex v) {
-        for (SimpleWeightEdge e : simpleW) {
-            if (e.getA() == u && e.getB() == v || e.getA() == v && e.getB() == u) {
-                return e;
-            }
-        }
-        return null;
-    }
+
+
     /**
      * adds a vertex to a panel
      *
-     * @param c
+     * @param c new vertex
      */
     public void addVertex(Vertex c) {
-        if(this.counter<this.n) {
-        	if (getVertex(c.getX(), c.getY()) == null) {
-            this.counter++;
-            vertexes.add(c);
-            G.V++;
-            this.setCurrentVertex(null);
-            this.update(this.getGraphics());
-        	}
-        	else {
-        		this.setCurrentVertex(getVertex(c.getX(), c.getY()));
-        	}
+        if(this.counter< Settings.n) {
+            if (getVertex(c.getX(), c.getY()) == null) {
+                this.counter++;
+                G.add(c);
+                this.setCurrentVertex(null);
+                this.update(this.getGraphics());
+            }
+            else {
+                this.setCurrentVertex(getVertex(c.getX(), c.getY()));
+            }
         }
     }
 
     /**
      * adds a edge to a panel
      *
-     * @param c
+     * @param c new edge
      */
     public void addEdge(Edge c) {
-    	Main.setGRAPH(Type.SIMPLE);;
-        if (getEdge(c.getA(), c.getB()) == null) {
-            edges.add(c);
-            unselect(c.getA(), c.getB());
-            G.E[c.a.getNumb()][c.b.getNumb()] = G.E[c.b.getNumb()][c.a.getNumb()] = true;
+        settings.GraphType= Type.SIMPLE;
+        if (getEdge(c.getSource(), c.getTarget()) == null) {
+            G.add(c);
+            unselect(c.getSource(), c.getTarget());
             this.update(this.getGraphics());
         }
-        /*
-        int i=0;
-        for (Edge e : edges) {
-        	i++;
-        }
-        System.out.println(i+" ");
-        */
     }
 
-    public void addSimpleWeightEdge(SimpleWeightEdge we) {
-    	Main.setGRAPH(Type.SIMPLEWEIGHT);
-    	Main.getMnNewMenu_1().setEnabled(false);
-    	//Main.getBtnVertex_1().setEnabled(false);
-        if (getSimpleWeightEdge(we.getA(), we.getB()) == null) {
-            simpleW.add(we);
-            unselect(we.getA(), we.getB());
-            G.E[we.a.getNumb()][we.b.getNumb()] = G.E[we.b.getNumb()][we.a.getNumb()] = true;
-            G.W[we.a.getNumb()][we.b.getNumb()] = G.W[we.b.getNumb()][we.a.getNumb()] = we.getWeight();
+    public void addWeightEdge(WeightEdge we) {
+        settings.GraphType=Type.SIMPLEWEIGHT;
+        if (getEdge(we.getSource(), we.getTarget()) == null) {
+            G.add(we);
+            unselect(we.getSource(), we.getTarget());
             this.update(this.getGraphics());
         }
     }
@@ -168,47 +163,7 @@ public class GraphPanel extends JPanel {
      * remove vertex from panel
      */
     public void removeVertex(Vertex v) {
-        ListIterator<Edge> iterE = edges.listIterator();
-        while (iterE.hasNext()) {
-            Edge e = iterE.next();
-            if (e.getA() == v || e.getB() == v) {
-                iterE.remove();
-                this.removeEdge(e);
-            }
-        }
-        ListIterator<SimpleWeightEdge> iterW = simpleW.listIterator();
-        while (iterW.hasNext()) {
-            SimpleWeightEdge e = iterW.next();
-            if (e.getA() == v || e.getB() == v) {
-            	iterW.remove();
-            	this.removeSimpleWeightEdge(e);
-            }
-        }
-        /*for(Edge e:this.edges) {
-                if(e.getA()==v||e.getB()==v) {
-				int a=this.edges.indexOf(e);
-				this.edges.remove(a);
-			}
-		}*/
-        this.counter--;
-        ListIterator<Vertex> iterV = vertexes.listIterator();
-        while (iterV.hasNext()) {
-            Vertex u = iterV.next();
-            if (u == v) {
-                iterV.remove();
-                G.remove(v.getNumb());
-            }
-        }
-        for (Vertex u : vertexes) {
-            if (u.getNumb() > v.getNumb()) u.setNumb(u.getNumb() - 1);
-        }
-		/*for(Vertex u:vertexes) {
-			if(u==v) {
-				int a=vertexes.indexOf(u);
-				vertexes.remove(a);
-				G.remove(v.getNumb());
-			}
-		}*/
+        G.remove(v);
         this.setOpaque(false);
         this.repaint();
     }
@@ -217,92 +172,49 @@ public class GraphPanel extends JPanel {
      * remove edge from panel
      */
     public void removeEdge(Edge e) {
-        int a;
-        for (Edge f : edges) {
-            if (f == e) {
-                a = edges.indexOf(f);
-                unselect(e.getA(), e.getB());
-                edges.remove(a);
-                G.E[e.getA().getNumb()][e.getB().getNumb()] = G.E[e.getB().getNumb()][e.getA().getNumb()] = false;
-                break;
-            }
-        }
-        if(edges.isEmpty()) Main.setGRAPH(Type.UNDEFINED);
-        this.setOpaque(false);
-        this.repaint();
-    }
-    
-    public void removeSimpleWeightEdge(Edge e) {
-        int a;
-        for (SimpleWeightEdge f : simpleW) {
-            if (f == e) {
-                a = simpleW.indexOf(f);
-                unselect(e.getA(), e.getB());
-                simpleW.remove(a);
-                G.E[e.getA().getNumb()][e.getB().getNumb()] = G.E[e.getB().getNumb()][e.getA().getNumb()] = false;
-                G.W[e.getA().getNumb()][e.getB().getNumb()] = G.W[e.getB().getNumb()][e.getA().getNumb()] = 0;
-                break;
-            }
-        }
-        if(simpleW.isEmpty()) {
-        	Main.setGRAPH(Type.UNDEFINED);
-        	Main.getMnNewMenu_1().setEnabled(true);
-        	//Main.getBtnVertex_1().setEnabled(true);
-        }
-        this.setOpaque(false);
-        this.repaint();
-    }
-    
-    public void showLabels() {
-    	for (Vertex c : vertexes) {
-            c.setVisible(true);
-        }
-        this.setOpaque(false);
-        this.repaint();
-    }
-    
-    public void hideLabels() {
-    	for (Vertex c : vertexes) {
-    		c.setVisible(false);
-        }
+        G.removeE(e);
+        if(G.getEdges().isEmpty()) settings.GraphType=Type.UNDEFINED;
         this.setOpaque(false);
         this.repaint();
     }
 
+    public WeightGraph getG() {
+        return G;
+    }
 
-    
-    
-    
-    
-    
-    public void refresh() {
-    	WeightGraph G = new WeightGraph(0, new boolean[n][n],new int[n][n]);
-        this.G = G;
-        this.vertexes.clear();
-        this.edges.clear();
-        this.simpleW.clear();
+    String allInfo(){
+        return G.allInfo();
+    }
+
+
+    void showLabels() {
+        settings.visibility=true;
+        this.setOpaque(false);
+        this.repaint();
+    }
+
+    void hideLabels() {
+        settings.visibility=false;
+        this.setOpaque(false);
+        this.repaint();
+    }
+
+    void refresh() {
+        this.G = new WeightGraph(this);
         this.counter = 0;
-        Main.setGRAPH(Type.UNDEFINED);
-    	Main.getMnNewMenu_1().setEnabled(true);
-    	Main.getBtnVertex_1().setEnabled(true);
+        settings.GraphType=Type.UNDEFINED;
+        //parent.getGetMnNewMenu_1().setEnabled(true);
+       //parent.getGetBtnVertex_1().setEnabled(true);
         this.setOpaque(false);
         this.repaint();
-        
+
     }
 
-    public void clear() {
-        for (Edge c : edges) {
-            c.setColor(Main.getEcolor());
-        }
-        for (SimpleWeightEdge c : simpleW) {
-            c.setColor(Main.getEcolor());
-        }
-        for (Vertex c : vertexes) {
-            c.setColor(Main.getVcolor());
-            c.setLabel(null);
-        }
+    void clear() {
+        G.clear();
         this.setOpaque(false);
         this.repaint();
     }
+
 
 }

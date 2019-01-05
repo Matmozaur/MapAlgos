@@ -1,6 +1,6 @@
-package representations;
+package model.elements;
 
-import view.Main;
+import model.settings.Settings;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -9,7 +9,6 @@ import java.awt.Graphics;
 
 /**
  * representation of vertex
- * @author Matmozaur
  *
  */
 public class Vertex {
@@ -22,44 +21,39 @@ public class Vertex {
      */
     private int y;
     /**
-     * diameter of vertex
+     * graphic settings
      */
-    private int diam;
+    private final Settings settings;
     /**
      * vertexes color
      */
     private Color color;
     /**
-     * number of vertex (primary indentifier
+     * number of vertex (primary indentifier)
      */
     private int numb;
     /**
      * vertexes label
      */
     private String label;
-    /**
-     * visibility of vertexes label
-     */
-    private boolean visible;
 
-    public Vertex(int x, int y, int numb, String label) {
+
+
+    public Vertex(int x, int y, int numb, String label,Settings settings) {
         super();
         this.x = x;
         this.y = y;
         this.numb = numb;
-        this.label = label;
-        this.color=Main.getVcolor();
-        this.diam= Main.getDiam();
-        this.visible=false;
+        if(label!=null){
+            this.label = label;
+        }
+        else{
+            this.label="Place"+(numb+1)+"";
+        }
+        this.color= settings.vcolor;
+        this.settings=settings;
     }
 
-    public boolean isVisible() {
-        return visible;
-    }
-
-    public void setVisible(boolean visible) {
-        this.visible = visible;
-    }
 
 
     public int getX() {
@@ -76,18 +70,6 @@ public class Vertex {
 
     public void setY(int y) {
         this.y = y;
-    }
-
-    public int getDiam() {
-        return diam;
-    }
-
-    public void setDiam(int diam) {
-        this.diam = diam;
-    }
-
-    public Color getColor() {
-        return color;
     }
 
     public void setColor(Color color) {
@@ -133,24 +115,24 @@ public class Vertex {
         Vertex other = (Vertex) obj;
         if (x != other.x)
             return false;
-        if (y != other.y)
-            return false;
-        return true;
+        return y == other.y;
     }
 
     /**
-     * draws vertex with color set in Main class
-     * @param g
+     * draws vertex with color set in GraphApp class
+     * @param g graphic
      */
     public void draw(Graphics g) {
         g.setColor(color);
-        g.fillOval(x, y, diam, diam);
-        if(visible) {
-            int n=numb+1;
-            g.drawString(n+"", x+diam/2, y-(int)0.6*diam);
+        g.fillOval(x, y, settings.vdiam, settings.vdiam);
+        if(settings.visibility&&this.label!=null) {
+            g.drawString(label, x+settings.vdiam/2, y-(int)(0.1*settings.vdiam));
         }
-        if(this.label != null) {
-            g.drawString(this.label, x+diam/2, y+(int)2.6*diam);
-        }
+    }
+
+    @Override
+    public String toString() {
+        if(label==null) return "(" + numb + ")";
+        return label+"(" + numb + ")";
     }
 }

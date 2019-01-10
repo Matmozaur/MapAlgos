@@ -1,8 +1,10 @@
 package model.settings;
 
 import java.awt.*;
+import java.io.Serializable;
 
-public class Settings {
+public class Settings implements Serializable {
+    private static final long serialVersionUID = -2121378365221L;
     /**
      * Maximal number of vertexes
      */

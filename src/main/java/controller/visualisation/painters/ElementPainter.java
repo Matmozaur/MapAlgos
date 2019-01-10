@@ -1,39 +1,38 @@
-package controller.visualisation;
+package controller.visualisation.painters;
 
 import model.elements.Edge;
 import model.elements.Vertex;
-import model.graphs.representation.SimpleGraph;
+import model.graphs.representation.WeightGraph;
 import view.GraphPanel;
 
-public class SlowPainter implements Visualable {
-    SlowPainter(SimpleGraph g, GraphPanel panel) {
+public class ElementPainter implements Visualable {
+    public ElementPainter(WeightGraph g, GraphPanel panel) {
         G = g;
         this.panel=panel;
     }
 
-    private final SimpleGraph G;
+    private final WeightGraph G;
     private final GraphPanel panel;
 
     @Override
-    public void visualVertex(int v) throws InterruptedException {
+    public void visualVertex(int v,String ... arg){
         for (Vertex c : G.getVertexes()) {
             if (c.getNumb() == v) {
                 c.setColor(panel.getSettings().colorEx);
                 panel.update(panel.getGraphics());
-                Thread.sleep(1000,1);
             }
         }
     }
 
     @Override
-    public void visualEdge(int a,int b) throws InterruptedException {
+    public void visualEdge(int a,int b){
         for (Edge c : G.getEdges()) {
-            if ((c.getSource().getNumb() == a && c.getTarget().getNumb() == b) || (c.getTarget().getNumb() == a && c.getSource().getNumb() == b)) {
+            if ((c.getMySource().getNumb() == a && c.getMyTarget().getNumb() == b) || (c.getMyTarget().getNumb() == a && c.getMySource().getNumb() == b)) {
                 c.setColor(panel.getSettings().colorEx);
                 panel.update(panel.getGraphics());
-                Thread.sleep(panel.getSettings().t);
             }
         }
-
     }
+
+
 }

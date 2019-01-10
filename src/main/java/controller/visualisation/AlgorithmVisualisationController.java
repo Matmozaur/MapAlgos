@@ -1,4 +1,6 @@
 package controller.visualisation;
+import controller.visualisation.painters.LabelPainter;
+import controller.visualisation.painters.SimplePainter;
 import model.settings.CurrentAction;
 import model.elements.Vertex;
 import view.GraphPanel;
@@ -8,15 +10,17 @@ import java.awt.event.MouseEvent;
 public class AlgorithmVisualisationController {
 
     private final GraphPanel panel;
-    private final SlowPainter slowpainter;
+    private SimplePainter slowpainter;
+    private LabelPainter labelPainter;
 
     public AlgorithmVisualisationController(GraphPanel panel) {
         this.panel = panel;
-        slowpainter=new SlowPainter(panel.getG(),panel);
+        slowpainter=new SimplePainter(panel.getG(),panel);
+        labelPainter=new LabelPainter(panel.getG(),panel);
     }
 
-    public void action(MouseEvent e){
 
+    public void action(MouseEvent e){
        if (panel.getSettings().currently == CurrentAction.DFS) {
             Vertex a = panel.getVertex(e.getX() - panel.getSettings().vdiam/ 2, e.getY() - panel.getSettings().vdiam/ 2);
             if (a != null) {
@@ -93,7 +97,7 @@ public class AlgorithmVisualisationController {
             if(start != null) {
                 Thread t=new Thread(()-> {
                     try {
-                        panel.getG().getLogic().vprim(slowpainter, start);
+                        panel.getG().getLogic().vprim(slowpainter, start.getNumb());
                     } catch (InterruptedException e1) {
                         e1.printStackTrace();
                     }
@@ -108,7 +112,7 @@ public class AlgorithmVisualisationController {
             if(start != null) {
                 Thread t=new Thread(()-> {
                     try {
-                        panel.getG().getLogic().dijkstra(start, slowpainter);
+                        panel.getG().getLogic().vdijkstra(start, labelPainter);
                     } catch (InterruptedException e1) {
                         e1.printStackTrace();
                     }
@@ -117,48 +121,6 @@ public class AlgorithmVisualisationController {
             }
         }
 
-
-
-
-
-
-
-
-
-
-//
-//        if (Settings.() == CurrentAction.PATCH) {
-//            if (p == 0) {
-//                panel.getCurrentVertex() = panel.getVertex(e.getX() - Settings.vdiam/ 2, e.getY() - Settings.vdiam/ 2);
-//                if (panel.getCurrentVertex() != null) p = 1;
-//            } else {
-//                Vertex a = panel.getVertex(e.getX() - Settings.vdiam/ 2, e.getY() - Settings.vdiam/ 2);
-//                if (a != null&&a!=panel.getCurrentVertex()) {
-//                    int P[]=panel.G.shortestPatch(a.getNumb(),panel.getCurrentVertex().getNumb());
-//                    panel.G.colorPatch(P, panel);
-//                    p--;
-//                }
-//            }
-//        }
-//        if (Settings.() != CurrentAction.PATCH) p = 0;
-//
-//        if (Settings.() == CurrentAction.ECCENTRICY) {
-//            Vertex a = panel.getVertex(e.getX() - Settings.vdiam / 2, e.getY() - Settings.vdiam / 2);
-//            if(a!=null) {
-//                int eccentricy = panel.G.eccentricyOfVertex(a.getNumb());
-//                JOptionPane.showMessageDialog(panel,"Vertexex eccenticity is equals: "+eccentricy);
-//                panel.unselect(a);
-//            }
-//        }
-//
-//        if (Settings.() == CurrentAction.DEGREE) {
-//            Vertex a = panel.getVertex(e.getX() - Settings.vdiam / 2, e.getY() - Settings.vdiam / 2);
-//            if(a!=null) {
-//                int degree = panel.G.degreeOfVertex(a.getNumb());
-//                JOptionPane.showMessageDialog(panel,"Vertexes degree is equal: "+degree);
-//                panel.unselect(a);
-//            }
-//        }
 
     }
 }

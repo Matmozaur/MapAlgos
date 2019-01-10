@@ -1,24 +1,25 @@
 package model.elements;
 import model.settings.Settings;
-import org.jgrapht.graph.DefaultEdge;
+import org.jgrapht.graph.DefaultWeightedEdge;
 
 import java.awt.*;
+import java.io.Serializable;
 
 /**
  * Representation of edge in simple graph
  * @author Matmozaur
  *
  */
-public class Edge extends DefaultEdge{
-
+public class Edge extends DefaultWeightedEdge implements Serializable {
+    private static final long serialVersionUID = -1562333378321L;
     /**
      * one of edges nodes
      */
-    final Vertex source;
+    Vertex mysource;
     /**
      * one of edges nodes
      */
-    final Vertex target;
+    Vertex mytarget;
 
 
     private Color color;
@@ -34,39 +35,45 @@ public class Edge extends DefaultEdge{
     final Settings settings;
     /**
      * Create egde with nodes in a and b
-     * @param source begin node
-     * @param target end node
+     * @param mysource begin node
+     * @param mytarget end node
      */
-    public Edge(Vertex source, Vertex target, Settings settings) {
+    public Edge(Vertex mysource, Vertex mytarget, Settings settings) {
         super();
-        this.source = source;
-        this.target = target;
+        this.mysource = mysource;
+        this.mytarget = mytarget;
         color= settings.ecolor;
         this.settings=settings;
     }
+
+
     Color getColor() {
         return color;
     }
 
-    @Override
-    public Vertex getTarget() {
-        return target;
+    public Vertex getMyTarget() {
+        return mytarget;
     }
 
-    @Override
-    public Vertex getSource() {
-        return source;
+    public Vertex getMySource() {
+        return mysource;
     }
 
+    public Vertex getSource(){
+        return (Vertex) super.getSource();
+    }
 
+    public Vertex getTarget(){
+        return (Vertex) super.getTarget();
+    }
 
 
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((source == null) ? 0 : source.hashCode());
-        result = prime * result + ((target == null) ? 0 : target.hashCode());
+        result = prime * result + ((mysource == null) ? 0 : mysource.hashCode());
+        result = prime * result + ((mytarget == null) ? 0 : mytarget.hashCode());
         return result;
     }
     @Override
@@ -75,31 +82,42 @@ public class Edge extends DefaultEdge{
             return true;
         if (obj == null)
             return false;
-        if (getClass() != obj.getClass())
-            return false;
         Edge other = (Edge) obj;
-        if (source == null) {
-            if (other.source != null)
+        if (mysource == null) {
+            if (other.mysource != null)
                 return false;
-        } else if (!source.equals(other.source))
+        } else if (!mysource.equals(other.mysource)&&!mysource.equals(other.mytarget))
             return false;
-        if (target == null) {
-            return other.target == null;
-        } else return target.equals(other.target);
+        if (mytarget == null) {
+            return other.mytarget == null;
+        } else return mytarget.equals(other.mytarget) || mytarget.equals(other.mysource);
     }
+
+
     /**
      * draws edge with color set in GraphApp class @see {@link Settings#ecolor}
      * @param g graphic
      */
     public void draw(Graphics g) {
-        g.setColor(color);
-        Graphics2D g2 = (Graphics2D) g;
-        g2.setStroke(new BasicStroke(3));
-        g.drawLine(source.getX()+ settings.vdiam/2, source.getY()+settings.vdiam/2/2,
-                target.getX()+settings.vdiam/2/2, target.getY()+settings.vdiam/2/2);
+        if (g != null) {
+            g.setColor(color);
+            Graphics2D g2 = (Graphics2D) g;
+            g2.setStroke(new BasicStroke(3));
+            g.drawLine(mysource.getX() + settings.vdiam / 2, mysource.getY() + settings.vdiam / 2 / 2,
+                    mytarget.getX() + settings.vdiam / 2 / 2, mytarget.getY() + settings.vdiam / 2 / 2);
+        }
     }
 
     public void setColor(Color colorEx) {
         this.color=colorEx;
+    }
+
+    public int getMyWeight(){
+        return 1;
+    }
+
+    @Override
+    public String toString(){
+        return "("+ mysource +","+ mytarget +")";
     }
 }

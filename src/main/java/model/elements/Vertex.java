@@ -4,14 +4,15 @@ import model.settings.Settings;
 
 import java.awt.Color;
 import java.awt.Graphics;
-
+import java.io.Serializable;
 
 
 /**
  * representation of vertex
  *
  */
-public class Vertex {
+public class Vertex implements Serializable {
+    private static final long serialVersionUID = -676713557378365221L;
     /**
      * horizontal coordinate in panel
      */
@@ -36,6 +37,7 @@ public class Vertex {
      * vertexes label
      */
     private String label;
+    private String additionalLabel;
 
 
 
@@ -92,8 +94,13 @@ public class Vertex {
         this.label = label;
     }
 
+    public void setAdditionalLabel(String additionalLabel) {
+        this.additionalLabel = additionalLabel;
+    }
 
-
+    public Settings getSettings() {
+        return settings;
+    }
 
     @Override
     public int hashCode() {
@@ -123,10 +130,15 @@ public class Vertex {
      * @param g graphic
      */
     public void draw(Graphics g) {
-        g.setColor(color);
-        g.fillOval(x, y, settings.vdiam, settings.vdiam);
-        if(settings.visibility&&this.label!=null) {
-            g.drawString(label, x+settings.vdiam/2, y-(int)(0.1*settings.vdiam));
+        if(g!=null) {
+            g.setColor(color);
+            g.fillOval(x, y, settings.vdiam, settings.vdiam);
+            if (settings.visibility && this.label != null) {
+                g.drawString(label, x + settings.vdiam / 2, y - (int) (0.1 * settings.vdiam));
+            }
+            if (additionalLabel!=null) {
+                g.drawString(additionalLabel, x + settings.vdiam / 2, y + (2 * settings.vdiam));
+            }
         }
     }
 

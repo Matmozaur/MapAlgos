@@ -1,8 +1,8 @@
 package model.graphs.logic;
 
 import model.additional.Algos;
-import controller.visualisation.Visualable;
-import model.graphs.representation.Graph;
+import controller.visualisation.painters.Visualable;
+import model.graphs.representation.WeightGraph;
 
 
 import java.util.LinkedList;
@@ -12,7 +12,7 @@ public class SimpleGraphLogic extends GraphLogic {
 
     final boolean[][] E;
 
-    public SimpleGraphLogic(Graph parent,int v, boolean[][] e) {
+    public SimpleGraphLogic(WeightGraph parent, int v, boolean[][] e) {
         super(parent,v);
         E=e;
     }
@@ -120,38 +120,13 @@ public class SimpleGraphLogic extends GraphLogic {
     private int degreeOfVertex(int v){
         int d=0;
         for(int i=0;i<this.V;i++) {
+            if(i==v) continue;
             if(this.E[v][i]) d++;
         }
         return d;
     }
 
 
-    //problem
-    private int eccentricyOfVertex(int v) {
-        if(!this.Connected()) return -1;
-        boolean[] Visited = new boolean[n];
-        int[] D = new int[n];
-        D[v]=0;
-        Queue<Integer> Q= new LinkedList<>();
-        this.breadthDistance(v,Visited,D,Q);
-        return Algos.max(D,this.V);
-    }
-
-    //PROBLEM
-    private void breadthDistance(int v, boolean[] Visited, int[] D, Queue<Integer> Q) {
-        Visited[v]=true;
-        for(int i=0;i<this.V;i++)
-            if (this.E[v][i] && !Visited[i]) {
-                Visited[i] = true;
-                D[i] = D[v] + 1;
-                Q.add(i);
-            }
-        int x;
-        while(!Q.isEmpty()){
-            x=Q.remove();
-            this.breadthDistance(x,Visited,D,Q);
-        }
-    }
 
 
     /**
@@ -175,35 +150,6 @@ public class SimpleGraphLogic extends GraphLogic {
     }
 
 
-// --Commented out by Inspection START (05.01.19 21:53):
-//    /**
-//     * BFS, returning number of vertex in sequence in BFS
-//     * @param v current vertex
-//     * @param numb current number in sequence
-//     * @param Sequence of vertices
-//     * @param Visited table if visited
-//     * @return number in sequence
-//     */
-//    private int BFS(int v, int numb, int[] Sequence, boolean[] Visited){
-//        Visited[v]=true;
-//        Sequence[numb]=v;
-//        numb++;
-//        Queue<Integer> Q= new LinkedList<>();
-//        for(int i=0;i<this.V;i++){
-//            if(this.E[v][i] && !Visited[i]){
-//                Visited[i]=true;
-//                Q.add(i);
-//            }
-//        }
-//        int x;
-//        while(!Q.isEmpty()){
-//            x=Q.remove();
-//            numb=BFS(  x, numb, Sequence, Visited);
-//        }
-//        return numb;
-//    }
-// --Commented out by Inspection STOP (05.01.19 21:53)
-
     /**
      * Checking if 2 vertices connected
      * @param v first vertex
@@ -211,23 +157,23 @@ public class SimpleGraphLogic extends GraphLogic {
      * @return if connected
      */
 
-    boolean Connected(int v, int u){
+    public boolean connected(int v, int u){
         int numb=0;
         int[] Sequence = new int[101];
         boolean[] Visited = new boolean[50];
         DFS(v,numb,Sequence,Visited);
         //DFS
-        return !Visited[u];
+        return Visited[u];
     }
 
     /**
      * Checking if graph is connected
      * @return if connected
      */
-    private boolean Connected() {
+    private boolean connected() {
         for(int i=0;i<this.V-1;i++) {
             for(int j=i+1;j<this.V;j++) {
-                if(this.Connected(i, j)) return false;
+                if(!this.connected(i, j)) return false;
             }
         }
         return true;
@@ -249,9 +195,9 @@ public class SimpleGraphLogic extends GraphLogic {
      * Get all informations about graph
      * @return info
      */
-    public String allInfo() {
+    public String basicInfo() {
         String info="";
-        if(this.Connected()) {
+        if(this.connected()) {
             info=info+"Connected \n";
         }
         else{
@@ -271,8 +217,48 @@ public class SimpleGraphLogic extends GraphLogic {
         }
         info=info+"Maximal degree="+maxdim+" \n";
         info=info+"Minimal degree="+mindim+" \n";
-        if(this.Connected()) {
-            int rad=size, diam=0;
+
+        return info;
+    }
+
+
+    private int eccentricyOfVertex(int v) {
+        if(!this.connected()) return -1;
+        boolean[] Visited = new boolean[n];
+        int[] D = new int[n];
+        D[v]=0;
+        Queue<Integer> Q= new LinkedList<>();
+        this.breadthDistance(v,Visited,D,Q);
+        return Algos.max(D,this.V);
+    }
+
+
+    private void breadthDistance(int v, boolean[] Visited, int[] D, Queue<Integer> Q) {
+        Visited[v]=true;
+        for(int i=0;i<this.V;i++)
+            if (this.E[v][i] && !Visited[i]) {
+                Visited[i] = true;
+                D[i] = D[v] + 1;
+                Q.add(i);
+            }
+        int x;
+        while(!Q.isEmpty()){
+            x=Q.remove();
+            this.breadthDistance(x,Visited,D,Q);
+        }
+    }
+
+    public String vertexInfo(int v){
+        String info="";
+        info=info+"Degree="+degreeOfVertex(v)+" \n";
+        if(eccentricyOfVertex(v)>=0) info+="Eccentricy="+eccentricyOfVertex(v)+" \n";
+        return info;
+    }
+
+    public String allInfo(){
+        String info=basicInfo();
+        if(this.connected()) {
+            int rad=V, diam=0;
             for(int i=0;i<this.V;i++){
                 if(this.eccentricyOfVertex(i)>diam) diam=this.eccentricyOfVertex(i);
                 if(this.eccentricyOfVertex(i)<rad) rad=this.eccentricyOfVertex(i);
@@ -281,5 +267,55 @@ public class SimpleGraphLogic extends GraphLogic {
             info=info+"Radious="+rad+" \n";
         }
         return info;
+    }
+    private int[] diamAndRad(){
+        if(this.connected()) {
+            int rad=V, diam=0;
+            for(int i=0;i<this.V;i++){
+                if(this.eccentricyOfVertex(i)>diam) diam=this.eccentricyOfVertex(i);
+                if(this.eccentricyOfVertex(i)<rad) rad=this.eccentricyOfVertex(i);
+            }
+            int[]A=new int[2];
+            A[0]=diam;
+            A[1]=rad;
+            return A;
+        }
+        return null;
+    }
+
+    public int[] getCenter(){
+        if(connected()) {
+            int counter = 0;
+            int[] A = new int[V];
+            for (int i = 0; i < V; i++) {
+                A[i] = -1;
+            }
+            for (int i = 0; i < V; i++) {
+                if (eccentricyOfVertex(i) == diamAndRad()[1]) {
+                    A[counter] = i;
+                    counter++;
+                }
+            }
+            return A;
+        }
+        return null;
+    }
+
+    public int[] getPeryfery(){
+        if(connected()) {
+            int counter = 0;
+            int[] A = new int[V];
+            for (int i = 0; i < V; i++) {
+                A[i] = -1;
+            }
+            for (int i = 0; i < V; i++) {
+                if (eccentricyOfVertex(i) == diamAndRad()[0]) {
+                    A[counter] = i;
+                    counter++;
+                }
+            }
+            return A;
+        }
+        return null;
     }
 }

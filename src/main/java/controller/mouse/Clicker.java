@@ -1,5 +1,7 @@
 package controller.mouse;
 
+import controller.element_controller.ElementController;
+import controller.info_controller.InfoController;
 import controller.model_manipulation.ConstructionController;
 import controller.visualisation.AlgorithmVisualisationController;
 import model.settings.CurrentAction;
@@ -12,12 +14,16 @@ public class Clicker extends MouseAdapter {
     private final GraphPanel panel;
     private final ConstructionController CC;
     private final AlgorithmVisualisationController AC;
+    private final InfoController IC;
+    private final ElementController EC;
 
     public Clicker(GraphPanel panel) {
         super();
         this.panel = panel;
         CC=new ConstructionController(panel);
         AC=new AlgorithmVisualisationController(panel);
+        IC=new InfoController(panel);
+        EC=new ElementController(panel);
     }
 
     @Override
@@ -28,41 +34,17 @@ public class Clicker extends MouseAdapter {
         if(CurrentAction.getAlgorithms().contains(panel.getSettings().currently)) {
             AC.action(e);
         }
+        if(CurrentAction.getInfo().contains(panel.getSettings().currently)) {
+            IC.action(e);
+        }
+        if(CurrentAction.getElements().contains(panel.getSettings().currently)) {
+            EC.action(e);
+        }
 
-
-//        if (Settings.() == CurrentAction.PATCH) {
-//            if (p == 0) {
-//                panel.getCurrentVertex() = panel.getVertex(e.getX() - Settings.vdiam/ 2, e.getY() - Settings.vdiam/ 2);
-//                if (panel.getCurrentVertex() != null) p = 1;
-//            } else {
-//                Vertex a = panel.getVertex(e.getX() - Settings.vdiam/ 2, e.getY() - Settings.vdiam/ 2);
-//                if (a != null&&a!=panel.getCurrentVertex()) {
-//                    int P[]=panel.G.shortestPatch(a.getNumb(),panel.getCurrentVertex().getNumb());
-//                    panel.G.colorPatch(P, panel);
-//                    p--;
-//                }
-//            }
-//        }
-//        if (Settings.() != CurrentAction.PATCH) p = 0;
-//
-//        if (Settings.() == CurrentAction.ECCENTRICY) {
-//            Vertex a = panel.getVertex(e.getX() - Settings.vdiam / 2, e.getY() - Settings.vdiam / 2);
-//            if(a!=null) {
-//                int eccentricy = panel.G.eccentricyOfVertex(a.getNumb());
-//                JOptionPane.showMessageDialog(panel,"Vertexex eccenticity is equals: "+eccentricy);
-//                panel.unselect(a);
-//            }
-//        }
-//
-//        if (Settings.() == CurrentAction.DEGREE) {
-//            Vertex a = panel.getVertex(e.getX() - Settings.vdiam / 2, e.getY() - Settings.vdiam / 2);
-//            if(a!=null) {
-//                int degree = panel.G.degreeOfVertex(a.getNumb());
-//                JOptionPane.showMessageDialog(panel,"Vertexes degree is equal: "+degree);
-//                panel.unselect(a);
-//            }
-//        }
     }
 
+    public ElementController getEC() {
+        return EC;
+    }
 }
 

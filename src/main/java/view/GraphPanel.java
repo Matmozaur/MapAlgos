@@ -1,5 +1,6 @@
 package view;
 
+import controller.mouse.Clicker;
 import model.settings.Settings;
 import model.settings.Type;
 import model.elements.Edge;
@@ -12,22 +13,26 @@ import java.awt.*;
 
 public class GraphPanel extends JPanel {
 
-    public GraphPanel(GraphApp parent){
+    GraphPanel(GraphApp parent){
         setLayout(null);
         G = new WeightGraph(this);
         settings=parent.getSettings();
+        this.myParent=parent;
     }
 
     private Vertex currentVertex=null;
     private WeightGraph G;
     private int counter=0;
+    private Settings settings;
+    private GraphApp myParent;
 
+    public GraphApp getMyParent() {
+        return myParent;
+    }
 
     public Settings getSettings() {
         return settings;
     }
-
-    private final Settings settings;
 
     public int getCounter() {
         return counter;
@@ -51,6 +56,14 @@ public class GraphPanel extends JPanel {
         this.select(currentVertex);
     }
 
+    public void setG(WeightGraph g) {
+        G = g;
+        this.update(this.getGraphics());
+    }
+
+    public void setSettings(Settings settings) {
+        this.settings = settings;
+    }
 
 
     private void select(Vertex v) {
@@ -108,13 +121,12 @@ public class GraphPanel extends JPanel {
      */
     public Edge getEdge(Vertex u, Vertex v) {
         for (Edge e : G.getEdges()) {
-            if (e.getSource() == u && e.getTarget() == v || e.getSource() == v && e.getTarget() == u) {
+            if (e.getMySource() == u && e.getMyTarget() == v || e.getMySource() == v && e.getMyTarget() == u) {
                 return e;
             }
         }
         return null;
     }
-
 
 
     /**
@@ -143,18 +155,18 @@ public class GraphPanel extends JPanel {
      */
     public void addEdge(Edge c) {
         settings.GraphType= Type.SIMPLE;
-        if (getEdge(c.getSource(), c.getTarget()) == null) {
+        if (getEdge(c.getMySource(), c.getMyTarget()) == null) {
             G.add(c);
-            unselect(c.getSource(), c.getTarget());
+            unselect(c.getMySource(), c.getMyTarget());
             this.update(this.getGraphics());
         }
     }
 
     public void addWeightEdge(WeightEdge we) {
         settings.GraphType=Type.SIMPLEWEIGHT;
-        if (getEdge(we.getSource(), we.getTarget()) == null) {
+        if (getEdge(we.getMySource(), we.getMyTarget()) == null) {
             G.add(we);
-            unselect(we.getSource(), we.getTarget());
+            unselect(we.getMySource(), we.getMyTarget());
             this.update(this.getGraphics());
         }
     }
@@ -186,6 +198,9 @@ public class GraphPanel extends JPanel {
         return G.allInfo();
     }
 
+    String basicInfo(){
+        return G.basicInfo();
+    }
 
     void showLabels() {
         settings.visibility=true;
@@ -203,8 +218,10 @@ public class GraphPanel extends JPanel {
         this.G = new WeightGraph(this);
         this.counter = 0;
         settings.GraphType=Type.UNDEFINED;
-        //parent.getGetMnNewMenu_1().setEnabled(true);
-       //parent.getGetBtnVertex_1().setEnabled(true);
+        for(int i=0;i<getMouseListeners().length;i++){
+            removeMouseListener(getMouseListeners()[i]);
+        }
+        addMouseListener(new Clicker(this));
         this.setOpaque(false);
         this.repaint();
 

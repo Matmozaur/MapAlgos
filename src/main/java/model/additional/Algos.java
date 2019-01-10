@@ -1,30 +1,17 @@
 package model.additional;
 
-public abstract class Algos {
+public interface Algos {
 
 
-    public static int max(int[] D, int n) {
+    static int max(int[] D, int n) {
         int m=D[0];
         for(int i=1;i<n;i++) if(D[i]>m) m=D[i];
         return m;
     }
 
 
-// --Commented out by Inspection START (05.01.19 22:10):
-//    /**
-//     * swaps 2 elements
-//     *
-//     * @param A first
-//     * @param B second
-//     */
-//    public static void swap(int[] A, int[] B) {
-//        int[] C = A;
-//        A = B;
-//        B = C;
-//    }
-// --Commented out by Inspection STOP (05.01.19 22:10)
 
-    public static int[][] sortEdges(int V,boolean[][] E,int[][] W){
+    static int[][] sortEdges(int V, boolean[][] E, int[][] W){
         int[][] L = new int[V * V][3];
         for (int i = 0; i < V; i++) {
             for (int j = 0; j < V; j++) {
@@ -55,5 +42,28 @@ public abstract class Algos {
         }
         return L;
     }
+
+    static int[] coors(int w, int h, int n) {
+        int[] A=new int[2];
+        if(n<=w-100){
+            A[0]=n+50;
+            A[1]=50;
+        }
+        if(n>w-100&&n<=w+h-200){
+            A[0]=w-50;
+            A[1]=n-w+150;
+        }
+        if(n>w+h-200&&n<=2*w+h-300){
+            A[0]=w-50-(n-(w+h-200));
+            A[1]=h-50;
+        }
+        if(n>2*w+h-300){
+            A[0]=50;
+            A[1]=h-50-(n-(2*w+h-300));
+        }
+        return A;
+    }
+
+
 
 }

@@ -70,7 +70,7 @@ public class ConstructionController {
                                     //throw new NumberFormatException();
                                 } else {
                                     weight = Integer.parseInt(response);
-                                    WeightEdge we = new WeightEdge(a, panel.getCurrentVertex(), null, weight,panel.getSettings());
+                                    WeightEdge we = new WeightEdge(a, panel.getCurrentVertex(), weight,panel.getSettings());
                                     panel.addWeightEdge(we);
                                     j--;
                                     panel.setCurrentVertex(null);

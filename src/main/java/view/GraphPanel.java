@@ -24,7 +24,7 @@ public class GraphPanel extends JPanel {
     private WeightGraph G;
     private int counter=0;
     private Settings settings;
-    private GraphApp myParent;
+    private final GraphApp myParent;
 
     public GraphApp getMyParent() {
         return myParent;
@@ -104,8 +104,8 @@ public class GraphPanel extends JPanel {
      */
     public Vertex getVertex(int u, int v) {
         for (Vertex c : G.getVertexes()) {
-            if (c.getX() <= u + settings.vdiam && c.getX() >= u - settings.vdiam &&
-                    c.getY() <= v + settings.vdiam && c.getY() >= v - settings.vdiam) {
+            if (c.getX() <= u + 1.5*settings.vdiam && c.getX() >= u - 1.5*settings.vdiam &&
+                    c.getY() <= v + 1.5*settings.vdiam && c.getY() >= v - 1.5*settings.vdiam) {
                 return c;
             }
         }

@@ -22,7 +22,8 @@ public class LabelPainter implements Visualable {
             if (c.getNumb() == v) {
                 c.setColor(panel.getSettings().colorEx);
                 if(arg.length>0){
-                    c.setAdditionalLabel(arg[0]);
+                    if(c.getAdditionalLabel()==null)c.setAdditionalLabel(arg[0]);
+                    else c.setAdditionalLabel(c.getAdditionalLabel()+"->"+arg[0]);
                 }
                 panel.update(panel.getGraphics());
                 Thread.sleep(panel.getSettings().t);
@@ -39,6 +40,15 @@ public class LabelPainter implements Visualable {
                 Thread.sleep(panel.getSettings().t);
             }
         }
+    }
 
+    @Override
+    public void clearEdge(int a,int b){
+        for (Edge c : G.getEdges()) {
+            if ((c.getMySource().getNumb() == a && c.getMyTarget().getNumb() == b) || (c.getMyTarget().getNumb() == a && c.getMySource().getNumb() == b)) {
+                c.setColor(panel.getSettings().ecolor);
+                panel.update(panel.getGraphics());
+            }
+        }
     }
 }

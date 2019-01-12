@@ -19,7 +19,7 @@ public class MyFileReader {
         return f;
     }
 
-    public File getUsersFile(JFrame parent){
+    private File getUsersFile(JFrame parent){
         int flag=FileChooser.showOpenDialog(parent);
         if(flag==JFileChooser.APPROVE_OPTION){
             File file=FileChooser.getSelectedFile();

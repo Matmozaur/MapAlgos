@@ -19,6 +19,10 @@ public class InfoController {
             Vertex a = panel.getVertex(e.getX() - panel.getSettings().vdiam / 2, e.getY() - panel.getSettings().vdiam / 2);
             if (a != null) {
                 panel.getMyParent().getInfo().setText("Info: \n" + panel.getG().vertexInfo(a));
+
+
+                System.out.println(panel.getG().containsVertex(a));
+
             }
             flag=0;
         }

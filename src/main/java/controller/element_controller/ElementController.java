@@ -16,7 +16,7 @@ import java.awt.event.MouseEvent;
 
 public class ElementController {
     private final GraphPanel panel;
-    private ElementPainter elementPainter;
+    private final ElementPainter elementPainter;
     private int flag1=0;
     private int flag2=0;
 
@@ -70,7 +70,7 @@ public class ElementController {
         }
     }
 
-    public void visualizeShortestPath(Vertex u, Vertex v){
+    private void visualizeShortestPath(Vertex u, Vertex v){
         System.out.println(u);
         if(panel.getG().connected(u,v)){
             visualizePath(panel.getG().getShortestPath(u,v));
@@ -80,7 +80,7 @@ public class ElementController {
     public void visualizeMinimalST(){
         try {
             panel.getG().getLogic().vkraskal(elementPainter);
-            KruskalMinimumSpanningTree kruskal=new KruskalMinimumSpanningTree(panel.getG());
+            KruskalMinimumSpanningTree<Vertex, DefaultWeightedEdge> kruskal=new KruskalMinimumSpanningTree<>(panel.getG());
             SpanningTreeAlgorithm.SpanningTree<DefaultWeightedEdge> MST=
                     kruskal.getSpanningTree();
             panel.getMyParent().getInfo().setText("Total Weight="+MST.getWeight());
@@ -95,10 +95,6 @@ public class ElementController {
         }
     }
 
-    public void visualizeMaxVerticesWithLabelsPath(Vertex u,Vertex v,int max,String s){
-
-    }
-
     public void visualizeMaxWeightPath(Vertex u,Vertex v){
         if(panel.getG().connected(u,v)){
             visualizePath(panel.getG().getMaxWeightPath(u,v));
@@ -106,29 +102,15 @@ public class ElementController {
     }
 
     private void visualizePath(GraphPath<Vertex,Edge> path){
-        System.out.println(path);
-        if(!path.getVertexList().isEmpty()) {
-            Vertex last=null;
-            for (Vertex v : path.getVertexList()) {
-                elementPainter.visualVertex(v.getNumb());
-                if(last!=null) elementPainter.visualEdge(last.getNumb(),v.getNumb());
-                last=v;
+        if(path!=null) {
+            if (!path.getVertexList().isEmpty()) {
+                Vertex last = null;
+                for (Vertex v : path.getVertexList()) {
+                    elementPainter.visualVertex(v.getNumb());
+                    if (last != null) elementPainter.visualEdge(last.getNumb(), v.getNumb());
+                    last = v;
+                }
             }
-//            for (DefaultWeightedEdge e : path.getEdgeList()) {
-//                try {
-//                    Field source=e.getClass().getClass().getDeclaredField("source");
-//                    source.setAccessible(true);
-//                    Vertex mySource=(Vertex) source.get(e);
-//                    Field target=e.getClass().getClass().getDeclaredField("target");
-//                    target.setAccessible(true);
-//                    Vertex myTarget=(Vertex) target.get(e);
-//                    elementPainter.visualEdge(mySource.getNumb(), myTarget.getNumb());
-//                } catch (NoSuchFieldException e1) {
-//                    e1.printStackTrace();
-//                } catch (IllegalAccessException e1) {
-//                    e1.printStackTrace();
-//                }
-//            }
         }
     }
 

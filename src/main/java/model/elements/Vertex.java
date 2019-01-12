@@ -98,6 +98,10 @@ public class Vertex implements Serializable {
         this.additionalLabel = additionalLabel;
     }
 
+    public String getAdditionalLabel() {
+        return additionalLabel;
+    }
+
     public Settings getSettings() {
         return settings;
     }
@@ -120,6 +124,7 @@ public class Vertex implements Serializable {
         if (getClass() != obj.getClass())
             return false;
         Vertex other = (Vertex) obj;
+        if(numb==other.numb) return true;
         if (x != other.x)
             return false;
         return y == other.y;

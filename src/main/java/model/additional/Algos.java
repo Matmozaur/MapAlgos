@@ -11,7 +11,7 @@ public interface Algos {
 
 
 
-    static int[][] sortEdges(int V, boolean[][] E, int[][] W){
+    static int[][] sortEdges(int V,boolean[][] E,int[][] W){
         int[][] L = new int[V * V][3];
         for (int i = 0; i < V; i++) {
             for (int j = 0; j < V; j++) {
@@ -43,7 +43,7 @@ public interface Algos {
         return L;
     }
 
-    static int[] coors(int w, int h, int n) {
+    static int[] coors(int w,int h,int n) {
         int[] A=new int[2];
         if(n<=w-100){
             A[0]=n+50;

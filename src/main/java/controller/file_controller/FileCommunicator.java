@@ -1,11 +1,8 @@
 package controller.file_controller;
 
-import javax.swing.*;
-import java.io.File;
-
 public class FileCommunicator {
-    private MyFileReader FR;
-    private MyFileWriter FW;
+    private final MyFileReader FR;
+    private final MyFileWriter FW;
 
     public MyFileWriter getFW() {
         return FW;

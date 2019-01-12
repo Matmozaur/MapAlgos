@@ -3,16 +3,12 @@ package view;
 
 import controller.Main;
 import controller.model_manipulation.GenerationController;
-import model.additional.Algos;
-import model.elements.Edge;
-import model.elements.Vertex;
 import model.graphs.representation.WeightGraph;
-import model.settings.Settings;
 
 import javax.swing.*;
 
 
-public class GraphGenerator extends JFrame{
+class GraphGenerator extends JFrame{
     private JList list;
     private JButton generateButton;
     private JLabel Vnumb;

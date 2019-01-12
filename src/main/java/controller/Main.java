@@ -8,7 +8,7 @@ import view.MainFrame;
 import java.awt.*;
 
 public class Main {
-    private static FileCommunicator FC=FileCommunicator.getInstance();
+    private static final FileCommunicator FC=FileCommunicator.getInstance();
     public static void main(String[] args) {
         EventQueue.invokeLater(() -> {
             MainFrame main=new MainFrame();

@@ -13,9 +13,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 class GraphConstructionTest {
-    private static List<Vertex> vList=new LinkedList<>();
-    private static List<WeightEdge> eList=new LinkedList<>();
-    private static Settings settings=new Settings();
+    private static final List<Vertex> vList=new LinkedList<>();
+    private static final List<WeightEdge> eList=new LinkedList<>();
+    private static final Settings settings=new Settings();
 
     @BeforeAll
     static void prepareMock(){

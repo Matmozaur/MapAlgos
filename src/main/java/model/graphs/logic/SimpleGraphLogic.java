@@ -21,7 +21,7 @@ public class SimpleGraphLogic extends GraphLogic {
         E[a][b] = E[b][a] = true;
     }
 
-    public void remove(int x) {
+    void remove(int x) {
         for(int i=x;i<this.V;i++) {
             for(int j=0;j<this.V;j++) {
                 this.E[i][j]=this.E[i+1][j];

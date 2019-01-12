@@ -40,7 +40,7 @@ public class WeightGraphLogic extends SimpleGraphLogic {
 
 
 
-    public SimpleGraphLogic vkraskal(Visualable painter) throws InterruptedException {
+    public void vkraskal(Visualable painter) throws InterruptedException {
         for(int i=0;i<V;i++) {
             painter.visualVertex(i);
         }
@@ -59,7 +59,6 @@ public class WeightGraphLogic extends SimpleGraphLogic {
             }
             i++;
         }
-        return T;
     }
 
     public void vprim(Visualable painter, int vStart) throws InterruptedException {
@@ -76,7 +75,7 @@ public class WeightGraphLogic extends SimpleGraphLogic {
         int iteration = 0;
         while (iteration < V) {
             iteration += 1;
-            for (int v : parent.getVertexes().stream().map(vt->vt.getNumb()).collect(Collectors.toList())) {
+            for (int v : parent.getVertexes().stream().map(Vertex::getNumb).collect(Collectors.toList())) {
                 if (available[v] == 0 && E[v][vLast]) {
                     available[v] = 1;
                 }
@@ -84,8 +83,8 @@ public class WeightGraphLogic extends SimpleGraphLogic {
             int minWeight = Integer.MAX_VALUE;
             int parentv = vLast;
             int candidate = vLast;
-            for (int v : parent.getVertexes().stream().map(vt->vt.getNumb()).collect(Collectors.toList())) {
-                for (int u : parent.getVertexes().stream().map(vt->vt.getNumb()).collect(Collectors.toList())) {
+            for (int v : parent.getVertexes().stream().map(Vertex::getNumb).collect(Collectors.toList())) {
+                for (int u : parent.getVertexes().stream().map(Vertex::getNumb).collect(Collectors.toList())) {
                     if (available[v] == 1 && available[u] == 2) {
                         if (E[u][v]) {
                             int weight = W[u][v];
@@ -108,13 +107,16 @@ public class WeightGraphLogic extends SimpleGraphLogic {
         }
         int index = 0;
         for (int v : spanningTree) {
-            painter.visualEdge(parents.get(index),v);
+            if(parents.get(index)!=v){
+                painter.visualEdge(parents.get(index),v);
+            }
             index++;
             painter.visualVertex(v);
         }
     }
 
-    public void vdijkstra(Vertex vStart, Visualable painter) throws InterruptedException {
+    public void vdijkstra(int vStart, Visualable painter) throws InterruptedException {
+        painter.visualVertex(vStart,"0");
         int[] distances = new int[V];
         int[] available = new int[V];
         int[] parentv = new int[V];
@@ -123,43 +125,52 @@ public class WeightGraphLogic extends SimpleGraphLogic {
             distances[i] = sup;
             available[i] = 0;
         }
-        distances[vStart.getNumb()] = 0;
-        available[vStart.getNumb()] = 2;
-        parentv[vStart.getNumb()] = -1;
-        Vertex vLast = vStart;
+        distances[vStart] = 0;
+        available[vStart] = 2;
+        parentv[vStart] = -1;
+        int vLast = vStart;
         int iteration = 0;
         while (iteration < V) {
             iteration += 1;
-            for (Vertex v : parent.getVertexes() ) {
-                if (available[v.getNumb()] == 0 && E[v.getNumb()][vLast.getNumb()]) {
-                    available[v.getNumb()] = 1;
+            for (int v : parent.getVertexes().stream().map(Vertex::getNumb).collect(Collectors.toList()) ) {
+                if (available[v] == 0 && E[v][vLast]) {
+                    available[v] = 1;
                 }
             }
             int min = Integer.MAX_VALUE;
-            for(Vertex v : parent.getVertexes()) {
-                if(available[v.getNumb()] == 1) {
-                    if(distances[v.getNumb()] < min) {
-                        min = distances[v.getNumb()];
+            for(int v : parent.getVertexes().stream().map(Vertex::getNumb).collect(Collectors.toList())) {
+                if(available[v] == 1) {
+                    if(distances[v] < min) {
+                        min = distances[v];
                         vLast = v;
                     }
                 }
             }
-            available[vLast.getNumb()] = 2;
+            available[vLast] = 2;
             // relaxation
-            for(Vertex v : parent.getVertexes()) {
-                if(E[v.getNumb()][vLast.getNumb()]) {
-                    int weight = W[v.getNumb()][vLast.getNumb()];
-                    if(distances[v.getNumb()] > distances[vLast.getNumb()] + weight) {
-                        distances[v.getNumb()] = distances[vLast.getNumb()] + weight;
-                        parentv[v.getNumb()] = vLast.getNumb();
+            for(int v : parent.getVertexes().stream().map(Vertex::getNumb).collect(Collectors.toList())) {
+                if(E[v][vLast]) {
+                    int weight = W[v][vLast];
+                    if(distances[v] > distances[vLast] + weight) {
+                        distances[v] = distances[vLast] + weight;
+                        painter.visualVertex(v,""+distances[v]);
+                        if(parentv[v]>=0&&parentv[v]!=v){
+                            painter.clearEdge(v,parentv[v]);
+                        }
+                        parentv[v] = vLast;
+                        if(parentv[v]>=0&&parentv[v]!=v){
+                            painter.visualEdge(v,parentv[v]);
+                        }
                     }
                 }
             }
         }
         for(Vertex v:parent.getVertexes()) {
             int i=v.getNumb();
-            painter.visualVertex(i,""+distances[i]);
-            painter.visualEdge(i,parentv[i]);
+//            painter.visualVertex(i,""+distances[i]);
+//            if(parentv[i]>=0&&parentv[i]!=i){
+//                painter.visualEdge(i,parentv[i]);
+//            }
         }
 
     }

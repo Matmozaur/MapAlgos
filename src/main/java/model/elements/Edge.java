@@ -11,24 +11,19 @@ import java.io.Serializable;
  *
  */
 public class Edge extends DefaultWeightedEdge implements Serializable {
-    private static final long serialVersionUID = -1562333378321L;
+    private static final long serialVersionUID = -15623738321L;
     /**
      * one of edges nodes
      */
-    Vertex mysource;
+    final Vertex mysource;
     /**
      * one of edges nodes
      */
-    Vertex mytarget;
+    final Vertex mytarget;
 
 
     private Color color;
-// --Commented out by Inspection START (05.01.19 22:10):
-//    /**
-//     * number of edge (identifier)
-//     */
-//    private int numb;
-// --Commented out by Inspection STOP (05.01.19 22:10)
+
     /**
      * Grphic settings
      */

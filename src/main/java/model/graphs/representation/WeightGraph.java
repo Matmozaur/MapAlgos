@@ -1,6 +1,5 @@
 package model.graphs.representation;
 
-import model.additional.Algos;
 import model.elements.Edge;
 import model.elements.Vertex;
 import model.elements.WeightEdge;
@@ -9,22 +8,23 @@ import model.settings.Settings;
 import org.jgrapht.GraphPath;
 import org.jgrapht.alg.shortestpath.AllDirectedPaths;
 import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
-import org.jgrapht.alg.shortestpath.FloydWarshallShortestPaths;
 import org.jgrapht.graph.DefaultDirectedWeightedGraph;
 import org.jgrapht.graph.DefaultWeightedEdge;
 import org.jgrapht.graph.SimpleWeightedGraph;
 import view.GraphPanel;
 
+import javax.swing.*;
 import java.io.Serializable;
 import java.util.*;
 import java.util.stream.Collectors;
 
+@SuppressWarnings("ALL")
 public class WeightGraph extends SimpleWeightedGraph<Vertex, DefaultWeightedEdge>  implements Serializable {
     private static final long serialVersionUID = -1567413557378365221L;
 
-    final List<Vertex> vertexes=new LinkedList<>();
-    final List<Edge> edges=new LinkedList<>();
-    transient GraphPanel panel;
+    private final List<Vertex> vertexes=new LinkedList<>();
+    private final List<Edge> edges=new LinkedList<>();
+    private transient GraphPanel panel;
     private final WeightGraphLogic logic;
 
     public WeightGraph(GraphPanel panel){
@@ -122,6 +122,11 @@ public class WeightGraph extends SimpleWeightedGraph<Vertex, DefaultWeightedEdge
 
     }
 
+    @Override
+    public boolean containsVertex(Vertex v){
+        return vertexes.contains(v);
+    }
+
     public String allInfo(){
         return logic.allInfo();
     }
@@ -138,7 +143,7 @@ public class WeightGraph extends SimpleWeightedGraph<Vertex, DefaultWeightedEdge
         return logic.connected(v.getNumb(),u.getNumb());
     }
 
-    public Subgraph getInducedSubgraph(int[] A){
+    private Subgraph getInducedSubgraph(int[] A){
         if(A!=null) {
             Subgraph sub = new Subgraph();
             for (int i : A) {
@@ -164,12 +169,13 @@ public class WeightGraph extends SimpleWeightedGraph<Vertex, DefaultWeightedEdge
         return getInducedSubgraph(logic.getPeryfery());
     }
 
-    public GraphPath<Vertex,Edge> getShortestPath(Vertex v, Vertex u){
+    public GraphPath getShortestPath(Vertex v, Vertex u){
         GraphPath shortest_path =   DijkstraShortestPath.findPathBetween(this, v, u);
         return shortest_path;
     }
 
     public GraphPath<Vertex,Edge> getMaxWeightPath(Vertex v,Vertex u){
+        //noinspection unchecked
         DefaultDirectedWeightedGraph<Vertex,DefaultWeightedEdge> G=
                 new DefaultDirectedWeightedGraph(DefaultWeightedEdge.class);
         for(Vertex x:this.getVertexes()){
@@ -212,9 +218,15 @@ public class WeightGraph extends SimpleWeightedGraph<Vertex, DefaultWeightedEdge
         AllDirectedPaths<Vertex,Edge> AllP=new AllDirectedPaths(G);
         List<GraphPath<Vertex, Edge>> list=
                 AllP.getAllPaths(sourceVertices,targetVertices,true,max);
-        return list.stream().max(Comparator.comparing(GraphPath::getLength)).
-                orElseThrow(NoSuchElementException::new);
-
+        list=list.stream().filter(p->p.getWeight()<=max).collect(Collectors.toList());
+        try {
+            return list.stream().max(Comparator.comparing(GraphPath::getLength)).
+                    orElseThrow(NoSuchElementException::new);
+        }
+        catch (NoSuchElementException e){
+            JOptionPane.showMessageDialog(panel,"There is no such a path!");
+        }
+        return null;
     }
 
 

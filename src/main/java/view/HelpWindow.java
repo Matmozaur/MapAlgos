@@ -7,7 +7,7 @@ import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.net.URL;
 
-public class HelpWindow extends JFrame {
+class HelpWindow extends JFrame {
     HelpWindow(URL helpFile){
         setTitle("MapApp");
         setBounds(100, 100, 800, 800);

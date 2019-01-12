@@ -294,7 +294,10 @@ public class GraphApp {
         btnRefresh.setPreferredSize(new Dimension(140, 23));
         btnRefresh.setBackground(Color.DARK_GRAY);
         mnRemove.add(btnRefresh);
-        btnRefresh.addActionListener(arg0 -> graphPanel.refresh());
+        btnRefresh.addActionListener(arg0 -> {
+            graphPanel.refresh();
+            info.setText("");
+        });
 
         JButton btnClear = new JButton("Clear");
         btnClear.setForeground(new Color(0, 200, 0));
@@ -302,7 +305,10 @@ public class GraphApp {
         btnClear.setMinimumSize(new Dimension(140, 23));
         btnClear.setMaximumSize(new Dimension(140, 23));
         btnClear.setBackground(Color.DARK_GRAY);
-        btnClear.addActionListener(arg0 -> graphPanel.clear());
+        btnClear.addActionListener(arg0 -> {
+            graphPanel.clear();
+            info.setText("");
+        });
         mnRemove.add(btnClear);
         mnRemove.add(btnVertex_1);
 

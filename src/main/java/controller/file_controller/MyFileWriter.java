@@ -19,7 +19,7 @@ public class MyFileWriter {
         return f;
     }
 
-    public void save(File file, WeightGraph w){
+    private void save(File file, WeightGraph w){
 
         try {
             FileOutputStream fileStream = new FileOutputStream(file);

@@ -7,8 +7,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Subgraph {
-    final List<Vertex> vertexes=new LinkedList<>();
-    final List<Edge> edges=new LinkedList<>();
+    private final List<Vertex> vertexes=new LinkedList<>();
+    private final List<Edge> edges=new LinkedList<>();
 
     public List<Vertex> getVertexes() {
         return vertexes;

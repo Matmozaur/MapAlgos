@@ -1,6 +1,6 @@
 package controller.visualisation;
 import controller.visualisation.painters.LabelPainter;
-import controller.visualisation.painters.SimplePainter;
+import controller.visualisation.painters.SlowPainter;
 import model.settings.CurrentAction;
 import model.elements.Vertex;
 import view.GraphPanel;
@@ -10,12 +10,12 @@ import java.awt.event.MouseEvent;
 public class AlgorithmVisualisationController {
 
     private final GraphPanel panel;
-    private SimplePainter slowpainter;
-    private LabelPainter labelPainter;
+    private final SlowPainter slowpainter;
+    private final LabelPainter labelPainter;
 
     public AlgorithmVisualisationController(GraphPanel panel) {
         this.panel = panel;
-        slowpainter=new SimplePainter(panel.getG(),panel);
+        slowpainter=new SlowPainter(panel.getG(),panel);
         labelPainter=new LabelPainter(panel.getG(),panel);
     }
 
@@ -112,7 +112,7 @@ public class AlgorithmVisualisationController {
             if(start != null) {
                 Thread t=new Thread(()-> {
                     try {
-                        panel.getG().getLogic().vdijkstra(start, labelPainter);
+                        panel.getG().getLogic().vdijkstra(start.getNumb(), labelPainter);
                     } catch (InterruptedException e1) {
                         e1.printStackTrace();
                     }

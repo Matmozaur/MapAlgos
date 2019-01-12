@@ -18,6 +18,8 @@ public class Settings implements Serializable {
     public  boolean visibility=false;
     public final Color colorEx = Color.RED;
     public final Color colorS = Color.BLUE;
+    public final Color colorLabel = Color.BLUE;
+
     /**
      * time between displaying algorithms steps
      */

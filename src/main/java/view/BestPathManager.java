@@ -4,8 +4,6 @@ import controller.element_controller.ElementController;
 import model.elements.Vertex;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
 
 public class BestPathManager extends JDialog {
     private JPanel contentPane;
@@ -14,9 +12,9 @@ public class BestPathManager extends JDialog {
     private JRadioButton maximalNumberOfVerticesRadioButton;
     private JRadioButton maximalSummaryWeightWithoutRadioButton;
     private JSpinner maxWeight;
-    ElementController EC;
-    Vertex u;
-    Vertex v;
+    private final ElementController EC;
+    private final Vertex u;
+    private final Vertex v;
 
 
     public BestPathManager(ElementController EC, Vertex u,Vertex v) {

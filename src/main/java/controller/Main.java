@@ -9,6 +9,7 @@ import java.awt.*;
 
 /**
  * Main class for starting application
+ * 
  */
 public class Main {
     private static final FileCommunicator FC=FileCommunicator.getInstance();

@@ -5,6 +5,9 @@ import view.MainFrame;
 
 import java.awt.*;
 
+/**
+ * Main class for starting application
+ */
 public class Main {
     public static void main(String[] args) {
         EventQueue.invokeLater(() -> {
